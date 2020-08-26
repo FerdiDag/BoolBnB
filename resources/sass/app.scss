@@ -1,0 +1,23 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+
+// import di fontawesome
+$fa-font-path: 'fonts';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+
+
+
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+//import partials
+@import 'partials/_variables';
+@import 'partials/_mixins';
+@import 'partials/_common';
+@import 'partials/_header';
+@import 'partials/_footer';
