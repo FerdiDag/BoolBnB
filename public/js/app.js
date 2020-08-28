@@ -9548,7 +9548,7 @@ $.extend( $.validator.messages, {
 	nieES: "Inserisci un NIE valido",
 	cifES: "Inserisci un CIF valido",
 	currency: "Inserisci una valuta valida",
-	lettersonly : "Inserisci solo lettere",
+	lettersonly: "Inserisci solo lettere"
 } );
 return $;
 }));
