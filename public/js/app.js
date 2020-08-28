@@ -9547,10 +9547,12 @@ $.extend( $.validator.messages, {
 	nifES: "Inserisci un NIF valido",
 	nieES: "Inserisci un NIE valido",
 	cifES: "Inserisci un CIF valido",
-	currency: "Inserisci una valuta valida"
+	currency: "Inserisci una valuta valida",
+	lettersonly : "Inserisci solo lettere",
 } );
 return $;
 }));
+
 
 /***/ }),
 
@@ -40522,13 +40524,17 @@ $('form').validate({
       email: true
     },
     password: {
-      required: true
+      required: true,
+      minlength: 8
     },
     name: {
       lettersonly: true
     },
     lastname: {
       lettersonly: true
+    },
+    date_of_birth: {
+      date: true
     }
   }
 });
@@ -40598,8 +40604,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/proj13_team6/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/proj13_team6/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\proj13_team6\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\proj13_team6\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

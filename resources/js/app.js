@@ -17,14 +17,19 @@ $('form').validate({ // initialize the plugin
 
         password: {
             required: true,
+            minlength: 8
         },
 
         name: {
-            lettersonly: true
+            lettersonly: true,
         },
 
         lastname: {
             lettersonly: true
+        },
+
+        date_of_birth: {
+            date : true
         },
 
     }
