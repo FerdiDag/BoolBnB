@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
 {
-  public function apartment() {
-    return $this->belongsTo('App\Apartment');
+  public function apartments() {
+    return $this->belongsToMany('App\Apartment');
   }
 }
