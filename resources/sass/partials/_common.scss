@@ -1,2 +1,7 @@
 $bordo-link-header: 1px solid black;
 $colore-font: black;
+
+
+.container-xl, .container-lg, .container-md, .container-sm, .container {
+    max-width: 1400px;
+}

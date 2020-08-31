@@ -16057,6 +16057,10 @@ h3 {
     border-color: #dee2e6;
   }
 }
+.container-xl, .container-lg, .container-md, .container-sm, .container {
+  max-width: 1400px;
+}
+
 header {
   height: 140px;
   display: flex;
