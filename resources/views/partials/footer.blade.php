@@ -1,6 +1,6 @@
 <footer>
     <div class="container">
-        <div class="row">
+        <div class="row mt-5">
             <div class=" col-md-3 col-sm-6">
                 <h5 class="h6 text-center">Informazioni</h5>
                 <ul class="list-unstyled text-small text-center">
