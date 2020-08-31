@@ -16057,3 +16057,46 @@ h3 {
     border-color: #dee2e6;
   }
 }
+header {
+  height: 140px;
+  display: flex;
+  align-items: center;
+}
+header a {
+  color: black;
+}
+header a:hover {
+  color: black;
+}
+header .header-left img {
+  height: 120px;
+}
+header .header-left {
+  width: 25%;
+}
+header .header-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+}
+header .header-center ul li {
+  list-style-type: none;
+  display: inline-block;
+}
+header .header-center ul .nav-item {
+  padding: 15px;
+}
+header .header-center ul .nav-item a:hover {
+  border-bottom: 1px solid black;
+}
+header .header-right {
+  width: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+header .header-right ul li {
+  list-style-type: none;
+  display: inline-block;
+}

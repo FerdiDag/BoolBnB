@@ -1,0 +1,55 @@
+header {
+    a {
+        color: $colore-font;
+        &:hover {
+            color: $colore-font;
+        }
+    }
+    height: 140px;
+    display: flex;
+    align-items: center;
+
+    .header-left img {
+        height: 120px;
+    }
+
+    .header-left {
+        width: 25%;
+    }
+
+    .header-center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+
+        ul {
+            li {
+                @include horizontal-list;
+            }
+
+            .nav-item {
+                padding:  15px;
+
+                a {
+                    &:hover {
+                        border-bottom: $bordo-link-header;
+                    }
+                }
+            }
+        }
+    }
+
+    .header-right {
+        width: 25%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        ul {
+            li {
+                @include horizontal-list;
+            }
+        }
+    }
+}
