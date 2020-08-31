@@ -47,6 +47,10 @@
                                     </label>
                                 </div>
                             </div>
+                            <div class="col-md-8">
+                                Non hai un account?
+                                <a href="http://localhost:8000/register">Registrati</a>
+                            </div>
                         </div>
 
                         <div class="form-group row mb-0">
