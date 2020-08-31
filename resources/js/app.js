@@ -5,7 +5,9 @@ require('jquery-validation/dist/additional-methods.js');
 require('jquery-validation/dist/localization/messages_it.js');
 import 'bootstrap';
 
-
+jQuery.validator.addMethod("lettersonly", function(value, element) {
+    return this.optional(element) || /^[a-zA-Z\s]*$/.test(value);
+}, "Inserisci solo lettere");
 
 $('form').validate({ // initialize the plugin
     rules: {
@@ -29,7 +31,7 @@ $('form').validate({ // initialize the plugin
         },
 
         date_of_birth: {
-            date : true
+            date: true
         },
 
     }

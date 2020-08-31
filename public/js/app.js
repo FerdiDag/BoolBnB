@@ -40516,6 +40516,9 @@ __webpack_require__(/*! jquery-validation/dist/additional-methods.js */ "./node_
 __webpack_require__(/*! jquery-validation/dist/localization/messages_it.js */ "./node_modules/jquery-validation/dist/localization/messages_it.js");
 
 
+jQuery.validator.addMethod("lettersonly", function (value, element) {
+  return this.optional(element) || /^[a-zA-Z\s]*$/.test(value);
+}, "Inserisci solo lettere");
 $('form').validate({
   // initialize the plugin
   rules: {
