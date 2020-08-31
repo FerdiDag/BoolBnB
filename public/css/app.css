@@ -16105,6 +16105,25 @@ header .header-right ul li {
   display: inline-block;
 }
 
+/********************Login********************/
 #login-header {
   text-align: center;
+  font-weight: bold;
+  background-color: white;
 }
+
+#login-card .form-group {
+  height: 50px;
+}
+#login-card .form-group .form-control {
+  height: 50px;
+}
+
+#login-button {
+  background-color: #FF385C;
+  border-color: #FF385C;
+  width: 100%;
+  height: 50px;
+}
+
+/********************Fine-Login********************/
