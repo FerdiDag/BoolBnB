@@ -1,5 +1,5 @@
 <div class="container">
-    <header>
+    <header id="#header">
         <div class="header-left">
             <img src="{{ asset('img/airbnb-logo.png') }}" alt="">
         </div>
@@ -51,6 +51,7 @@
             @endguest
         </div>
     </header>
+
 </div>
 
 

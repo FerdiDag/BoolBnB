@@ -16067,10 +16067,10 @@ header {
   align-items: center;
 }
 header a {
-  color: black;
+  color: #000000;
 }
 header a:hover {
-  color: black;
+  color: #000000;
 }
 header .header-left img {
   height: 120px;
@@ -16092,7 +16092,7 @@ header .header-center ul .nav-item {
   padding: 15px;
 }
 header .header-center ul .nav-item a:hover {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #000000;
 }
 header .header-right {
   width: 25%;
