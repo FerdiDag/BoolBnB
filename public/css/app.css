@@ -16100,3 +16100,7 @@ header .header-right ul li {
   list-style-type: none;
   display: inline-block;
 }
+
+#login-header {
+  text-align: center;
+}
