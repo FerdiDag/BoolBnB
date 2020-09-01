@@ -36,11 +36,3 @@ $('form').validate({ // initialize the plugin
 
     }
 });
-
-$(document).ready(function() {
-    //intercetto il click sull hamburger del back-office e lo visualizzo o viceversa
-    $("#aside-toggle").click(function() {
-        $("aside").toggleClass("active");
-        $(".nav-container").toggleClass("active");
-    })
-})
