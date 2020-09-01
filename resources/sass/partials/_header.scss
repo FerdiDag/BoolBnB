@@ -1,13 +1,8 @@
-.navbar-brand img {
-    height: 150px;
+.container {
+    padding: 0;
 
-}
-
-.navbar {
-    background-color: white !important;
-}
-
-.navbar-light .navbar-nav .nav-link {
-    color: $black;
-
+    nav {
+        color: $black;
+        padding: 20px 0 0 0;
+    }
 }

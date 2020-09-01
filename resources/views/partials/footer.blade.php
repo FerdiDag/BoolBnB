@@ -2,8 +2,8 @@
     <div class="container">
         <div class="row mt-5">
             <div class=" col-md-3 col-sm-6">
-                <h5 class="h6 text-center">Informazioni</h5>
-                <ul class="list-unstyled text-small text-center">
+                <h5 class="h6">Informazioni</h5>
+                <ul class="list-unstyled text-small">
                     <li><a class="text-muted" href="#">Come funziona BoolBnB</a></li>
                     <li><a class="text-muted" href="#">Newsroom</a></li>
                     <li><a class="text-muted" href="#">Airbnb Plus</a></li>
@@ -15,8 +15,8 @@
                 </ul>
             </div>
             <div class="col-md-3 col-sm-6">
-                <h5 class="h6 text-center">Community</h5>
-                <ul class="list-unstyled text-small text-center">
+                <h5 class="h6">Community</h5>
+                <ul class="list-unstyled text-small">
                     <li><a class="text-muted" href="#">Diversità e appartenenza</a></li>
                     <li><a class="text-muted" href="#">Accesibilità</a></li>
                     <li><a class="text-muted" href="#">Airbnb Associates</a></li>
@@ -25,8 +25,8 @@
                 </ul>
             </div>
             <div class=" col-md-3 col-sm-6">
-                <h5 class="h6 text-center">Ospita</h5>
-                <ul class="list-unstyled text-small text-center">
+                <h5 class="h6">Ospita</h5>
+                <ul class="list-unstyled text-small">
                     <li><a class="text-muted" href="#">Diventa un host</a></li>
                     <li><a class="text-muted" href="#">Offri un'Esperienza online</a></li>
                     <li><a class="text-muted" href="#">Offri un'Esperienza</a></li>
@@ -38,8 +38,8 @@
                 </ul>
             </div>
             <div class="col-md-3 col-sm-6">
-                <h5 class="h6 text-center">Assistenza</h5>
-                <ul class="list-unstyled text-small text-center">
+                <h5 class="h6">Assistenza</h5>
+                <ul class="list-unstyled text-small">
                     <li><a class="text-muted" href="#">Aggiornamenti sulla pandemia di Covid-19</a></li>
                     <li><a class="text-muted" href="#">Centro Assistenza</a></li>
                     <li><a class="text-muted" href="#">Opzioni di cancellazione</a></li>

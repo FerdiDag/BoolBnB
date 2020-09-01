@@ -16057,16 +16057,12 @@ h3 {
     border-color: #dee2e6;
   }
 }
-.navbar-brand img {
-  height: 150px;
+.container {
+  padding: 0;
 }
-
-.navbar {
-  background-color: white !important;
-}
-
-.navbar-light .navbar-nav .nav-link {
+.container nav {
   color: #000000;
+  padding: 20px 0 0 0;
 }
 
 /********************Login********************/
