@@ -16061,6 +16061,10 @@ h3 {
   height: 150px;
 }
 
+.navbar {
+  background-color: white !important;
+}
+
 .navbar-light .navbar-nav .nav-link {
   color: #000000;
 }
