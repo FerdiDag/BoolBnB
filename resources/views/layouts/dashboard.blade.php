@@ -12,7 +12,7 @@
             <div class="container-fluid d-flex justify-content-between align-items-center">
                 <div id="header-left">
                     <div class="logo-container">
-                        <img src="{{ asset('img/logo-bk-office.png') }}" alt="Logo" class="img-fluid">
+                        <img src="{{ asset('img/logo.png') }}" alt="Logo" class="img-fluid">
                     </div>
                 </div>
                 <div id="header-right" class="d-flex justify-content-end align-items-center">
