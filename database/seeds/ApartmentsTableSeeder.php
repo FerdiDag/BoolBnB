@@ -27,6 +27,7 @@ class ApartmentsTableSeeder extends Seeder
         $newApartment->lat = $faker->latitude(-90, 90);
         $newApartment->lon = $faker->longitude(-180, 180);
         $newApartment->slug = $apartment['slug'];
+        $newApartment->visibility = true;
         $newApartment->user_id = rand(1, 3);
         $newApartment->save();
       }
