@@ -16173,7 +16173,6 @@ body#bk-office aside {
   background-color: #F7F7F7;
   border-radius: 0 25px 0 0;
   transition: transform 1s ease-out;
-  transition-property: transform;
   overflow-y: auto;
 }
 body#bk-office aside.active {
