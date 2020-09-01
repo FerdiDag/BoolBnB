@@ -65,27 +65,21 @@ body#bk-office {
     }
 
     aside {
-        padding: 50px 5px;
-        width: 200px;
-        position: absolute;
+        padding: 15px 5px;
+        width: 250px;
+        position: fixed;
         top: 90px;
         transform: translate3d(-100%,0,0);
         height: calc(100vh - 90px);
         background-color: #F7F7F7;
         border-radius: 0 25px 0 0;
         transition: transform 1s ease-out;
-        transition-property: transform, opacity;
-        opacity: 0;
+        transition-property: transform;
         overflow-y: auto;
 
         &.active {
-            opacity: 1;
             transform: translate3d(0,0,0);
             box-shadow: 10px 15px 19px -18px rgba(255,56,92,0.92);
-        }
-
-        h2 {
-            font-size: 20px;
         }
 
         ul {
@@ -97,10 +91,19 @@ body#bk-office {
                 margin: 20px 0;
                 padding: 5px 8px;
                 cursor: pointer;
+                border-radius: 20px;
+                transition: background-color 0.5s;
 
-                &:hover {
+                &:hover,
+                &.active {
                     background-color: #FF385C;
-                    border-radius: 20px;
+                }
+
+                i {
+                    width: 18px;
+                    height: 20px;
+                    text-align: center;
+                    margin-right: 5px;
                 }
             }
         }
@@ -119,14 +122,13 @@ body#bk-office {
     body#bk-office {
 
         aside {
-            opacity: 1;
             position: static;
             transform: translate3d(0,0,0);
             box-shadow: 10px 15px 19px -18px rgba(255,56,92,0.92);
         }
 
         main {
-            width: calc(100% - 200px);
+            width: calc(100% - 250px);
         }
     }
 }

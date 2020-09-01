@@ -47,21 +47,44 @@
                 </div>
             </div>
         </header>
-            <aside class="float-left">
-                <h2>Il tuo pannello</h2>
+            <aside class="float-md-left">
                 <nav id="aside-nav">
                     <ul>
                         <li>
-                            <a href="#">Aggiungi appartamento</a>
+                            <a href="#">
+                                <i class="fas fa-home"></i>
+                                Home admin
+                            </a>
                         </li>
                         <li>
-                            <a href="#">Gestisci appartamenti</a>
+                            <a href="#">
+                                <i class="fas fa-plus"></i>
+                                Aggiungi appartamento
+                            </a>
                         </li>
                         <li>
-                            <a href="#">Messaggi</a>
+                            <a href="#">
+                                <i class="fas fa-sliders-h"></i>
+                                Gestisci appartamenti
+                            </a>
                         </li>
                         <li>
-                            <a href="#">Statistiche</a>
+                            <a href="#">
+                                <i class="fas fa-envelope-open-text"></i>
+                                Messaggi
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-chart-line"></i>
+                                Statistiche
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-angle-double-up"></i>
+                                Sponsorizza
+                            </a>
                         </li>
                     </ul>
                 </nav>
