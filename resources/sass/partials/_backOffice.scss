@@ -1,0 +1,132 @@
+body#bk-office {
+    font-family: $font-family-sans-serif;
+    font-size: 16px;
+
+        a {
+            color: inherit;
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
+
+
+    header {
+        width: 100%;
+        height: 90px;
+        padding: 15px 0;
+        color: #222222;
+
+        #header-left {
+            width: 30%;
+
+            .logo-container {
+                padding: 5px 0;
+            }
+        }
+
+        #header-right {
+            width: 60%;
+
+            ul {
+                margin: 0;
+
+                li {
+                    display: inline-block;
+                    margin-left: 25px;
+                    cursor: pointer;
+
+                    a {
+                        position: relative;
+
+                        &:after {
+                            content: "";
+                            display: inline-block;
+                            position: absolute;
+                            width: 0;
+                            height: 2px;
+                            background-color: #FF385C;
+                            top: 100%;
+                            left: 0;
+                            transition: width 1s;
+                        }
+
+                        &:hover:after {
+                            width: 100%;
+                        }
+
+                        span {
+                            padding-left: 5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    aside {
+        padding: 50px 5px;
+        width: 200px;
+        position: absolute;
+        top: 90px;
+        transform: translate3d(-100%,0,0);
+        height: calc(100vh - 90px);
+        background-color: #F7F7F7;
+        border-radius: 0 25px 0 0;
+        transition: transform 1s ease-out;
+        transition-property: transform, opacity;
+        opacity: 0;
+        overflow-y: auto;
+
+        &.active {
+            opacity: 1;
+            transform: translate3d(0,0,0);
+            box-shadow: 10px 15px 19px -18px rgba(255,56,92,0.92);
+        }
+
+        h2 {
+            font-size: 20px;
+        }
+
+        ul {
+            padding: 0;
+            list-style-type: none;
+            margin-top: 30px;
+
+            li {
+                margin: 20px 0;
+                padding: 5px 8px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #FF385C;
+                    border-radius: 20px;
+                }
+            }
+        }
+    }
+
+    main {
+        width: 100%;
+        height: calc(100vh - 90px);
+        padding: 50px 0;
+        overflow-y: auto;
+    }
+}
+
+@media screen and (min-width: 768px) {
+
+    body#bk-office {
+
+        aside {
+            opacity: 1;
+            position: static;
+            transform: translate3d(0,0,0);
+            box-shadow: 10px 15px 19px -18px rgba(255,56,92,0.92);
+        }
+
+        main {
+            width: calc(100% - 200px);
+        }
+    }
+}
