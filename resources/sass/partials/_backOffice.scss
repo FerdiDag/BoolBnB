@@ -2,14 +2,13 @@ body#bk-office {
     font-family: $font-family-sans-serif;
     font-size: 16px;
 
-        a {
-            color: inherit;
+    a {
+        color: inherit;
 
-            &:hover {
-                text-decoration: none;
-            }
+        &:hover {
+            text-decoration: none;
         }
-
+    }
 
     header {
         width: 100%;
@@ -93,8 +92,8 @@ body#bk-office {
                 border-radius: 20px;
                 transition: background-color 0.5s;
 
-                &:hover,
-                &.active {
+                &.active,
+                &:hover {
                     background-color: #FF385C;
                 }
 
@@ -115,11 +114,43 @@ body#bk-office {
         overflow-y: auto;
     }
 }
+//*inizio sezione lista appartamenti
 
+#index {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    .box {
+        width: 300px;
+        margin: 30px 15px;
+
+        h5 {
+            margin-top: 5px;
+        }
+
+        img {
+            max-height: 200px;
+            min-height: 200px;
+            object-fit: cover;
+        }
+
+        .info {
+            font-size: 14px;
+        }
+
+        .btn {
+            padding: 5px;
+        }
+
+        .features {
+            margin-bottom: 10px;
+        }
+    }
+}
+//****fine sezione lista appartamenti
 @media screen and (min-width: 768px) {
-
     body#bk-office {
-
         aside {
             position: static;
             transform: translate3d(0,0,0);

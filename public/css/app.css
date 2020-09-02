@@ -16191,7 +16191,7 @@ body#bk-office aside ul li {
   border-radius: 20px;
   transition: background-color 0.5s;
 }
-body#bk-office aside ul li:hover, body#bk-office aside ul li.active {
+body#bk-office aside ul li.active, body#bk-office aside ul li:hover {
   background-color: #FF385C;
 }
 body#bk-office aside ul li i {
@@ -16205,6 +16205,34 @@ body#bk-office main {
   height: calc(100vh - 90px);
   padding: 50px 0;
   overflow-y: auto;
+}
+
+#index {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+#index .box {
+  width: 300px;
+  margin: 30px 15px;
+}
+#index .box h5 {
+  margin-top: 5px;
+}
+#index .box img {
+  max-height: 200px;
+  min-height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+#index .box .info {
+  font-size: 14px;
+}
+#index .box .btn {
+  padding: 5px;
+}
+#index .box .features {
+  margin-bottom: 10px;
 }
 
 @media screen and (min-width: 768px) {
