@@ -16057,10 +16057,10 @@ h3 {
     border-color: #dee2e6;
   }
 }
-.container {
+header .container {
   padding: 0;
 }
-.container nav {
+header .container nav {
   color: #000000;
   padding: 20px 0 0 0;
 }
@@ -16223,7 +16223,7 @@ body#bk-office main {
   margin: 30px 15px;
   border: 3px solid #FF385C;
   border-radius: 20px;
-  padding: 8px;
+  padding: 35px;
   text-align: left;
 }
 #index .box #index-box-title {
@@ -16247,6 +16247,7 @@ body#bk-office main {
 #index .box .features {
   margin-bottom: 10px;
   width: 100%;
+  height: 100px;
 }
 
 /*********************Pagina-Show*********************/
@@ -16288,11 +16289,15 @@ body#bk-office main {
 
 #show-description {
   padding-left: 20px;
-}
-#show-description span {
   font-weight: bold;
 }
+#show-description span {
+  font-weight: lighter;
+}
 
+#show-info ul {
+  font-weight: bold;
+}
 #show-info ul:before {
   content: attr(aria-label);
   font-size: 120%;
@@ -16300,7 +16305,7 @@ body#bk-office main {
   margin-left: -15px;
 }
 #show-info span {
-  font-weight: bold;
+  font-weight: lighter;
 }
 
 #show-services ul:before {

@@ -40545,17 +40545,23 @@ $(document).ready(function () {
   //intercetto il click sull hamburger del back-office e lo visualizzo o viceversa
   $("#aside-toggle").click(function () {
     $("aside").toggleClass("active");
-  }); //script per l'index in back-office
-  //ciclo i tag con classe "info"
+  }); //invoco la funzione per mostrare l'indirizzo nell'index all'interno della back-offcie
 
-  $(".box").each(function () {
-    var lon = $(this).find("#address").data("lon");
-    var lat = $(this).find("#address").data("lat");
-    var id = $(this).data("id");
-    converti_indirizzo(lat, lon, id);
-  });
+  show_address(".box", "#address", "#address span"); //invoco la funzione per mostrare l'indirizzo nella show all'interno della back-office
 
-  function converti_indirizzo(lat, lon, id) {
+  show_address("#show-info", "#address", "#address span"); //funzione per il recupero della lan e lot
+
+  function show_address(container, coordinates, item) {
+    $(container).each(function () {
+      var lon = $(this).find(coordinates).data("lon");
+      var lat = $(this).find(coordinates).data("lat");
+      var id = $(this).data("id");
+      converti_indirizzo(lat, lon, id, container, item);
+    });
+  } //funzione per la conversione delle coordinate in indirizzo testuale
+
+
+  function converti_indirizzo(lat, lon, id, container, item) {
     var query = lat + "," + lon;
     $.ajax({
       "url": "https://api.tomtom.com/search/2/reverseGeocode/" + query + ".json",
@@ -40566,7 +40572,7 @@ $(document).ready(function () {
       "success": function success(data) {
         var indirizzo_completo = data.addresses[0].address.freeformAddress;
         console.log(indirizzo_completo);
-        $(".box[data-id='" + id + "']").find("#address span").text(indirizzo_completo);
+        $(container + "[data-id='" + id + "']").find(item).text(indirizzo_completo);
       },
       "error": function error() {
         alert("Si è verificato un errore");

@@ -22,13 +22,13 @@
     <div class="row">
         <div id="show-image" class="col-md-6 offset-md-0 col-sm-12">
             @if (!$apartment->cover_image)
-            <img class="rounded" src="{{asset('img/Immagine_non_disponibile.jpg')}}" alt="">
+            <img class="rounded" src="{{asset('img/immagine-non-disponibile.gif')}}" alt="">
             @else
             <img class="rounded" src="{{ asset('storage/' . $apartment->cover_image) }}">
             @endif
         </div>
         <div id="show-description" class="col-md-6 offset-md-0 col-sm-12">
-            <p><span>Descrizione: </span>{{$apartment->description}}</p>
+            <p>Descrizione: <span>{{$apartment->description}}</span</p>
         </div>
     </div>
 </div>
@@ -37,11 +37,11 @@
     <div class="row">
         <div data-id="{{$apartment->id}}" id="show-info" class="col-md-6 col-sm-8">
             <ul aria-label="Informazioni">
-                <li id="address" data-lon="{{$apartment->lon}}" data-lat="{{$apartment->lat}}"><span>Indirizzo: </span></li>
-                <li><span>Numero di stanze: </span>{{$apartment->number_of_rooms}}</li>
-                <li><span>Numero posti letto: </span>{{$apartment->number_of_beds}}</li>
-                <li><span>Numero bagni: </span>{{$apartment->number_of_bathrooms}}</li>
-                <li><span>Metri quadrati: </span>{{$apartment->square_meters}}</li>
+                <li id="address" data-lon="{{$apartment->lon}}" data-lat="{{$apartment->lat}}">Indirizzo: <span ></span></li>
+                <li>Numero di stanze: <span>{{$apartment->number_of_rooms}}</span></li>
+                <li>Numero posti letto: <span>{{$apartment->number_of_beds}}</span></li>
+                <li>Numero bagni: <span>{{$apartment->number_of_bathrooms}}</span></li>
+                <li>Metri quadrati: <span>{{$apartment->square_meters}}</span>{{" m²"}}</li>
             </ul>
         </div>
 

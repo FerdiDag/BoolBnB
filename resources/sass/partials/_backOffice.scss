@@ -132,7 +132,7 @@ body#bk-office {
         margin: 30px 15px;
         border: 3px solid $main_color;
         border-radius: 20px;
-        padding: 8px;
+        padding: 35px;
         text-align: left;
 
         #index-box-title {
@@ -160,6 +160,7 @@ body#bk-office {
         .features {
             margin-bottom: 10px;
             width: 100%;
+            height: 100px;
         }
     }
 }
@@ -202,19 +203,21 @@ body#bk-office {
     border: 1px solid red;
     margin-bottom: 30px;
     padding: 0;
-
 }
 
 #show-description {
     padding-left: 20px;
+    font-weight: bold;
 
     span {
-        font-weight: bold;
+        font-weight: lighter;
     }
 }
 
 #show-info {
     ul {
+        font-weight: bold;
+
         &:before {
             content:attr(aria-label);
             font-size:120%;
@@ -223,7 +226,7 @@ body#bk-office {
         }
     }
     span {
-        font-weight: bold;
+        font-weight: lighter;
     }
 }
 
