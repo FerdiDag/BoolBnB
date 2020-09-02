@@ -44,7 +44,6 @@ class ApartmentController extends Controller
         //   $img_path = Storage::put('uploads', $dati['image']);
         //   $dati['cover_image'] = $img_path;
         // }
-
     }
 
     /**
@@ -53,9 +52,13 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Apartment $apartment)
     {
-        //
+        if ($apartment->user_id == Auth::user()->id) {
+            return view('admin.apartments.show');
+        } else {
+            return abort('404');
+        }
     }
 
     /**
