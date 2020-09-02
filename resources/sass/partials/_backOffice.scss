@@ -78,6 +78,7 @@ body#bk-office {
         &.active {
             transform: translate3d(0,0,0);
             box-shadow: 10px 15px 19px -18px rgba(255,56,92,0.92);
+            z-index: 999;
         }
 
         ul {
@@ -149,6 +150,81 @@ body#bk-office {
     }
 }
 //****fine sezione lista appartamenti
+
+/*********************Pagina-Show*********************/
+#show-header-right {
+    margin-bottom: 30px;
+    text-align: right;
+}
+
+#detail-title {
+    margin-bottom: 30px;
+}
+
+#visibility-switch {
+    display: inline-block;
+    margin-right: 20px;
+
+    .custom-control-input:checked ~ .custom-control-label::before {
+        color: #fff;
+        border-color: #FF385C;
+        background-color: #FF385C;
+    }
+}
+
+#modify-button {
+    border: 1px solid #FF385C;
+}
+
+#delete-button {
+    color: white;
+    background-color: #FF385C;
+    border: 1px solid #FF385C;
+}
+
+#show-image {
+    height: 300px;
+    border: 1px solid red;
+    margin-bottom: 30px;
+    padding: 0;
+
+}
+
+#show-description {
+    padding-left: 20px;
+
+    span {
+        font-weight: bold;
+    }
+}
+
+#show-info {
+    ul {
+        &:before {
+            content:attr(aria-label);
+            font-size:120%;
+            font-weight:bold;
+            margin-left:-15px;
+        }
+    }
+    span {
+        font-weight: bold;
+    }
+}
+
+#show-services {
+    ul {
+        &:before {
+            content:attr(aria-label);
+            font-size:120%;
+            font-weight:bold;
+            margin-left:-15px;
+        }
+    }
+}
+
+/*********************Fine-Pagina-Show*********************/
+
 @media screen and (min-width: 768px) {
     body#bk-office {
         aside {
@@ -160,5 +236,16 @@ body#bk-office {
         main {
             width: calc(100% - 250px);
         }
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    #show-header-right {
+        text-align: left;
+    }
+
+    #show-description {
+        padding-left: 0;
     }
 }
