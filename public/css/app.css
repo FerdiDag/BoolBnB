@@ -16214,8 +16214,20 @@ body#bk-office main {
   flex-wrap: wrap;
 }
 #index .box {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
   width: 300px;
+  height: 500px;
   margin: 30px 15px;
+  border: 3px solid #FF385C;
+  border-radius: 20px;
+  padding: 8px;
+  text-align: left;
+}
+#index .box #index-box-title {
+  height: 70px;
 }
 #index .box h5 {
   margin-top: 5px;
@@ -16234,6 +16246,7 @@ body#bk-office main {
 }
 #index .box .features {
   margin-bottom: 10px;
+  width: 100%;
 }
 
 /*********************Pagina-Show*********************/

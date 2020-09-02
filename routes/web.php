@@ -26,4 +26,7 @@ Route::prefix('admin')->namespace('Admin')->name('admin.')->middleware('auth')->
     Route::get('/create', function () {
         return view('admin.apartments.create');
     });
+    Route::get('/show', function () {
+        return view('admin.apartments.show');
+    });
 });

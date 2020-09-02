@@ -71,35 +71,24 @@
               @enderror
             </div>
           </div>
-          <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="customCheck1">
-            <label class="custom-control-label" for="customCheck1">Wifi</label>
-          </div>
-          <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="customCheck1">
-            <label class="custom-control-label" for="customCheck1">Posto Macchina</label>
-          </div>
-          <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="customCheck1">
-            <label class="custom-control-label" for="customCheck1">Piscina</label>
-          </div>
-          <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="customCheck1">
-            <label class="custom-control-label" for="customCheck1">Portineria</label>
-          </div>
-          <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="customCheck1">
-            <label class="custom-control-label" for="customCheck1">Sauna</label>
-          </div>
-          <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="customCheck1">
-            <label class="custom-control-label" for="customCheck1">Vista Mare</label>           
-          </div>
-
-          <div class="text-center form-group">
-            <button class="btn btn-primary btn-sm add-apartment" type="submit" name="button">Aggiungi appartamento</button>
-          </div>
+          {{-- <div class="form-group">
+              Servizi :
+              @foreach ($tags as $tag)
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label" for="inlineCheckbox1">
+                    <input
+                     {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }}
+                     class="form-check-input" name="tags[]" type="checkbox" id="inlineCheckbox1" value="{{$tag->id}}">
+                    {{$tag->name}}
+                  </label>
+                </div>
+              @endforeach
+            </div>             --}}
+            <div class="text-center form-group">
+              <button class="btn btn-primary btn-sm add-apartment" type="submit" name="button">Aggiungi appartamento</button>
+            </div>
           </form>
+          </div>
       </div>
     </div>
   </div>

@@ -2,121 +2,24 @@
 @section('content')
 <h1 class="text-center">Lista appartamenti</h1>
 <div class="container" id="index">
-    <div class="box">
-        <img src="https://balivacationhomes.com/wp-content/uploads/2020/02/villa-zoubi-bali-vacation-homes-resize-1-23.jpg" class="rounded" alt="">
-        <h5 class="title text-center">Apartamento sito in</h5>
-        <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-            commodo consequat. Duis
-            aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <div class="features">
-            <h5 class="info">Numero di stanze: </h5>
-            <h5 class="info">Numero di letti: </h5>
-            <h5 class="info">Numero di bagni: </h5>
-            <h5 class="info">Superficie: </h5>
-            <h5 class="info">Indirizzo: </h5>
-            <h5 class="info">Prezzo per notte: </h5>
+    @foreach ($apartments as $apartment)
+      <a href="{{route('admin.apartments.show', ['apartment' => $apartment->id])}}">
+        <div class="box">
+          <h5 id="index-box-title" class="title text-center">{{$apartment->description_title}}</h5>
+          @if (!$apartment->cover_image)
+            <img class="rounded" src="{{asset('img/Immagine_non_disponibile.jpg')}}" alt="">
+          @else
+            <img class="rounded" src="{{ asset('storage/' . $apartment->cover_image) }}">
+          @endif
+            <div class="features text-center">
+                <h5 class="info">Numero di stanze: {{$apartment->number_of_rooms}} </h5>
+                <h5 class="info">Numero di letti: {{$apartment->number_of_beds}} </h5>
+                <h5 class="info">Numero di bagni: {{$apartment->number_of_bathrooms}}</h5>
+                <h5 class="info">Superficie: {{$apartment->square_meters}}</h5>
+                <h5 class="info" data-lon="{{$apartment->lon}}" data-lat="{{$apartment->lat}}">Indirizzo: <span></span> </h5>
+            </div>
         </div>
-        <button type="button" class="btn btn-success">Dettagli</button>
-        <button type="button" class="btn btn-primary">Modifica</button>
-        <button type="button" class="btn btn-secondary">Nascondi</button>
-        <button type="button" class="btn btn-danger">Elimina</button>
-    </div>
-    <div class="box">
-        <img src="https://balivacationhomes.com/wp-content/uploads/2020/02/villa-zoubi-bali-vacation-homes-resize-1-23.jpg" class="rounded" alt="">
-        <h5 class="title text-center">Apartamento sito in</h5>
-        <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-            commodo consequat. Duis
-            aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <div class="features">
-            <h5 class="info">Numero di stanze: </h5>
-            <h5 class="info">Numero di letti: </h5>
-            <h5 class="info">Numero di bagni: </h5>
-            <h5 class="info">Superficie: </h5>
-            <h5 class="info">Indirizzo: </h5>
-            <h5 class="info">Prezzo per notte: </h5>
-        </div>
-        <button type="button" class="btn btn-success">Dettagli</button>
-        <button type="button" class="btn btn-primary">Modifica</button>
-        <button type="button" class="btn btn-secondary">Nascondi</button>
-        <button type="button" class="btn btn-danger">Elimina</button>
-    </div>
-    <div class="box">
-        <img src="https://balivacationhomes.com/wp-content/uploads/2020/02/villa-zoubi-bali-vacation-homes-resize-1-23.jpg" class="rounded" alt="">
-        <h5 class="title text-center">Apartamento sito in</h5>
-        <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-            commodo consequat. Duis
-            aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <div class="features">
-            <h5 class="info">Numero di stanze: </h5>
-            <h5 class="info">Numero di letti: </h5>
-            <h5 class="info">Numero di bagni: </h5>
-            <h5 class="info">Superficie: </h5>
-            <h5 class="info">Indirizzo: </h5>
-            <h5 class="info">Prezzo per notte: </h5>
-        </div>
-        <button type="button" class="btn btn-success">Dettagli</button>
-        <button type="button" class="btn btn-primary">Modifica</button>
-        <button type="button" class="btn btn-secondary">Nascondi</button>
-        <button type="button" class="btn btn-danger">Elimina</button>
-    </div>
-    <div class="box">
-        <img src="https://balivacationhomes.com/wp-content/uploads/2020/02/villa-zoubi-bali-vacation-homes-resize-1-23.jpg" class="rounded" alt="">
-        <h5 class="title text-center">Apartamento sito in</h5>
-        <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-            commodo consequat. Duis
-            aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <div class="features">
-            <h5 class="info">Numero di stanze: </h5>
-            <h5 class="info">Numero di letti: </h5>
-            <h5 class="info">Numero di bagni: </h5>
-            <h5 class="info">Superficie: </h5>
-            <h5 class="info">Indirizzo: </h5>
-            <h5 class="info">Prezzo per notte: </h5>
-        </div>
-        <button type="button" class="btn btn-success">Dettagli</button>
-        <button type="button" class="btn btn-primary">Modifica</button>
-        <button type="button" class="btn btn-secondary">Nascondi</button>
-        <button type="button" class="btn btn-danger">Elimina</button>
-    </div>
-    <div class="box">
-        <img src="https://balivacationhomes.com/wp-content/uploads/2020/02/villa-zoubi-bali-vacation-homes-resize-1-23.jpg" class="rounded" alt="">
-        <h5 class="title text-center">Apartamento sito in</h5>
-        <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-            commodo consequat. Duis
-            aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <div class="features">
-            <h5 class="info">Numero di stanze: </h5>
-            <h5 class="info">Numero di letti: </h5>
-            <h5 class="info">Numero di bagni: </h5>
-            <h5 class="info">Superficie: </h5>
-            <h5 class="info">Indirizzo: </h5>
-            <h5 class="info">Prezzo per notte: </h5>
-        </div>
-        <button type="button" class="btn btn-success">Dettagli</button>
-        <button type="button" class="btn btn-primary">Modifica</button>
-        <button type="button" class="btn btn-secondary">Nascondi</button>
-        <button type="button" class="btn btn-danger">Elimina</button>
-    </div>
-    <div class="box">
-        <img src="https://balivacationhomes.com/wp-content/uploads/2020/02/villa-zoubi-bali-vacation-homes-resize-1-23.jpg" class="rounded" alt="">
-        <h5 class="title text-center">Apartamento sito in</h5>
-        <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-            commodo consequat. Duis
-            aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <div class="features">
-            <h5 class="info">Numero di stanze: </h5>
-            <h5 class="info">Numero di letti: </h5>
-            <h5 class="info">Numero di bagni: </h5>
-            <h5 class="info">Superficie: </h5>
-            <h5 class="info">Indirizzo: </h5>
-            <h5 class="info">Prezzo per notte: </h5>
-        </div>
-        <button type="button" class="btn btn-success">Dettagli</button>
-        <button type="button" class="btn btn-primary">Modifica</button>
-        <button type="button" class="btn btn-secondary">Nascondi</button>
-        <button type="button" class="btn btn-danger">Elimina</button>
-    </div>
-
+      </a>
+    @endforeach
 </div>
-
 @endsection
