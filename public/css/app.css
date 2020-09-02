@@ -16235,6 +16235,22 @@ body#bk-office main {
   margin-bottom: 10px;
 }
 
+.numbers-form {
+  display: flex;
+}
+
+#description-apartment {
+  border-color: rgba(72, 72, 72, 0.2);
+}
+
+.add-apartment {
+  background-color: #FF385C;
+  border-color: #FF385C;
+  height: 50px;
+  width: 40%;
+  margin-top: 2rem;
+}
+
 @media screen and (min-width: 768px) {
   body#bk-office aside {
     position: static;
@@ -16243,5 +16259,14 @@ body#bk-office main {
   }
   body#bk-office main {
     width: calc(100% - 250px);
+  }
+
+  .form-group {
+    text-align: center;
+  }
+}
+@media screen and (max-width: 576px) {
+  .numbers-form {
+    display: block;
   }
 }

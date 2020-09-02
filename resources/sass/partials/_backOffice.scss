@@ -151,6 +151,7 @@ body#bk-office {
 }
 //****fine sezione lista appartamenti
 
+<<<<<<< Updated upstream
 /*********************Pagina-Show*********************/
 #show-header-right {
     margin-bottom: 30px;
@@ -224,6 +225,26 @@ body#bk-office {
 }
 
 /*********************Fine-Pagina-Show*********************/
+=======
+//*inizio sezione aggiungi appartamento
+
+.numbers-form {
+  display: flex;
+}
+
+#description-apartment {
+  border-color: rgba(72, 72, 72, 0.2);
+}
+
+.add-apartment {
+  background-color: #FF385C;
+  border-color: #FF385C;
+  height: 50px;
+  width: 40%;
+  margin-top: 2rem;
+}
+//*fine sezione aggiungi appartamento
+>>>>>>> Stashed changes
 
 @media screen and (min-width: 768px) {
     body#bk-office {
@@ -237,6 +258,20 @@ body#bk-office {
             width: calc(100% - 250px);
         }
     }
+
+    //inizio sezione aggiungi appartamento
+      .form-group {
+        text-align: center;
+      }
+    //fine sezione aggiungi appartamento
+}
+@media screen and (max-width: 576px) {
+
+    //inizio sezione aggiungi appartamento
+    .numbers-form {
+      display: block;
+    }
+    //fine sezione aggiungi appartamento
 }
 
 @media screen and (max-width: 768px) {

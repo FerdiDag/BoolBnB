@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Apartment;
+use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
 {
@@ -38,6 +39,11 @@ class ApartmentController extends Controller
     public function store(Request $request)
     {
         //
+        // if ($dati['image']) {
+        //   $img_path = Storage::put('uploads', $dati['image']);
+        //   $dati['cover_image'] = $img_path;
+        // }
+
     }
 
     /**
