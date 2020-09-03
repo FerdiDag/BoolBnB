@@ -14,7 +14,11 @@
                 <label class="custom-control-label" for="customSwitch1">Visibile</label>
             </div>
             <button id="modify-button" type="button" class="btn btn-default" name="button">Modifica</button>
-            <button id="delete-button" type="button" class="btn btn-default" name="button">Elimina</button>
+            <form class="d-inline" action="{{ route('admin.apartments.destroy', ['apartment' => $apartment->id]) }}" method="post">
+                @csrf
+                @method('DELETE')
+                <input type="submit" class="btn btn-default" value="Elimina">
+            </form>
         </div>
     </div>
 </div>

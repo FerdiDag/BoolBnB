@@ -16057,6 +16057,20 @@ h3 {
     border-color: #dee2e6;
   }
 }
+label.error {
+  width: 100%;
+}
+
+label#status_load {
+  width: 100%;
+  margin-top: 8px;
+  text-align: left;
+}
+
+.container {
+  width: 95%;
+}
+
 header .container {
   padding: 0;
 }
@@ -16326,10 +16340,6 @@ body#bk-office main {
 /*********************Fine-Pagina-Show*********************/
 form {
   text-align: center;
-}
-
-.numbers-form {
-  display: flex;
 }
 
 #description-apartment {

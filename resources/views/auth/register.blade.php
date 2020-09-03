@@ -13,7 +13,7 @@
 
                         <div class="form-group row">
 
-                            <div class="col-md-12">
+                            <div class="form-item col-md-12">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email *">
 
                                 @error('email')
@@ -26,7 +26,7 @@
 
                         <div class="form-group row">
 
-                            <div class="col-md-12">
+                            <div class="form-item col-md-12">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password *">
 
                                 @error('password')
@@ -39,14 +39,14 @@
 
                         <div class="form-group row">
 
-                            <div class="col-md-12">
+                            <div class="form-item col-md-12">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Conferma password *">
                             </div>
                         </div>
 
                         <div class="form-group row">
 
-                            <div class="col-md-12">
+                            <div class="form-item col-md-12">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autocomplete="name" placeholder="Nome">
 
                                 @error('name')
@@ -59,7 +59,7 @@
 
                         <div class="form-group row">
 
-                            <div class="col-md-12">
+                            <div class="form-item col-md-12">
                                 <input id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}" autocomplete="lastname" placeholder="Cognome">
 
                                 @error('lastname')
@@ -72,7 +72,7 @@
 
                         <div class="form-group row">
 
-                            <div class="col-md-12">
+                            <div class="form-item col-md-12">
                                 <input id="date_of_birth" type="text"
                                 onfocus="(this.type='date')"
                                 class="form-control @error('date_of_birth') is-invalid @enderror" name="date_of_birth" value="{{ old('date_of_birth') }}" autocomplete="date_of_birth" placeholder="Data di nascita">

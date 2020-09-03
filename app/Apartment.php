@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Apartment extends Model
 {
-  protected $fillable = ["description_title", "description", "number_of_rooms", "number_of_beds", "number_of_bathrooms", "square_meters", "lat", "lon", "cover_image", "slug", "visibility"];
+  protected $fillable = ["description_title", "description", "number_of_rooms", "number_of_beds", "number_of_bathrooms", "square_meters", "lat", "lon", "cover_image", "slug", "visibility", "user_id"];
 
   public function views() {
     return $this->hasMany('App\View');

@@ -48,6 +48,8 @@ class ApartmentController extends Controller
             "cover_image" => "file|image|max:512",
             "description" => "nullable|min:50",
             "address" => "required|string",
+            "lat" => ['required','regex:/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/'],
+            "lon" => ['required','regex:/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/'],
             "number_of_rooms" => "required|numeric|min:1|digits_between:1,11",
             "number_of_beds" => "required|numeric|min:1|digits_between:1,11",
             "number_of_bathrooms" => "required|numeric|min:1|digits_between:1,11",
@@ -76,14 +78,17 @@ class ApartmentController extends Controller
             $img_path = Storage::put('uploads', $data['cover_image']);
             $data["cover_image"] = $img_path;
         }
-        dd($data);
         //creiamo una nuoa istanza di appartamento
         $new_apartment = New Apartment();
         //compilo l'oggetto con la funzione fill
         $new_apartment->fill($data);
         //salvo il nuovo appartamento
-        dd($data);
-
+        $new_apartment->save();
+        //inserisco gli eventuali servizi nella tabella ponte
+        if (!empty($data["services"])) {
+            $new_apartment->services()->sync($data["services"]);
+        };
+        return redirect()->route("admin.apartments.index");
     }
 
     /**
@@ -133,7 +138,12 @@ class ApartmentController extends Controller
     public function destroy($id)
     {
         $apartment = Apartment::find($id);
-        $apartment->delete();
-        return redirect()->route('admin.apartments.index');
+        if ($apartment) {
+            $apartment->delete();
+            return redirect()->route('admin.apartments.index');
+        } else {
+            return abort("404");
+        }
+
     }
 }
