@@ -9,11 +9,7 @@
             <h1 id="detail-title">{{$apartment->description_title}}</h1>
         </div>
         <div id="show-header-right" class="col-md-6 col-sm-12">
-            <div id="visibility-switch" class="custom-control custom-switch switch-danger">
-                <input type="checkbox" class="custom-control-input" id="customSwitch1" checked>
-                <label class="custom-control-label" for="customSwitch1">Visibile</label>
-            </div>
-            <button id="modify-button" type="button" class="btn btn-default" name="button">Modifica</button>
+            <a id="modify-button" href="{{ route('admin.apartments.edit', ['apartment' => $apartment->id]) }}" type="button" class="btn btn-default" name="button">Modifica</a>
             <form class="d-inline" action="{{ route('admin.apartments.destroy', ['apartment' => $apartment->id]) }}" method="post">
                 @csrf
                 @method('DELETE')

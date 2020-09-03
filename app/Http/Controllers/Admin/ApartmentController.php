@@ -114,7 +114,18 @@ class ApartmentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $apartment = Apartment::find($id);
+
+        if ($apartment->user_id != Auth::user()->id) {
+          return abort('404');
+        }
+
+        $services = Service::all();
+        $data = [
+          'apartment' => $apartment,
+          'services' => $services
+        ];
+        return view('admin.apartments.edit', $data);
     }
 
     /**
@@ -126,7 +137,56 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      //valido i dati pervenuti lato-cliet
+      $request->validate([
+          "description_title" => "required|string|max:255",
+          "cover_image" => "file|image|max:512",
+          "description" => "nullable|min:50",
+          "address" => "required|string",
+          "lat" => ['required','regex:/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/'],
+          "lon" => ['required','regex:/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/'],
+          "number_of_rooms" => "required|numeric|min:1|digits_between:1,11",
+          "number_of_beds" => "required|numeric|min:1|digits_between:1,11",
+          "number_of_bathrooms" => "required|numeric|min:1|digits_between:1,11",
+          "square_meters" => "required|numeric|min:1|digits_between:1,11",
+          "services" => "required"
+      ]);
+      //mappo i dati in un array
+      $data= $request->all();
+      //recupero l'appartamento con l'id della richiesta
+      $apartment = Apartment::find($id);
+      //geenro uno slug
+      $slug = Str::of($data['description_title'])->slug('-');
+      $original_slug = $slug;
+      $apartments = Apartment::where("slug", $slug)->first();
+      $contatore = 0;
+      while ($apartments && $apartment->slug != $slug) {
+          $contatore++;
+          $slug = $original_slug . "-" . $contatore;
+          $apartments = Apartment::where("slug", $slug)->first();
+      }
+      //aggiungo lo slug all'array
+      $data["slug"] = $slug;
+      //aggiungo lo user id
+      $data["user_id"] = Auth::user()->id;
+      if (isset($data['visibility'])) {
+        $data['visibility'] = true;
+      } else {
+        $data['visibility'] = false;
+      }
+      if (isset($data["cover_image"])) {
+          $img_path = Storage::put('uploads', $data['cover_image']);
+          $data["cover_image"] = $img_path;
+      };
+      //salvo il nuovo appartamento
+      $apartment->update($data);
+      //inserisco gli eventuali servizi nella tabella ponte
+      if (!empty($data["services"])) {
+          $apartment->services()->sync($data["services"]);
+      }else {
+          $apartment->services()->detach();
+      }
+      return redirect()->route("admin.apartments.index");
     }
 
     /**
