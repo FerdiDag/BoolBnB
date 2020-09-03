@@ -16286,6 +16286,12 @@ body#bk-office main {
   margin-bottom: 30px;
   padding: 0;
 }
+#show-image img {
+  width: 100%;
+  height: auto;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
 
 #show-description {
   padding-left: 20px;

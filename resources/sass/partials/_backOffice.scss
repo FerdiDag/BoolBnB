@@ -203,6 +203,12 @@ body#bk-office {
     border: 1px solid red;
     margin-bottom: 30px;
     padding: 0;
+
+    img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
 }
 
 #show-description {
