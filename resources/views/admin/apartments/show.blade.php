@@ -22,9 +22,9 @@
     <div class="row">
         <div id="show-image" class="col-md-6 offset-md-0 col-sm-12">
             @if (!$apartment->cover_image)
-            <img class="rounded" src="{{asset('img/immagine-non-disponibile.gif')}}" alt="">
+            <img src="{{asset('img/immagine-non-disponibile.gif')}}" alt="">
             @else
-            <img class="rounded" src="{{ asset('storage/' . $apartment->cover_image) }}">
+            <img src="{{ asset('storage/' . $apartment->cover_image) }}">
             @endif
         </div>
         <div id="show-description" class="col-md-6 offset-md-0 col-sm-12">

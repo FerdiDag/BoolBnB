@@ -16288,7 +16288,7 @@ body#bk-office main {
 }
 #show-image img {
   width: 100%;
-  height: auto;
+  height: 100%;
   -o-object-fit: contain;
      object-fit: contain;
 }
