@@ -40538,6 +40538,17 @@ $('form').validate({
     },
     date_of_birth: {
       date: true
+    },
+    description_title: {
+      required: true,
+      minlength: 255
+    },
+    description: {
+      minlength: 50
+    },
+    cover_image: {
+      file: true,
+      image: true
     }
   }
 });
@@ -40571,14 +40582,46 @@ $(document).ready(function () {
       },
       "success": function success(data) {
         var indirizzo_completo = data.addresses[0].address.freeformAddress;
-        console.log(indirizzo_completo);
         $(container + "[data-id='" + id + "']").find(item).text(indirizzo_completo);
       },
       "error": function error() {
         alert("Si è verificato un errore");
       }
     });
-  }
+  } //intercetto il click sul button "aggiungi indirizzo"
+
+
+  $("#add_address").click(function () {
+    //recupero il valore dell'input indirizzo
+    var address = $("#address").val(); //effettuo la chiamata ajax per convertire l'indirizzo testuale in coordinate
+
+    $.ajax({
+      "url": "https://api.tomtom.com/search/2/geocode/" + address + ".json",
+      "method": "GET",
+      "data": {
+        'key': 'VQnRG5CX322Qq4G6tKnUMDqG6DDv0Q6A',
+        "limit": 1
+      },
+      "success": function success(data) {
+        var result = data.results;
+        console.log(lat);
+        console.log(lon);
+
+        if (result.length > 0) {
+          var lat = result[0].position.lat;
+          var lon = result[0].position.lon; //recuper l'input nascosto predisposto per la lat
+
+          $("#add_lat").val(lat);
+          $("#add_lon").val(lon);
+        }
+
+        console.log(result);
+      },
+      "error": function error() {
+        alert("Si è verificato un errore");
+      }
+    });
+  });
 });
 
 /***/ }),

@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Apartment;
 use Auth;
+use App\Apartment;
+use App\Service;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
@@ -15,7 +17,7 @@ class ApartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(request $request)
     {
         $apartments = Apartment::where('user_id', Auth::user()->id)->get();
         return view('admin.apartments.index', compact('apartments'));
@@ -28,7 +30,8 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        return view('admin.apartments.create');
+        $services = Service::all();
+        return view('admin.apartments.create', compact("services"));
     }
 
     /**
@@ -39,11 +42,48 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // if ($dati['image']) {
-        //   $img_path = Storage::put('uploads', $dati['image']);
-        //   $dati['cover_image'] = $img_path;
-        // }
+        //valido i dati pervenuti lato-cliet
+        $request->validate([
+            "description_title" => "required|string|max:255",
+            "cover_image" => "file|image|max:512",
+            "description" => "nullable|min:50",
+            "address" => "required|string",
+            "number_of_rooms" => "required|numeric|min:1|digits_between:1,11",
+            "number_of_beds" => "required|numeric|min:1|digits_between:1,11",
+            "number_of_bathrooms" => "required|numeric|min:1|digits_between:1,11",
+            "square_meters" => "required|numeric|min:1|digits_between:1,11",
+            "services" => "required"
+        ]);
+        //mappo i dati in un array
+        $data= $request->all();
+        //geenro uno slug
+        $slug = Str::of($data['description_title'])->slug('-');
+        $original_slug = $slug;
+        $apartments = Apartment::where("slug", $slug)->first();
+        $contatore = 0;
+        while ($apartments) {
+            $contatore++;
+            $slug = $original_slug . "-" . $contatore;
+            $apartments = Apartment::where("slug", $slug)->first();
+        }
+        //aggiungo lo slug all'array
+        $data["slug"] = $slug;
+        //aggiungo lo user id
+        $data["user_id"] = Auth::user()->id;
+        //rendo l'appartamento subito visibile
+        $data["visibility"] = true;
+        if (isset($data["cover_image"])) {
+            $img_path = Storage::put('uploads', $data['cover_image']);
+            $data["cover_image"] = $img_path;
+        }
+        dd($data);
+        //creiamo una nuoa istanza di appartamento
+        $new_apartment = New Apartment();
+        //compilo l'oggetto con la funzione fill
+        $new_apartment->fill($data);
+        //salvo il nuovo appartamento
+        dd($data);
+
     }
 
     /**

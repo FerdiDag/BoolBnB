@@ -16188,12 +16188,14 @@ body#bk-office aside ul {
 body#bk-office aside ul li {
   margin: 20px 0;
   padding: 5px 8px;
-  cursor: pointer;
   border-radius: 20px;
   transition: background-color 0.5s;
 }
 body#bk-office aside ul li.active, body#bk-office aside ul li:hover {
   background-color: #FF385C;
+}
+body#bk-office aside ul li a {
+  display: block;
 }
 body#bk-office aside ul li i {
   width: 18px;
@@ -16322,6 +16324,10 @@ body#bk-office main {
 }
 
 /*********************Fine-Pagina-Show*********************/
+form {
+  text-align: center;
+}
+
 .numbers-form {
   display: flex;
 }
@@ -16330,12 +16336,32 @@ body#bk-office main {
   border-color: rgba(72, 72, 72, 0.2);
 }
 
+.input-group {
+  margin-top: 20px;
+}
+.input-group #add_address {
+  color: white;
+  background-color: #FF385C;
+}
+
 .add-apartment {
   background-color: #FF385C;
   border-color: #FF385C;
   height: 50px;
   width: 40%;
   margin-top: 2rem;
+}
+
+#services {
+  max-width: 100%;
+}
+
+.btn-primary:hover,
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:focus {
+  color: white;
+  background-color: #FF385C;
+  border-color: #FF385C;
 }
 
 @media screen and (min-width: 768px) {

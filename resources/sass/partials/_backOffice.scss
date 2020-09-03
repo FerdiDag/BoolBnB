@@ -89,13 +89,16 @@ body#bk-office {
             li {
                 margin: 20px 0;
                 padding: 5px 8px;
-                cursor: pointer;
                 border-radius: 20px;
                 transition: background-color 0.5s;
 
                 &.active,
                 &:hover {
                     background-color: #FF385C;
+                }
+
+                a {
+                    display: block;
                 }
 
                 i {
@@ -251,6 +254,10 @@ body#bk-office {
 
 //*inizio sezione aggiungi appartamento
 
+form {
+    text-align: center;
+}
+
 .numbers-form {
   display: flex;
 }
@@ -259,12 +266,33 @@ body#bk-office {
   border-color: rgba(72, 72, 72, 0.2);
 }
 
+.input-group {
+    margin-top: 20px;
+
+    #add_address {
+        color: white;
+        background-color: $main_color
+    }
+}
+
 .add-apartment {
-  background-color: #FF385C;
-  border-color: #FF385C;
-  height: 50px;
-  width: 40%;
-  margin-top: 2rem;
+    background-color: $main_color;
+    border-color: $main_color;
+    height: 50px;
+    width: 40%;
+    margin-top: 2rem;
+}
+
+#services {
+    max-width: 100%;
+}
+
+.btn-primary:hover,
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:focus {
+    color: white;
+    background-color: $main_color;
+    border-color: $main_color;
 }
 //*fine sezione aggiungi appartamento
 

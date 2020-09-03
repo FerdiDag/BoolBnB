@@ -145,9 +145,17 @@ return [
     */
 
     'attributes' => [
-        "name" => "nome",
-        "lastname" => "cognome",
-        "date_of_birth" => "data di nascita"
+        "name" => "Il nome",
+        "lastname" => "Il cognome",
+        "date_of_birth" => "La data di nascita",
+        "description_title" => "Il titolo",
+        "description" => "La descrizione",
+        "number_of_rooms" => "Il numero di stanze",
+        "number_of_beds" => "Il numero di letti",
+        "number_of_bathrooms" => "Il numero di bagni",
+        "square_meters" => "I metri quadrati",
+        "address" => "L'indirizzo",
+        "services" => "Un servizio"
     ],
 
 ];

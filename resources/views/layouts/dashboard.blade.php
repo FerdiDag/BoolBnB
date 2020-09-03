@@ -57,13 +57,13 @@
                         Home admin
                     </a>
                 </li>
-                <li>
-                    <a href="#">
+                <li class="{{ Request::route()->getName() == 'admin.apartments.create' ? 'active' : '' }}">
+                    <a href="{{route("admin.apartments.create")}}">
                         <i class="fas fa-plus"></i>
                         Aggiungi appartamento
                     </a>
                 </li>
-                <li>
+                <li class="{{ Request::route()->getName() == 'admin.apartments.index' ? 'active' : '' }}">
                     <a href="{{route('admin.apartments.index')}}">
                         <i class="fas fa-sliders-h"></i>
                         Gestisci appartamenti

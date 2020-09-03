@@ -28,7 +28,7 @@
             @endif
         </div>
         <div id="show-description" class="col-md-6 offset-md-0 col-sm-12">
-            <p>Descrizione: <span>{{$apartment->description}}</span</p>
+            <p>Descrizione: <span>{{$apartment->description ?? "-"}}</span</p>
         </div>
     </div>
 </div>
