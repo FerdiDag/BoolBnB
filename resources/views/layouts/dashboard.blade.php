@@ -63,30 +63,32 @@
                         Aggiungi appartamento
                     </a>
                 </li>
-                <li class="{{ Request::route()->getName() == 'admin.apartments.index' ? 'active' : '' }}">
-                    <a href="{{route('admin.apartments.index')}}">
-                        <i class="fas fa-sliders-h"></i>
-                        Gestisci appartamenti
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fas fa-envelope-open-text"></i>
-                        Messaggi
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fas fa-chart-line"></i>
-                        Statistiche
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fas fa-angle-double-up"></i>
-                        Sponsorizza
-                    </a>
-                </li>
+                @if (!Auth::user()->apartments->isEmpty())
+                    <li class="{{ Request::route()->getName() == 'admin.apartments.index' ? 'active' : '' }}">
+                        <a href="{{route('admin.apartments.index')}}">
+                            <i class="fas fa-sliders-h"></i>
+                            Gestisci appartamenti
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-envelope-open-text"></i>
+                            Messaggi
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chart-line"></i>
+                            Statistiche
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-angle-double-up"></i>
+                            Sponsorizza
+                        </a>
+                    </li>
+                @endif
             </ul>
         </nav>
     </aside>

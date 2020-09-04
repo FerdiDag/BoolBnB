@@ -16124,6 +16124,13 @@ header .container nav {
 }
 
 /********************Fine-Register********************/
+#error h1 {
+  font-size: 160px;
+}
+#error p {
+  font-size: 20px;
+}
+
 body#bk-office {
   font-family: "Nunito", sans-serif;
   font-size: 16px;

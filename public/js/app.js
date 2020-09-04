@@ -40586,21 +40586,20 @@ $(document).ready(function () {
     $("aside").toggleClass("active");
   }); //invoco la funzione per mostrare l'indirizzo nell'index all'interno della back-offcie
 
-  show_address(".box", "#address", "#address span"); //invoco la funzione per mostrare l'indirizzo nella show all'interno della back-office
-
-  show_address("#show-info", "#address", "#address span"); //funzione per il recupero della lan e lot
-
-  function show_address(container, coordinates, item) {
-    $(container).each(function () {
-      var lon = $(this).find(coordinates).data("lon");
-      var lat = $(this).find(coordinates).data("lat");
-      var id = $(this).data("id");
-      converti_indirizzo(lat, lon, id, container, item);
-    });
-  } //funzione per la conversione delle coordinate in indirizzo testuale
+  if ($(".container").is("#index")) {
+    show_address(".box", "#address", "#address span");
+  } //invoco la funzione per mostrare l'indirizzo nella show all'interno della back-office
 
 
-  function converti_indirizzo(lat, lon, id, container, item) {
+  if ($(".container").is("#show-header")) {
+    show_address("#show-info", "#address", "#address span");
+  } //inserisco l'indirizzo in pagina in fase di modifica dell'appartamento
+
+
+  if ($(".container").is("#edit")) {
+    //recuper i valori della lot e lan
+    var lat = $("#add_lat").val();
+    var lon = $("#add_lon").val();
     var query = lat + "," + lon;
     $.ajax({
       "url": "https://api.tomtom.com/search/2/reverseGeocode/" + query + ".json",
@@ -40609,8 +40608,9 @@ $(document).ready(function () {
         'key': 'VQnRG5CX322Qq4G6tKnUMDqG6DDv0Q6A'
       },
       "success": function success(data) {
-        var indirizzo_completo = data.addresses[0].address.freeformAddress;
-        $(container + "[data-id='" + id + "']").find(item).text(indirizzo_completo);
+        var address = data.addresses[0].address.freeformAddress; //inserisco l'indirizzo in pagina
+
+        $("#address").val(address);
       },
       "error": function error() {
         alert("Si è verificato un errore");
@@ -40658,7 +40658,35 @@ $(document).ready(function () {
       event.preventDefault();
       $("#status_load").text("Inserisci un indirizzo valido e clicca su 'Aggiungi' per proseguire");
     }
-  });
+  }); //funzione per il recupero della lan e lot
+
+  function show_address(container, coordinates, item) {
+    $(container).each(function () {
+      var lon = $(this).find(coordinates).data("lon");
+      var lat = $(this).find(coordinates).data("lat");
+      var id = $(this).data("id");
+      converti_indirizzo(lat, lon, id, container, item);
+    });
+  } //funzione per la conversione delle coordinate in indirizzo testuale
+
+
+  function converti_indirizzo(lat, lon, id, container, item) {
+    var query = lat + "," + lon;
+    $.ajax({
+      "url": "https://api.tomtom.com/search/2/reverseGeocode/" + query + ".json",
+      "method": "GET",
+      "data": {
+        'key': 'VQnRG5CX322Qq4G6tKnUMDqG6DDv0Q6A'
+      },
+      "success": function success(data) {
+        var indirizzo_completo = data.addresses[0].address.freeformAddress;
+        $(container + "[data-id='" + id + "']").find(item).text(indirizzo_completo);
+      },
+      "error": function error() {
+        alert("Si è verificato un errore");
+      }
+    });
+  }
 });
 
 /***/ }),
