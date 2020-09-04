@@ -16256,8 +16256,8 @@ body#bk-office main {
   margin-top: 5px;
 }
 #index .box img {
-  max-height: 200px;
-  min-height: 200px;
+  width: 100%;
+  height: 200px;
   -o-object-fit: cover;
      object-fit: cover;
 }
@@ -16342,6 +16342,17 @@ body#bk-office main {
   font-size: 120%;
   font-weight: bold;
   margin-left: -15px;
+}
+
+#show-map {
+  border: 1px solid #FF385C;
+  padding: 0;
+  height: 500px;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
 }
 
 /*********************Fine-Pagina-Show*********************/
