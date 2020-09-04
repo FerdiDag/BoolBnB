@@ -16226,8 +16226,8 @@ body#bk-office main {
 
 #index {
   display: flex;
-  justify-content: space-around;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 #index .box {
   display: flex;
@@ -16236,7 +16236,7 @@ body#bk-office main {
   align-items: center;
   width: 300px;
   height: 500px;
-  margin: 30px 15px;
+  margin: 30px 0;
   border: 3px solid #FF385C;
   border-radius: 20px;
   padding: 35px;
@@ -16366,9 +16366,9 @@ form {
   max-width: 100%;
 }
 
+.btn-primary:focus,
 .btn-primary:hover,
-.btn-primary:not(:disabled):not(.disabled):active,
-.btn-primary:focus {
+.btn-primary:not(:disabled):not(.disabled):active {
   color: white;
   background-color: #FF385C;
   border-color: #FF385C;
@@ -16400,5 +16400,15 @@ form {
 
   #show-description {
     padding-left: 0;
+  }
+}
+@media screen and (min-width: 320px) {
+  #index {
+    justify-content: space-around;
+  }
+}
+@media screen and (min-width: 1200px) {
+  #index {
+    justify-content: space-between;
   }
 }
