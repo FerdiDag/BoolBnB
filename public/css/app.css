@@ -16407,8 +16407,11 @@ form {
     justify-content: space-around;
   }
 }
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1024px) {
   #index {
-    justify-content: space-between;
+    justify-content: flex-start;
+  }
+  #index .box {
+    margin: 15px 20px;
   }
 }
