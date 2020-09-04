@@ -56,7 +56,6 @@
                 var lat = {{$apartment->lat}};
                 var appartamento = [lon, lat];
                 var nomeAppartamento = '{{$apartment->description_title}}';
-                var indirizzo = 'prova indirizzo';
 
                 var map = tt.map({
                     container: 'map',
@@ -79,7 +78,7 @@
 
                 var popup = new tt.Popup({
                     offset: popupOffsets
-                }).setHTML(nomeAppartamento + '<br>' + indirizzo);
+                }).setHTML(nomeAppartamento);
                 marker.setPopup(popup).togglePopup();
             </script>
         </div>
