@@ -122,8 +122,8 @@ body#bk-office {
 
 #index {
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
+    justify-content: space-between;
 
     .box {
         display: flex;
@@ -132,14 +132,14 @@ body#bk-office {
         align-items: center;
         width: 300px;
         height: 500px;
-        margin: 30px 15px;
+        margin: 30px 0;
         border: 3px solid $main_color;
         border-radius: 20px;
         padding: 35px;
         text-align: left;
 
         #index-box-title {
-          height: 70px;
+            height: 70px;
         }
 
         h5 {
@@ -168,9 +168,8 @@ body#bk-office {
     }
 }
 //****fine sezione lista appartamenti
-
-
 /*********************Pagina-Show*********************/
+
 #show-header-right {
     margin-bottom: 30px;
     text-align: right;
@@ -228,12 +227,13 @@ body#bk-office {
         font-weight: bold;
 
         &:before {
-            content:attr(aria-label);
-            font-size:120%;
-            font-weight:bold;
-            margin-left:-15px;
+            content: attr(aria-label);
+            font-size: 120%;
+            font-weight: bold;
+            margin-left: -15px;
         }
     }
+
     span {
         font-weight: lighter;
     }
@@ -242,17 +242,25 @@ body#bk-office {
 #show-services {
     ul {
         &:before {
-            content:attr(aria-label);
-            font-size:120%;
-            font-weight:bold;
-            margin-left:-15px;
+            content: attr(aria-label);
+            font-size: 120%;
+            font-weight: bold;
+            margin-left: -15px;
         }
     }
 }
 
+#show-map {
+    border: 1px solid $main_color;
+    padding: 0;
+    height: 500px;
+}
 
+#map {
+    height: 100%;
+    width: 100%;
+}
 /*********************Fine-Pagina-Show*********************/
-
 //*inizio sezione aggiungi appartamento
 
 form {
@@ -260,7 +268,7 @@ form {
 }
 
 #description-apartment {
-  border-color: rgba(72, 72, 72, 0.2);
+    border-color: rgba(72, 72, 72, 0.2);
 }
 
 .input-group {
@@ -268,7 +276,7 @@ form {
 
     #add_address {
         color: white;
-        background-color: $main_color
+        background-color: $main_color;
     }
 }
 
@@ -284,15 +292,14 @@ form {
     max-width: 100%;
 }
 
+.btn-primary:focus,
 .btn-primary:hover,
-.btn-primary:not(:disabled):not(.disabled):active,
-.btn-primary:focus {
+.btn-primary:not(:disabled):not(.disabled):active {
     color: white;
     background-color: $main_color;
     border-color: $main_color;
 }
 //*fine sezione aggiungi appartamento
-
 @media screen and (min-width: 768px) {
     body#bk-office {
         aside {
@@ -305,29 +312,39 @@ form {
             width: calc(100% - 250px);
         }
     }
-
     //inizio sezione aggiungi appartamento
-      .form-group {
+    .form-group {
         text-align: center;
-      }
-    //fine sezione aggiungi appartamento
-}
-@media screen and (max-width: 576px) {
-
-    //inizio sezione aggiungi appartamento
-    .numbers-form {
-      display: block;
     }
     //fine sezione aggiungi appartamento
 }
-
+@media screen and (max-width: 576px) {
+    //inizio sezione aggiungi appartamento
+    .numbers-form {
+        display: block;
+    }
+    //fine sezione aggiungi appartamento
+}
 @media screen and (max-width: 768px) {
-
     #show-header-right {
         text-align: left;
     }
 
     #show-description {
         padding-left: 0;
+    }
+}
+@media screen and (min-width: 320px) {
+    #index {
+        justify-content: space-around;
+    }
+}
+@media screen and (min-width: 1024px) {
+    #index {
+        justify-content: flex-start;
+
+        .box {
+            margin: 15px 20px;
+        }
     }
 }
