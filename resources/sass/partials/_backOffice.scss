@@ -249,6 +249,17 @@ body#bk-office {
         }
     }
 }
+
+#show-map {
+    border: 1px solid $main_color;
+    padding: 0;
+    height: 500px;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+}
 /*********************Fine-Pagina-Show*********************/
 //*inizio sezione aggiungi appartamento
 

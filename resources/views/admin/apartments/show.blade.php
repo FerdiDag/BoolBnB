@@ -13,7 +13,7 @@
             <form class="d-inline" action="{{ route('admin.apartments.destroy', ['apartment' => $apartment->id]) }}" method="post">
                 @csrf
                 @method('DELETE')
-                <input type="submit" class="btn btn-default" value="Elimina">
+                <input id="delete-button" type="submit" class="btn btn-default" value="Elimina">
             </form>
         </div>
     </div>
@@ -43,18 +43,46 @@
                 <li>Numero bagni: <span>{{$apartment->number_of_bathrooms}}</span></li>
                 <li>Metri quadrati: <span>{{$apartment->square_meters}}</span>{{" m²"}}</li>
             </ul>
-        </div>
-
-        <div id="show-services" class="col-md-6 col-sm-4">
-
             <ul aria-label="Servizi">
                 @foreach ($apartment->services as $service)
                 <li>{{$service->type}}</li>
                 @endforeach
             </ul>
         </div>
+        <div id="show-map" class="col-md-6">
+            <div id='map'></div>
+            <script>
+                var lon = {{$apartment->lon}};
+                var lat = {{$apartment->lat}};
+                var appartamento = [lon, lat];
+                var nomeAppartamento = '{{$apartment->description_title}}';
+                var indirizzo = 'prova indirizzo';
 
+                var map = tt.map({
+                    container: 'map',
+                    key: 'lxZY3SRkbhxVGTMUwh3haJI69qlwDQ1I',
+                    style: 'tomtom://vector/1/basic-main',
+                    center: appartamento,
+                    zoom: 15,
+                });
+
+                var marker = new tt.Marker().setLngLat(appartamento).addTo(map);
+
+                var popupOffsets = {
+                    top: [0, 0],
+                    bottom: [0, -40],
+                    'bottom-right': [0, -70],
+                    'bottom-left': [0, -70],
+                    left: [25, -35],
+                    right: [-25, -35]
+                }
+
+                var popup = new tt.Popup({
+                    offset: popupOffsets
+                }).setHTML(nomeAppartamento + '<br>' + indirizzo);
+                marker.setPopup(popup).togglePopup();
+            </script>
+        </div>
     </div>
-
 </div>
 @endsection
