@@ -16071,6 +16071,58 @@ label#status_load {
   width: 95%;
 }
 
+.box {
+  cursor: default;
+}
+.box .row {
+  margin: 0 20px;
+  height: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid gainsboro;
+}
+.box .img-container,
+.box .text-container {
+  cursor: pointer;
+}
+.box img {
+  width: 100%;
+  height: 259px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 20px;
+}
+.box h2 {
+  font-size: 20px;
+  margin: 5px 0 0 0;
+}
+.box h2 + p {
+  font-size: 16px;
+  width: 90%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  color: grey;
+}
+.box ul {
+  padding: 0;
+}
+.box ul li {
+  list-style-type: none;
+  font-weight: bold;
+}
+.box ul li span {
+  font-weight: lighter;
+}
+.box p {
+  font-weight: bold;
+  font-size: 18px;
+  margin: 0;
+}
+.box p span {
+  font-weight: lighter;
+}
+
 header .container {
   padding: 0;
 }
@@ -16231,48 +16283,6 @@ body#bk-office main {
   overflow-y: auto;
 }
 
-#index {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-#index .box {
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: column;
-  align-items: center;
-  width: 300px;
-  height: 500px;
-  margin: 30px 0;
-  border: 3px solid #FF385C;
-  border-radius: 20px;
-  padding: 35px;
-  text-align: left;
-}
-#index .box #index-box-title {
-  height: 70px;
-}
-#index .box h5 {
-  margin-top: 5px;
-}
-#index .box img {
-  width: 100%;
-  height: 200px;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-#index .box .info {
-  font-size: 14px;
-}
-#index .box .btn {
-  padding: 5px;
-}
-#index .box .features {
-  margin-bottom: 10px;
-  width: 100%;
-  height: 100px;
-}
-
 /*********************Pagina-Show*********************/
 #show-header-right {
   margin-bottom: 30px;
@@ -16418,18 +16428,5 @@ form {
 
   #show-description {
     padding-left: 0;
-  }
-}
-@media screen and (min-width: 320px) {
-  #index {
-    justify-content: space-around;
-  }
-}
-@media screen and (min-width: 1024px) {
-  #index {
-    justify-content: flex-start;
-  }
-  #index .box {
-    margin: 15px 20px;
   }
 }

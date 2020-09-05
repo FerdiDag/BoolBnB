@@ -11,3 +11,65 @@ label#status_load {
 .container {
     width: 95%;
 }
+
+//stile per la lista appartamenti guest e admin
+.box {
+    cursor: default;
+
+    & .row {
+        margin: 0 20px;
+        height: 100%;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        border-top: 1px solid rgb(220, 220, 220);
+    }
+
+    .img-container,
+    .text-container {
+        cursor: pointer;
+    }
+
+    img {
+        width: 100%;
+        height: 259px;
+        object-fit: cover;
+        border-radius: 20px;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 5px 0 0 0;
+
+        & + p {
+            font-size: 16px;
+            width: 90%;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow-x: hidden;
+            color: grey;
+        }
+    }
+
+    ul {
+        padding: 0;
+
+        li {
+            list-style-type: none;
+            font-weight: bold;
+
+            span {
+                font-weight: lighter;
+            }
+        }
+    }
+
+    p {
+        font-weight: bold;
+        font-size: 18px;
+        margin: 0;
+
+        span {
+            font-weight: lighter;
+        }
+    }
+}

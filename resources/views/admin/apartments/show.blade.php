@@ -41,7 +41,7 @@
                 <li>Numero di stanze: <span>{{$apartment->number_of_rooms}}</span></li>
                 <li>Numero posti letto: <span>{{$apartment->number_of_beds}}</span></li>
                 <li>Numero bagni: <span>{{$apartment->number_of_bathrooms}}</span></li>
-                <li>Metri quadrati: <span>{{$apartment->square_meters}}</span>{{" m²"}}</li>
+                <li>Metri quadrati: <span>{{$apartment->square_meters}} m²</span></li>
             </ul>
             <ul aria-label="Servizi">
                 @foreach ($apartment->services as $service)

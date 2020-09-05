@@ -5,13 +5,15 @@ require('jquery-validation/dist/additional-methods.js');
 require('jquery-validation/dist/localization/messages_it.js');
 import 'bootstrap';
 
-jQuery.validator.addMethod("lettersonly", function(value, element) {
-    return this.optional(element) || /^[a-zA-Z\s]*$/.test(value);
-}, "Inserisci solo lettere");
 
 
 
 $(document).ready(function() {
+
+    //validazione form lato-client
+    jQuery.validator.addMethod("lettersonly", function(value, element) {
+        return this.optional(element) || /^[a-zA-Z\s]*$/.test(value);
+    }, "Inserisci solo lettere");
 
     $('form').each(function() {  // selects all forms with class="form"
         $(this).validate({
@@ -87,20 +89,23 @@ $(document).ready(function() {
         })
     })
 
-    //intercetto il click sull hamburger del back-office e lo visualizzo o viceversa
+
+    //intercetto il click sull'hamburger menù per visualizzare l'aside in mobile
     $("#aside-toggle").click(function() {
         $("aside").toggleClass("active");
     })
 
-    //invoco la funzione per mostrare l'indirizzo nell'index all'interno della back-offcie
-    if ($(".container").is("#index")) {
-        show_address(".box" , "#address", "#address span");
-    }
+    //chiamo la funzione per visualizzare gli indirizzo nelle index
+    reverseGeocode("#index", ".box", "#address");
 
-    //invoco la funzione per mostrare l'indirizzo nella show all'interno della back-office
-    if ($(".container").is("#show-header")) {
-        show_address("#show-info", "#address" ,"#address span");
-    }
+    //chiamo la funzione per visualizzare gli indirizzo nelle show
+    reverseGeocode("#show-header", "#show-info","#address");
+
+    //intercetto il click sul button "aggiungi indirizzo"
+    $("#add_address").click(function() {
+        //chiamo la funzione per la gestione dell'aggiunta indirizzo in fase di aggiunta e modifica appartamento
+        geocodeBackoffice();
+    })
 
     //inserisco l'indirizzo in pagina in fase di modifica dell'appartamento
     if ($(".container").is("#edit")) {
@@ -109,6 +114,7 @@ $(document).ready(function() {
         var lon = $("#add_lon").val();
         var query = lat + "," + lon;
 
+        //effettuo la chiamata ajax
         $.ajax({
             "url": "https://api.tomtom.com/search/2/reverseGeocode/" + query + ".json",
             "method": "GET",
@@ -116,6 +122,7 @@ $(document).ready(function() {
                 'key': 'VQnRG5CX322Qq4G6tKnUMDqG6DDv0Q6A'
             },
             "success": function(data) {
+                //recupero l'indirizzo testuale dalla risposta
                 var address = data.addresses[0].address.freeformAddress;
                 //inserisco l'indirizzo in pagina
                 $("#address").val(address);
@@ -126,41 +133,6 @@ $(document).ready(function() {
         })
     }
 
-    //intercetto il click sul button "aggiungi indirizzo"
-    $("#add_address").click(function() {
-        if ($("#address").val().length > 0) {
-            //recupero il valore dell'input indirizzo
-            var address = $("#address").val();
-            //effettuo la chiamata ajax per convertire l'indirizzo testuale in coordinate
-            $.ajax({
-                "url": "https://api.tomtom.com/search/2/geocode/" + address + ".json",
-                "method": "GET",
-                "data": {
-                    'key': 'VQnRG5CX322Qq4G6tKnUMDqG6DDv0Q6A',
-                    "limit": 1
-                },
-                "success": function(data) {
-                    var result = data.results;
-                    if (result.length > 0) {
-                        var lat = result[0].position.lat;
-                        var lon = result[0].position.lon;
-                        //recuper l'input nascosto predisposto per la lat
-                        $("#add_lat").val(lat);
-                        $("#add_lon").val(lon);
-                        $("#status_load").text("Indirizzo aggiunto correttamente!")
-                    } else {
-                        $("#status_load").text("Inserisci un indirizzo valido");
-                    }
-                },
-                "error": function() {
-                    alert("Si è verificato un errore");
-                }
-            })
-        } else {
-            $("#status_load").text("Digita un indirizzo per proseguire");
-        }
-    })
-
     $("#send_form").click(function() {
         if ($("#add_lat").val() == "" || $("#add_lon").val() == "") {
             event.preventDefault();
@@ -168,19 +140,67 @@ $(document).ready(function() {
         }
     })
 
-    //funzione per il recupero della lan e lot
-    function show_address(container, coordinates, item) {
-        $(container).each(function() {
-            var lon = $(this).find(coordinates).data("lon");
-            var lat = $(this).find(coordinates).data("lat");
-            var id = $(this).data("id");
-            converti_indirizzo(lat,lon,id,container, item);
+
+    //**************FUNZIONI*************//
+    //**********************************//
+
+    //funzione per la conversione dell'indirizzo da testuale a coordinate
+    function geocodeBackoffice() {
+        if ($("#address").val().length > 0) {
+            //recupero il valore dell'input indirizzo
+            var address = $("#address").val();
+            //effettuo la chiamata ajax tramite la funzione apposita
+            geocodeBackofficeAjax(address);
+        } else {
+            $("#status_load").text("Digita un indirizzo per proseguire");
+        }
+    }
+
+    //funzione per la chiamata ajax verso le Api geocode di tomtom
+    function geocodeBackofficeAjax(address) {
+        //effettuo la chiamata ajax per convertire l'indirizzo testuale in coordinate
+        $.ajax({
+            "url": "https://api.tomtom.com/search/2/geocode/" + address + ".json",
+            "method": "GET",
+            "data": {
+                'key': 'VQnRG5CX322Qq4G6tKnUMDqG6DDv0Q6A',
+                "limit": 1
+            },
+            "success": function(data) {
+                var result = data.results;
+                if (result.length > 0) {
+                    var lat = result[0].position.lat;
+                    var lon = result[0].position.lon;
+                    //recuper l'input nascosto predisposto per la lat
+                    $("#add_lat").val(lat);
+                    $("#add_lon").val(lon);
+                    $("#status_load").text("Indirizzo aggiunto correttamente!")
+                } else {
+                    $("#status_load").text("Inserisci un indirizzo valido");
+                }
+            },
+            "error": function() {
+                alert("Si è verificato un errore");
+            }
         })
     }
 
-    //funzione per la conversione delle coordinate in indirizzo testuale
-    function converti_indirizzo(lat,lon,id,container,item) {
-        var query = lat + "," + lon;
+    //creo una funzione per mostrare l'indirizzo in pagina partendo dalle coordinate
+    function reverseGeocode(section,container,tag_indirizzo) {
+        if ($(section).length == 1) {
+            $(container).each(function() {
+                var indirizzo = $(this).find(tag_indirizzo);
+                var id = $(this).data("id");
+                var lat = indirizzo.data("lat");
+                var lon = indirizzo.data("lon");
+                var query = lat + "," + lon;
+                ajax_reverse_geocode(id,query,container);
+            })
+        }
+    }
+
+    //creo una funzione che esegua una chiamata ajax all'API TomTom
+    function ajax_reverse_geocode(id,query,container) {
         $.ajax({
             "url": "https://api.tomtom.com/search/2/reverseGeocode/" + query + ".json",
             "method": "GET",
@@ -188,8 +208,10 @@ $(document).ready(function() {
                 'key': 'VQnRG5CX322Qq4G6tKnUMDqG6DDv0Q6A'
             },
             "success": function(data) {
-                var indirizzo_completo = data.addresses[0].address.freeformAddress;
-                $(container + "[data-id='" + id + "']").find(item).text(indirizzo_completo);
+                //recupero l'indirizzo testuale dall'Api
+                var indirizzo_testuale = data.addresses[0].address.freeformAddress;
+                //lo inserisco in pagina
+                $(container + "[data-id='" + id + "']").find("#address span").text(indirizzo_testuale);
             },
             "error": function() {
                 alert("Si è verificato un errore");
