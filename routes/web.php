@@ -29,4 +29,7 @@ Route::prefix('admin')->namespace('Admin')->name('admin.')->middleware('auth')->
     Route::get('/show', function () {
         return view('admin.apartments.show');
     });
+    Route::get('/payment', function () {
+        return view('admin.payment.make');
+    });
 });

@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "braintree-web-drop-in": "^1.23.0",
         "jquery-validation": "^1.19.2"
     }
 }
