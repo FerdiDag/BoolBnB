@@ -2,49 +2,45 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="row d-flex justify-content-center">
+        <div class="">
             <h3>
                 Sponsorizza il tuo appartamento
             </h3>
-            <p></p>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="content">
                 <section>
-                    <label for="amount">
-                        <div class="input-wrapper amount-wrapper">
-                            <ul>
-                                <li>
-                                    <input class="radio" type="radio" id="amount" name="amount" min="1" placeholder="Amount" value="">
-                                    Sponsorizzazione versione: ,
-                                    della durata di ore,
-                                    e al costo di €.
-                                </li>
-                                <li>
-                                    <input class="radio" type="radio" id="amount" name="amount" min="1" placeholder="Amount" value="">
-                                    Sponsorizzazione versione: ,
-                                    della durata di ore,
-                                    e al costo di €.
-                                </li>
-                                <li>
-                                    <input class="radio" type="radio" id="amount" name="amount" min="1" placeholder="Amount" value="">
-                                    Sponsorizzazione versione: ,
-                                    della durata di ore,
-                                    e al costo di €.
-                                </li>
-                            </ul>
-                        </div>
-                    </label>
+                    <div class="input-wrapper d-flex justify-content-center">
+                        <ul>
+                            <li>
+                                <input class="radio" type="radio" id="amount" name="amount" min="1" placeholder="Amount" value="">
+                                Sponsorizzazione versione: ,
+                                della durata di ore,
+                                e al costo di €.
+                            </li>
+                            <li>
+                                <input class="radio" type="radio" id="amount" name="amount" min="1" placeholder="Amount" value="">
+                                Sponsorizzazione versione: ,
+                                della durata di ore,
+                                e al costo di €.
+                            </li>
+                            <li>
+                                <input class="radio" type="radio" id="amount" name="amount" min="1" placeholder="Amount" value="">
+                                Sponsorizzazione versione: ,
+                                della durata di ore,
+                                e al costo di €.
+                            </li>
+                        </ul>
+                    </div>
+
                 </section>
             </div>
         </div>
     </div>
-</div>
-<div class="container">
-    <div class="row">
+    <div class="row d-flex justify-content-center">
         <div class="">
             <div id="dropin-wrapper">
                 <div id="checkout-message"></div>
@@ -54,6 +50,9 @@
         </div>
     </div>
 </div>
+
+
+
 
 <script>
     var button = document.querySelector('#submit-button');

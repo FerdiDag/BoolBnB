@@ -118,9 +118,7 @@ body#bk-office {
         overflow-y: auto;
     }
 }
-
 /*********************Pagina-Show*********************/
-
 #show-header-right {
     margin-bottom: 30px;
     text-align: right;
@@ -249,6 +247,14 @@ form {
     color: white;
     background-color: $main_color;
     border-color: $main_color;
+}
+
+.input-wrapper {
+    ul {
+        li {
+            list-style-type: none;
+        }
+    }
 }
 //*fine sezione aggiungi appartamento
 @media screen and (min-width: 768px) {
