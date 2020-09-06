@@ -55,6 +55,8 @@
 
 
 <script>
+
+
     var button = document.querySelector('#submit-button');
 
     braintree.dropin.create({
