@@ -16365,6 +16365,16 @@ body#bk-office main {
   width: 100%;
 }
 
+#guest-show-form-title {
+  margin-bottom: 20px;
+}
+
+#guest-show-form-submit {
+  background-color: #FF385C;
+  border: 1px solid #FF385C;
+  margin-bottom: 20px;
+}
+
 /*********************Fine-Pagina-Show*********************/
 form {
   text-align: center;
@@ -16404,6 +16414,10 @@ form {
 
 .input-wrapper ul li {
   list-style-type: none;
+}
+
+#sponsorship h3 {
+  margin-bottom: 30px;
 }
 
 @media screen and (min-width: 768px) {

@@ -112,9 +112,8 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Apartment $apartment)
     {
-        $apartment = Apartment::find($id);
 
         if ($apartment->user_id != Auth::user()->id) {
           return abort('404');

@@ -1,11 +1,11 @@
 @extends('layouts.dashboard')
-
+@section('page-title', "Sponsorizza")
 @section('content')
-<div class="container">
+<div id="sponsorship" class="container">
     <div class="row d-flex justify-content-center">
         <div class="">
             <h3>
-                Sponsorizza il tuo appartamento
+                Sponsorizza il seguente appartamento: {{$apartment->description_title}}
             </h3>
         </div>
     </div>
@@ -15,27 +15,18 @@
                 <section>
                     <div class="input-wrapper d-flex justify-content-center">
                         <ul>
-                            <li>
-                                <input class="radio" type="radio" id="amount" name="amount" min="1" placeholder="Amount" value="">
-                                Sponsorizzazione versione: ,
-                                della durata di ore,
-                                e al costo di €.
-                            </li>
-                            <li>
-                                <input class="radio" type="radio" id="amount" name="amount" min="1" placeholder="Amount" value="">
-                                Sponsorizzazione versione: ,
-                                della durata di ore,
-                                e al costo di €.
-                            </li>
-                            <li>
-                                <input class="radio" type="radio" id="amount" name="amount" min="1" placeholder="Amount" value="">
-                                Sponsorizzazione versione: ,
-                                della durata di ore,
-                                e al costo di €.
-                            </li>
+                            @foreach ($rates as $rate)
+                                <li>
+                                    <label class="form-check-label">
+                                        <input class="radio" type="radio" class="form-check-input" name="amount" min="1" placeholder="Amount">
+                                        <strong>{{$rate->price}}€</strong>
+                                        per {{$rate->time}}
+                                        ore di sponsorizzazione
+                                    </label>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
-
                 </section>
             </div>
         </div>
@@ -50,13 +41,7 @@
         </div>
     </div>
 </div>
-
-
-
-
 <script>
-
-
     var button = document.querySelector('#submit-button');
 
     braintree.dropin.create({
