@@ -155,7 +155,8 @@ return [
         "number_of_bathrooms" => "Il numero di bagni",
         "square_meters" => "I metri quadrati",
         "address" => "L'indirizzo",
-        "services" => "Un servizio"
+        "services" => "Un servizio",
+        "type" => "Un tipo"
     ],
 
 ];

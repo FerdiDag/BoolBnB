@@ -80,6 +80,10 @@ $(document).ready(function() {
 
                 "services[]": {
                     required: true
+                },
+
+                type: {
+                    required: true
                 }
 
             },

@@ -32,9 +32,9 @@ return [
 
     'braintree' => [
        'environment' => 'sandbox',
-       'merchantId' => 'xvc66dz98xy9sznz',
-       'publicKey' => 'jx437d66k4p2nn74',
-       'privateKey' => 'c56653d27a5707ee57a936747e321357'
+       'merchantId' => 'fz4w2yv9pgyfff5y',
+       'publicKey' => 'hwbbtthpty6v4kwv',
+       'privateKey' => '89779b355325b99fe4729317a13a6e79'
 ],
 
 ];

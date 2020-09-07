@@ -16123,6 +16123,10 @@ label#status_load {
   font-weight: lighter;
 }
 
+.form-group {
+  margin: 0;
+}
+
 header .container {
   padding: 0;
 }
@@ -16416,6 +16420,9 @@ form {
   list-style-type: none;
 }
 
+#sponsorship ul {
+  text-align: left;
+}
 #sponsorship h3 {
   margin-bottom: 30px;
 }

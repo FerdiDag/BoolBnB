@@ -8,6 +8,8 @@ use App\Apartment;
 use Auth;
 use App\Rate;
 use Braintree;
+use App\Sponsorship;
+use App\Payment;
 
 class SponsorshipController extends Controller
 {
@@ -37,8 +39,11 @@ class SponsorshipController extends Controller
         return view("admin.sponsorship.make", $data);
     }
 
-    public function submit(Request $request)
+    public function submit(Request $request, Apartment $apartment)
     {
+        $request->validate([
+            "type" => "required"
+        ]);
         $gateway = new Braintree\Gateway([
             'environment' => config('services.braintree.environment'),
             'merchantId' => config('services.braintree.merchantId'),
@@ -46,95 +51,45 @@ class SponsorshipController extends Controller
             'privateKey' => config('services.braintree.privateKey')
         ]);
 
-        $amount = $request->amount;
+        $amount = $request->type;
         $nonce = $request->payment_method_nonce;
 
         $result = $gateway->transaction()->sale([
             'amount' => $amount,
             'paymentMethodNonce' => $nonce,
             'customer' => [
-                'firstName' => 'Pippo',
-                'lastName' => 'Franco',
-                'email' => 'pippofranco@gmail.com',
+                'firstName' => Auth::user()->name ?? "",
+                'lastName' => Auth::user()->lastname ?? "",
+                'email' => Auth::user()->email,
             ],
             'options' => [
                 'submitForSettlement' => true
             ]
         ]);
-
         if ($result->success) {
-            $transaction = $result->transaction;
-            // header("Location: transaction.php?id=" . $transaction->id);
 
-            return back()->with('success_message', 'Transaction successful. The ID is:'. $transaction->id);
+            $transaction = $result->transaction;
+            //aggiungo la sponsorizzazione in database
+            $new_sponsorship = new Sponsorship();
+            //creo un array tramite la fuzione all
+            $data = $request->all();
+            //recuper l'id dell' appartamento attraverso il placeholder della post
+            $new_sponsorship->apartment_id = $apartment->id;
+            //recupero il rates con prezzo uguale a quello inserito dall'utente
+            $rate = Rate::where("price", $request->type)->first();
+            //inserisco nell'array il tipo di tariffa
+            $data["rate_id"] = $rate->id;
+            //inserisco nell'array l'id dell'appartamento
+            $data["apartment_id"] = $apartment->id;
+            dd($data);
+            return back();
         } else {
             $errorString = "";
 
             foreach ($result->errors->deepAll() as $error) {
                 $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
             }
-
-            // $_SESSION["errors"] = $errorString;
-            // header("Location: index.php");
-            return back()->withErrors('An error occurred with the message: '.$result->message);
+            return back();
         }
     }
 }
-
-
-// Route::get('/', function () {
-//     $gateway = new Braintree\Gateway([
-//         'environment' => config('services.braintree.environment'),
-//         'merchantId' => config('services.braintree.merchantId'),
-//         'publicKey' => config('services.braintree.publicKey'),
-//         'privateKey' => config('services.braintree.privateKey')
-//     ]);
-//
-//     $token = $gateway->ClientToken()->generate();
-//
-//     return view('welcome', [
-//         'token' => $token
-//     ]);
-// });
-
-// Route::post('/checkout', function (Request $request) {
-//     $gateway = new Braintree\Gateway([
-//         'environment' => config('services.braintree.environment'),
-//         'merchantId' => config('services.braintree.merchantId'),
-//         'publicKey' => config('services.braintree.publicKey'),
-//         'privateKey' => config('services.braintree.privateKey')
-//     ]);
-//
-//     $amount = $request->amount;
-//     $nonce = $request->payment_method_nonce;
-//
-//     $result = $gateway->transaction()->sale([
-//         'amount' => $amount,
-//         'paymentMethodNonce' => $nonce,
-//         'customer' => [
-//             'firstName' => 'Tony',
-//             'lastName' => 'Stark',
-//             'email' => 'tony@avengers.com',
-//         ],
-//         'options' => [
-//             'submitForSettlement' => true
-//         ]
-//     ]);
-//
-//     if ($result->success) {
-//         $transaction = $result->transaction;
-//         // header("Location: transaction.php?id=" . $transaction->id);
-//
-//         return back()->with('success_message', 'Transaction successful. The ID is:'. $transaction->id);
-//     } else {
-//         $errorString = "";
-//
-//         foreach ($result->errors->deepAll() as $error) {
-//             $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
-//         }
-//
-//         // $_SESSION["errors"] = $errorString;
-//         // header("Location: index.php");
-//         return back()->withErrors('An error occurred with the message: '.$result->message);
-//     }
-// });
