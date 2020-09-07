@@ -24,7 +24,7 @@ class SponsorshipController extends Controller
                'privateKey' => config('services.braintree.privateKey')
            ]);
 
-                $token = $gateway->ClientToken()->generate();
+        $token = $gateway->ClientToken()->generate();
 
         $rates = Rate::all();
         $data = [
@@ -52,11 +52,6 @@ class SponsorshipController extends Controller
         $result = $gateway->transaction()->sale([
             'amount' => $amount,
             'paymentMethodNonce' => $nonce,
-            'customer' => [
-                'firstName' => 'Pippo',
-                'lastName' => 'Franco',
-                'email' => 'pippofranco@gmail.com',
-            ],
             'options' => [
                 'submitForSettlement' => true
             ]

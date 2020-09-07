@@ -20,7 +20,7 @@
                                 @foreach ($rates as $rate)
                                 <li>
                                     <label class="form-check-label">
-                                        <input class="radio" type="radio" class="form-check-input" name="amount" min="1" placeholder="Amount" value="{{$rate->price}}">
+                                        <input class="radio" type="radio" class="form-check-input" name="amount" id="amount" min="1" placeholder="Amount" value="{{$rate->price}}">
                                         <strong>{{$rate->price}}€</strong>
                                         per {{$rate->time}}
                                         ore di sponsorizzazione
@@ -50,6 +50,7 @@
     var form = document.querySelector('#payment-form');
     // var client_token = 'sandbox_ktgsjr7n_xvc66dz98xy9sznz';
     var client_token = "{{ $token }}";
+
     braintree.dropin.create({
         authorization: client_token,
         selector: '#dropin-container',
