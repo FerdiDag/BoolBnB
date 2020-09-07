@@ -16,11 +16,24 @@ class SponsorshipController extends Controller
         if ($apartment->user_id != Auth::user()->id) {
             return abort("404");
         };
+
+        $gateway = new Braintree\Gateway([
+               'environment' => config('services.braintree.environment'),
+               'merchantId' => config('services.braintree.merchantId'),
+               'publicKey' => config('services.braintree.publicKey'),
+               'privateKey' => config('services.braintree.privateKey')
+           ]);
+
+                $token = $gateway->ClientToken()->generate();
+
         $rates = Rate::all();
         $data = [
             "apartment" => $apartment,
-            "rates" => $rates
+            "rates" => $rates,
+            "token" => $token
         ];
+
+
         return view("admin.sponsorship.make", $data);
     }
 
