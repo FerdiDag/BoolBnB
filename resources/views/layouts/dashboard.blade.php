@@ -85,12 +85,6 @@
                             Statistiche
                         </a>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-angle-double-up"></i>
-                            Sponsorizza
-                        </a>
-                    </li>
                 @endif
             </ul>
         </nav>
