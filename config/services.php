@@ -31,10 +31,10 @@ return [
     ],
 
     'braintree' => [
-        'environment' => env('BRAINTREE_ENV'),
-        'merchant_id' => env('BRAINTREE_MERCHANT_ID'),
-        'public_key' => env('BRAINTREE_PUBLIC_KEY'),
-        'private_key' => env('BRAINTREE_PRIVATE_KEY'),
+        'environment' => 'sandbox',
+       'merchantId' => 'xvc66dz98xy9sznz',
+       'publicKey' => 'jx437d66k4p2nn74',
+       'privateKey' => 'c56653d27a5707ee57a936747e321357'
 ],
 
 ];

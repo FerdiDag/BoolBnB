@@ -30,4 +30,5 @@ Route::prefix('admin')->namespace('Admin')->name('admin.')->middleware('auth')->
         return view('admin.apartments.show');
     });
     Route::get('/sponsorship/{apartment}', "SponsorshipController@index")->name("sponsorship");
+    Route::post('/sponsorship', 'SponsorshipController@submit')->name('sponsorshipsubmit');
 });

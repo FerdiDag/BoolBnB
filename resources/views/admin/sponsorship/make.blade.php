@@ -11,24 +11,26 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <div class="content">
-                <section>
-                    <div class="input-wrapper d-flex justify-content-center">
-                        <ul>
-                            @foreach ($rates as $rate)
+            <form method="post" id="payment-form" action="{{route('admin.sponsorshipsubmit')}}">
+                @csrf
+                <div class="content">
+                    <section>
+                        <div class="input-wrapper d-flex justify-content-center">
+                            <ul>
+                                @foreach ($rates as $rate)
                                 <li>
                                     <label class="form-check-label">
-                                        <input class="radio" type="radio" class="form-check-input" name="amount" min="1" placeholder="Amount">
+                                        <input class="radio" type="radio" class="form-check-input" name="amount" min="1" placeholder="Amount" value="{{$rate->price}}">
                                         <strong>{{$rate->price}}€</strong>
                                         per {{$rate->time}}
                                         ore di sponsorizzazione
                                     </label>
                                 </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </section>
-            </div>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </section>
+                </div>
         </div>
     </div>
     <div class="row d-flex justify-content-center">
@@ -36,54 +38,40 @@
             <div id="dropin-wrapper">
                 <div id="checkout-message"></div>
                 <div id="dropin-container"></div>
-                <button id="submit-button">Submit payment</button>
+                <input id="nonce" name="payment_method_nonce" type="hidden" />
+                <button class="button" type="submit" id="submit-button">Submit payment</button>
+                </form>
             </div>
+
         </div>
     </div>
 </div>
 <script>
-    var button = document.querySelector('#submit-button');
+       var form = document.querySelector('#payment-form');
+       var client_token = 'sandbox_ktgsjr7n_xvc66dz98xy9sznz';
+       braintree.dropin.create({
+         authorization: client_token,
+         selector: '#dropin-container',
 
-    braintree.dropin.create({
-        // Insert your tokenization key here
-        authorization: 'sandbox_ktgsjr7n_xvc66dz98xy9sznz',
-        container: '#dropin-container'
-    }, function(createErr, instance) {
-        button.addEventListener('click', function() {
-            instance.requestPaymentMethod(function(requestPaymentMethodErr, payload) {
-                // When the user clicks on the 'Submit payment' button this code will send the
-                // encrypted payment information in a variable called a payment method nonce
-                $.ajax({
-                    type: 'POST',
-                    url: '/checkout',
-                    data: {
-                        'paymentMethodNonce': payload.nonce
-                    }
-                }).done(function(result) {
-                    // Tear down the Drop-in UI
-                    instance.teardown(function(teardownErr) {
-                        if (teardownErr) {
-                            console.error('Could not tear down Drop-in UI!');
-                        } else {
-                            console.info('Drop-in UI has been torn down!');
-                            // Remove the 'Submit payment' button
-                            $('#submit-button').remove();
-                        }
-                    });
-
-                    if (result.success) {
-                        $('#checkout-message').html(
-                            '<h1>Success</h1><p>Your Drop-in UI is working! Check your <a href="https://sandbox.braintreegateway.com/login">sandbox Control Panel</a> for your test transactions.</p><p>Refresh to try another transaction.</p>'
-                        );
-                    } else {
-                        console.log(result);
-                        $('#checkout-message').html('<h1>Error</h1><p>Check your console.</p>');
-                    }
-                });
-            });
-        });
-    });
-</script>
+       }, function (createErr, instance) {
+         if (createErr) {
+           console.log('Create Error', createErr);
+           return;
+         }
+         form.addEventListener('submit', function (event) {
+           event.preventDefault();
+           instance.requestPaymentMethod(function (err, payload) {
+             if (err) {
+               console.log('Request Payment Method Error', err);
+               return;
+             }
+             // Add the nonce to the form and submit
+             document.querySelector('#nonce').value = payload.nonce;
+             form.submit();
+           });
+         });
+       });
+   </script>
 
 
 
