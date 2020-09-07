@@ -80,6 +80,9 @@ $(document).ready(function() {
 
                 "services[]": {
                     required: true
+                },
+                amount {
+                    required: true
                 }
             },
             errorPlacement: function (error, element) {
