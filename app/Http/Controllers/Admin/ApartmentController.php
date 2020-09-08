@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Apartment;
 use App\Service;
+use App\Sponsorship;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class ApartmentController extends Controller
 {
@@ -99,11 +101,22 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
+        //definisco la data di scadenza con CARBON
+        $current_timestamp = Carbon::now('Europe/Rome')->toDateTimeString();
+        //recupero la sponsorizzazione in database più recente, dell'appartamento in oggetto
+        $sponsorship = Sponsorship::all()->where("expiry_date", ">", $current_timestamp)->where("apartment_id","=", $apartment->id)->sortByDesc('expiry_date')->first();
+
         if ($apartment->user_id == Auth::user()->id) {
-            return view('admin.apartments.show', compact('apartment'));
+            $data = [
+                "sponsorship" => $sponsorship,
+                "apartment" => $apartment
+            ];
+            return view('admin.apartments.show', $data);
         } else {
             return abort('404');
         }
+
+
     }
 
     /**

@@ -19,6 +19,29 @@ class SponsorshipController extends Controller
         if ($apartment->user_id != Auth::user()->id) {
             return abort("404");
         };
+        //definisco la data di scadenza con CARBON
+        $current_timestamp = Carbon::now('Europe/Rome')->toDateTimeString();
+
+
+        //recupero la sponsorizzazione in database più recente, dell'appartamento in oggetto
+        $sponsorship = Sponsorship::all()->where("expiry_date", ">", $current_timestamp)->where("apartment_id","=", $apartment->id)->sortByDesc('expiry_date')->first();
+
+        //se ci sono sponsorizzazioni in corso entro nella condizione
+        if ($sponsorship != null) {
+            //creo una variabile contatore
+            $contatore = 1;
+            //ciclo i pagamenti
+            foreach ($sponsorship->payments as $payment) {
+                $counted = $sponsorship->payments->count();
+                //se uno corrisponde ad accepted non permetto la sponsorizzazione dell'appartamento
+                if ($contatore == $counted && $payment->status == "accepted") {
+                    return abort("404");
+                }
+                //incremento il contatore
+                $contatore++;
+            }
+        }
+
 
         $gateway = new Braintree\Gateway([
                'environment' => config('services.braintree.environment'),

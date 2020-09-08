@@ -13,7 +13,15 @@
             <h1 id="detail-title">{{$apartment->description_title}}</h1>
         </div>
         <div id="show-header-right" class="col-md-6 col-sm-12">
-            <a id="sponsorship-button" href="{{route("admin.sponsorship", ["apartment" => $apartment->id])}}" type="button" class="btn btn-default" name="button">Sponsorizza</a>
+            @if ($sponsorship != null)
+                @foreach ($sponsorship->payments as $payment)
+                    @if ($loop->last && $payment->status != "accepted")
+                        <a id="sponsorship-button" href="{{route("admin.sponsorship", ["apartment" => $apartment->id])}}" type="button" class="btn btn-default" name="button">Sponsorizza</a>
+                    @endif
+                @endforeach
+            @else
+                <a id="sponsorship-button" href="{{route("admin.sponsorship", ["apartment" => $apartment->id])}}" type="button" class="btn btn-default" name="button">Sponsorizza</a>
+            @endif
             <a id="modify-button" href="{{ route('admin.apartments.edit', ['apartment' => $apartment->id]) }}" type="button" class="btn btn-default" name="button">Modifica</a>
             <form class="d-inline" action="{{ route('admin.apartments.destroy', ['apartment' => $apartment->id]) }}" method="post">
                 @csrf
