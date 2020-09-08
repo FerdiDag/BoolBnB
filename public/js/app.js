@@ -40621,6 +40621,13 @@ $(document).ready(function () {
         alert("Si è verificato un errore");
       }
     });
+  } //se in pagina è presente il messaggio dell'esito sponsorizzazione, lo rimuovo dopo due secondi
+
+
+  if ($(".info-sponsorship").length == 1) {
+    setTimeout(function () {
+      $(".info-sponsorship").toggleClass("active");
+    }, 2000);
   }
 
   $("#send_form").click(function () {

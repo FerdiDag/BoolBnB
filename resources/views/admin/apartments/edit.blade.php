@@ -33,7 +33,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label class="text-left d-block" for="image">Aggiungi immagine</label>
+                        <label class="mt-3 text-left d-block" for="image">Aggiungi immagine:</label>
                         <input type="file" name="cover_image" class="form-control-file" id="image">
                     </div>
                     <div class="form-group">

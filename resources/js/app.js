@@ -138,6 +138,13 @@ $(document).ready(function() {
         })
     }
 
+    //se in pagina è presente il messaggio dell'esito sponsorizzazione, lo rimuovo dopo due secondi
+    if ($(".info-sponsorship").length == 1) {
+        setTimeout(function() {
+            $(".info-sponsorship").toggleClass("active");
+        },2000)
+    }
+
     $("#send_form").click(function() {
         if ($("#add_lat").val() == "" || $("#add_lon").val() == "") {
             event.preventDefault();

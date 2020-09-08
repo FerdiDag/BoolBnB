@@ -139,7 +139,8 @@ body#bk-office {
     }
 }
 
-#modify-button {
+#modify-button,
+#sponsorship-button {
     border: 1px solid #FF385C;
 }
 
@@ -275,6 +276,15 @@ form {
     h3 {
     margin-bottom: 30px;
     }
+}
+
+.info-sponsorship {
+    opacity: 1;
+    transition: 2s all;
+}
+
+.info-sponsorship.active {
+    opacity: 0;
 }
 
 //*fine sezione aggiungi appartamento

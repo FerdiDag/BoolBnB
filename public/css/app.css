@@ -16307,7 +16307,8 @@ body#bk-office main {
   background-color: #FF385C;
 }
 
-#modify-button {
+#modify-button,
+#sponsorship-button {
   border: 1px solid #FF385C;
 }
 
@@ -16425,6 +16426,15 @@ form {
 }
 #sponsorship h3 {
   margin-bottom: 30px;
+}
+
+.info-sponsorship {
+  opacity: 1;
+  transition: 2s all;
+}
+
+.info-sponsorship.active {
+  opacity: 0;
 }
 
 @media screen and (min-width: 768px) {

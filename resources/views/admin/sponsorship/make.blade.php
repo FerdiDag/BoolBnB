@@ -2,6 +2,12 @@
 @section('page-title', "Sponsorizza")
 @section('content')
 
+@if (session("contatore") && (session("radio")))
+    <div class="info-sponsorship alert alert-danger">
+        {{ "Pagamento non effettuato. Controllare i dati inseriti." }}
+    </div>
+@endif
+
 <div id="sponsorship" class="container">
     <div class="row d-flex justify-content-center">
         <div class="">
@@ -29,7 +35,7 @@
                             @foreach ($rates as $rate)
                             <li>
                                 <label class="form-check-label">
-                                    <input class="radio" type="radio" class="form-check-input" name="type" id="amount" min="1" placeholder="Amount" value="{{$rate->price}}">
+                                    <input class="radio" type="radio" {{session("radio") == $rate->id ? "checked" : "" }} class="form-check-input" name="type" id="amount" min="1" placeholder="Amount" value="{{$rate->price}}">
                                     <strong>{{$rate->price}}€</strong>
                                     per {{$rate->time}}
                                     ore di sponsorizzazione
@@ -41,6 +47,12 @@
                     @error('type')
                         <small class="text-danger w-100">{{ $message }}</small>
                     @enderror
+                    @if (session('contatore'))
+                        <div class="form-group">
+                            <input type="hidden" name="contatore" value="{{session('contatore')}}">
+                        </div>
+                    @else
+                    @endif
                     <div id="dropin-wrapper" class="col-6 offset-3">
                         <div id="checkout-message"></div>
                         <div id="dropin-container"></div>

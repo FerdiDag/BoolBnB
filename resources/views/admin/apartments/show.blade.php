@@ -1,8 +1,12 @@
 @extends('layouts.dashboard')
 
 @section('page-title', 'Dettaglio appartamento')
-
-@section('content')
+@section("content")
+@if (session('messages'))
+    <div class="info-sponsorship alert alert-success">
+        {{ session('messages') }}
+    </div>
+@endif
 <div id="show-header" class="container">
     <div class="row">
         <div class="col-md-6">
