@@ -14,11 +14,13 @@
         </div>
         <div id="show-header-right" class="col-md-6 col-sm-12">
             @if ($sponsorship != null)
-                @foreach ($sponsorship->payments as $payment)
+                @forelse ($sponsorship->payments as $payment)
                     @if ($loop->last && $payment->status != "accepted")
                         <a id="sponsorship-button" href="{{route("admin.sponsorship", ["apartment" => $apartment->id])}}" type="button" class="btn btn-default" name="button">Sponsorizza</a>
                     @endif
-                @endforeach
+                @empty
+                    <a id="sponsorship-button" href="{{route("admin.sponsorship", ["apartment" => $apartment->id])}}" type="button" class="btn btn-default" name="button">Sponsorizza</a>
+                @endforelse
             @else
                 <a id="sponsorship-button" href="{{route("admin.sponsorship", ["apartment" => $apartment->id])}}" type="button" class="btn btn-default" name="button">Sponsorizza</a>
             @endif
