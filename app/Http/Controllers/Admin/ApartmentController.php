@@ -104,7 +104,7 @@ class ApartmentController extends Controller
         //definisco la data di scadenza con CARBON
         $current_timestamp = Carbon::now('Europe/Rome')->toDateTimeString();
         //recupero la sponsorizzazione in database più recente, dell'appartamento in oggetto
-        $sponsorship = Sponsorship::all()->where("expiry_date", ">", $current_timestamp)->where("apartment_id","=", $apartment->id)->sortByDesc('expiry_date')->first();
+        $sponsorship = Sponsorship::all()->where("expiry_date", ">", $current_timestamp)->where("apartment_id","=", $apartment->id)->sortByDesc('created_at')->first();
 
         if ($apartment->user_id == Auth::user()->id) {
             $data = [

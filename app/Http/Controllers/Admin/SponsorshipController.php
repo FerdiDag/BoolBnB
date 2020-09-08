@@ -24,8 +24,7 @@ class SponsorshipController extends Controller
 
 
         //recupero la sponsorizzazione in database più recente, dell'appartamento in oggetto
-        $sponsorship = Sponsorship::all()->where("expiry_date", ">", $current_timestamp)->where("apartment_id","=", $apartment->id)->sortByDesc('expiry_date')->first();
-
+        $sponsorship = Sponsorship::all()->where("expiry_date", ">", $current_timestamp)->where("apartment_id","=", $apartment->id)->sortByDesc('created_at')->first();
         //se ci sono sponsorizzazioni in corso entro nella condizione
         if ($sponsorship != null) {
             //creo una variabile contatore
