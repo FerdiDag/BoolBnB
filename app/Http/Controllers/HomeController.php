@@ -12,11 +12,6 @@ use Carbon\Carbon;
 class HomeController extends Controller
 {
 
-    public function index()
-    {
-        return view('home');
-    }
-
     public function homepage(Apartment $apartment)
     {
         //definisco la data di scadenza con CARBON
