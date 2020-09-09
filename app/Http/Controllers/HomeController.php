@@ -18,7 +18,7 @@ class HomeController extends Controller
         $current_timestamp = Carbon::now('Europe/Rome')->toDateTimeString();
 
         //recupero la sponsorizzazione in database più recente, dell'appartamento in oggetto
-        $sponsorships = Sponsorship::where("expiry_date", ">", $current_timestamp)->get();
+        $sponsorships = Sponsorship::all()->where("expiry_date", ">", $current_timestamp)->sortByDesc('created_at');
 
         return view('homepage', compact('sponsorships'));
 }
