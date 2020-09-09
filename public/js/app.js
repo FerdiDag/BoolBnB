@@ -40584,7 +40584,12 @@ $(document).ready(function () {
         error.insertAfter(element.closest('.form-group'));
       }
     });
-  }); //intercetto il click sull'hamburger menù per visualizzare l'aside in mobile
+  }); //Inserisco un messaggio in caso in cui non ci siano appartamenti in evidenza
+
+  if ($('.in-evidenza a').length == 0) {
+    $('.in-evidenza h1').after('<p class="text-center w-100">Nessuna sponsorizzazione presente</p>');
+  } //intercetto il click sull'hamburger menù per visualizzare l'aside in mobile
+
 
   $("#aside-toggle").click(function () {
     $("aside").toggleClass("active");

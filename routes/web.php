@@ -20,6 +20,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/homepage', 'HomeController@homepage')->name('homepage');
+Route::get('/search', 'HomeController@search')->name('search');
+Route::get('/show/{apartment}', 'HomeController@show')->name('show');
+
 Route::prefix('admin')->namespace('Admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('/apartments', 'ApartmentController');
     Route::get('/', 'HomeController@index')->name('dashboard');
