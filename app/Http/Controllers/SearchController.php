@@ -10,7 +10,9 @@ class SearchController extends Controller
     public function simplysearch(Request $request) {
         $services = Service::all();
         $request->validate([
-            'search' => 'required|string'
+            'search' => 'required|string',
+            "lon" => "required",
+            "lat" => "required"
         ]);
     }
 

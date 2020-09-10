@@ -88,7 +88,17 @@ $(document).ready(function() {
 
                 search: {
                     required: true
+                },
+
+                lan: {
+                    required: true
+                },
+
+                lot: {
+                    required: true
                 }
+
+
 
             },
             errorPlacement: function (error, element) {
@@ -100,7 +110,7 @@ $(document).ready(function() {
 
     // intercetto la pressione del pulsante sulla barra di ricerca
     $("#search").keyup(function() {
-        if ($('#search').val() != '') {
+        if ($('#search').val() != '' && $('#search').val().length % 5) {
             geocodeGuest()
         }
     })
@@ -122,6 +132,9 @@ $(document).ready(function() {
             "success": function(data) {
                 var result = data.results;
                 if (result.length > 0) {
+                    if ($("#search-error").length > 0) {
+                        $(this).remove();
+                    }
                     var lat = result[0].position.lat;
                     var lon = result[0].position.lon;
                     //recuper l'input nascosto predisposto per la lat
@@ -130,9 +143,14 @@ $(document).ready(function() {
                 }
             },
             "error": function() {
-                $("#add_lat").val('');
-                $("#add_lon").val('');
-                $('#search').val('');
+                $("#search-button").click(function() {
+                    if($("#search-error").length == 0) {
+                        //se c'e un errore spossesso il button delle sue funzione
+                        event.preventDefault();
+                        //aggiungo un messagigo in pagina
+                        $(".form-group").after("<label id=search-error class=error for=search>Inserisci un indirizzo valido</label>");
+                    }
+                })
             }
         })
     }

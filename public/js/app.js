@@ -40577,6 +40577,15 @@ $(document).ready(function () {
         },
         type: {
           required: true
+        },
+        search: {
+          required: true
+        },
+        lan: {
+          required: true
+        },
+        lot: {
+          required: true
         }
       },
       errorPlacement: function errorPlacement(error, element) {
@@ -40584,7 +40593,55 @@ $(document).ready(function () {
         error.insertAfter(element.closest('.form-group'));
       }
     });
-  }); //Inserisco un messaggio in caso in cui non ci siano appartamenti in evidenza
+  }); // intercetto la pressione del pulsante sulla barra di ricerca
+
+  $("#search").keyup(function () {
+    if ($('#search').val() != '' && $('#search').val().length % 5) {
+      geocodeGuest();
+    }
+  });
+
+  function geocodeGuest() {
+    var address = $('#search').val();
+    geocodeGuestAjax(address);
+  }
+
+  function geocodeGuestAjax(address) {
+    $.ajax({
+      "url": "https://api.tomtom.com/search/2/geocode/" + address + ".json",
+      "method": "GET",
+      "data": {
+        'key': 'VQnRG5CX322Qq4G6tKnUMDqG6DDv0Q6A',
+        "limit": 1
+      },
+      "success": function success(data) {
+        var result = data.results;
+
+        if (result.length > 0) {
+          if ($("#search-error").length > 0) {
+            $(this).remove();
+          }
+
+          var lat = result[0].position.lat;
+          var lon = result[0].position.lon; //recuper l'input nascosto predisposto per la lat
+
+          $("#add_lat").val(lat);
+          $("#add_lon").val(lon);
+        }
+      },
+      "error": function error() {
+        $("#search-button").click(function () {
+          if ($("#search-error").length == 0) {
+            //se c'e un errore spossesso il button delle sue funzione
+            event.preventDefault(); //aggiungo un messagigo in pagina
+
+            $(".form-group").after("<label id=search-error class=error for=search>Inserisci un indirizzo valido</label>");
+          }
+        });
+      }
+    });
+  } //Inserisco un messaggio in caso in cui non ci siano appartamenti in evidenza
+
 
   if ($('.in-evidenza a').length == 0) {
     $('.in-evidenza h1').after('<p class="text-center w-100">Nessuna sponsorizzazione presente</p>');
