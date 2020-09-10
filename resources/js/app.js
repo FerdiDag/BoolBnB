@@ -84,6 +84,10 @@ $(document).ready(function() {
 
                 type: {
                     required: true
+                },
+
+                search: {
+                    required: true
                 }
 
             },
@@ -93,6 +97,48 @@ $(document).ready(function() {
         },
         })
     })
+
+    // intercetto la pressione del pulsante sulla barra di ricerca
+    $("#search").keyup(function() {
+        if ($('#search').val() != '') {
+            geocodeGuest()
+        }
+    })
+
+    function geocodeGuest() {
+        var address = $('#search').val();
+
+        geocodeGuestAjax(address);
+    }
+
+    function geocodeGuestAjax(address) {
+        $.ajax({
+            "url": "https://api.tomtom.com/search/2/geocode/" + address + ".json",
+            "method": "GET",
+            "data": {
+                'key': 'VQnRG5CX322Qq4G6tKnUMDqG6DDv0Q6A',
+                "limit": 1
+            },
+            "success": function(data) {
+                var result = data.results;
+                if (result.length > 0) {
+                    var lat = result[0].position.lat;
+                    var lon = result[0].position.lon;
+                    //recuper l'input nascosto predisposto per la lat
+                    $("#add_lat").val(lat);
+                    $("#add_lon").val(lon);
+                }
+            },
+            "error": function() {
+                $("#add_lat").val('');
+                $("#add_lon").val('');
+                $('#search').val('');
+            }
+        })
+    }
+
+
+
     //Inserisco un messaggio in caso in cui non ci siano appartamenti in evidenza
     if($('.in-evidenza a').length == 0) {
       $('.in-evidenza h1').after('<p class="text-center w-100">Nessuna sponsorizzazione presente</p>');

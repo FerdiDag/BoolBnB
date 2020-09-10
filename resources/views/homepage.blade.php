@@ -4,13 +4,23 @@
   <main>
       <div class="container">
         <div class="row">
-          <div class="input-group mb-3 search-bar">
-            <input id="search" type="search" class="form-control input-search" placeholder="Dove vuoi andare?" aria-describedby="basic-addon2">
-            <div class="input-group-append button-box">
-            <button class="btn btn-outline-secondary" id="search-button" type="button">
-            <i class="fas fa-search"></i>
-              Cerca
-            </button>
+
+            <form id="simple-search" class="w-100" action="{{ route('search') }}" method="get">
+                <div class="input-group mb-3 search-bar form-group">
+                  <input id="search" name="search" type="search" class="form-control input-search" placeholder="Dove vuoi andare?" aria-describedby="basic-addon2">
+                  <input id="add_lon" type="hidden" name="lon" value="">
+                  <input id="add_lat" type="hidden" name="lat" value="">
+                  <div class="input-group-append button-box">
+                      <button class="btn btn-outline-secondary" id="search-button" type="submit">
+                      <i class="fas fa-search"></i>
+                        Cerca
+                      </button>
+                  </div>
+              </div>
+              @error('search')
+                  <small class="text-danger">{{ $message }}</small>
+              @enderror
+            </form>
             </div>
           </div>
         </div>

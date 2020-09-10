@@ -156,7 +156,8 @@ return [
         "square_meters" => "I metri quadrati",
         "address" => "L'indirizzo",
         "services" => "Un servizio",
-        "type" => "Un tipo"
+        "type" => "Un tipo",
+        "search" => "Il campo indirizzo"    
     ],
 
 ];

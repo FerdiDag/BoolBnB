@@ -38,9 +38,4 @@ class HomeController extends Controller
           return view('show', compact('apartment'));
         }
 
-        public function search()
-        {
-            $services = Service::all();
-            return view('search', compact("services"));
-        }
 }
