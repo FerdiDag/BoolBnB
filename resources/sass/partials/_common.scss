@@ -77,3 +77,26 @@ label#status_load {
 .form-group {
     margin: 0;
 }
+
+//barra di ricerca avanzata
+.filter-search {
+  margin-top: 30px;
+}
+
+.search-filter-bar {
+    border: 1px solid #B0B0B0;
+    border-radius: 12px;
+    background-color: white;
+}
+
+#search-filter-button {
+  color: white;
+  background-image: radial-gradient(circle at center center, rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%);
+}
+
+#input-filter-search {
+  cursor: text;
+  height: 60px;
+  border: 1px solid #ced4da;
+  border-radius: $border-radius-button;
+}

@@ -16127,6 +16127,28 @@ label#status_load {
   margin: 0;
 }
 
+.filter-search {
+  margin-top: 30px;
+}
+
+.search-filter-bar {
+  border: 1px solid #B0B0B0;
+  border-radius: 12px;
+  background-color: white;
+}
+
+#search-filter-button {
+  color: white;
+  background-image: radial-gradient(circle at center center, #ff385c 0%, #e61e4d 27.5%, #e31c5f 40%, #d70466 57.5%, #bd1e59 75%, #bd1e59 100%);
+}
+
+#input-filter-search {
+  cursor: text;
+  height: 60px;
+  border: 1px solid #ced4da;
+  border-radius: 12px;
+}
+
 header .container {
   padding: 0;
 }
