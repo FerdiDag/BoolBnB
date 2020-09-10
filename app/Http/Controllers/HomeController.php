@@ -22,9 +22,12 @@ class HomeController extends Controller
         return view('homepage', compact('sponsorships'));
     }
 
-        public function show(Apartment $apartment)
+        public function show($slug)
         {
-            dd($apartment);
+            $apartment = Apartment::where("slug", $slug)->first();
+            if(!$apartment) {
+                return abort("404");
+            }
           $new_view = new View();
           $data = [
             'apartment_id' => $apartment->id
