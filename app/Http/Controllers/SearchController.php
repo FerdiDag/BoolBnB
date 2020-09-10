@@ -10,6 +10,7 @@ use App\Apartment;
 
 class SearchController extends Controller
 {
+
     public function simplysearch(Request $request) {
         $services = Service::all();
         $request->validate([
@@ -28,6 +29,8 @@ class SearchController extends Controller
         dd($apartments);
     }
 
-
+    public function index() {
+      return view('search');
+    }
 
 }

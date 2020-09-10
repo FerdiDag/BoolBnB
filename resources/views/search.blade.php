@@ -1,4 +1,4 @@
-{{-- @extends('layouts.dashboard_search')
+@extends('layouts.app')
 
 @section('content')
   <main>
@@ -35,15 +35,14 @@
             <div class="form-group">
               <label for="number_of_bathrooms"></label>
               <select class="form-control" id="number_of_bathrooms">
-                <option value="">Km</option>
-                <option value="">5 Km</option>
-                <option value="">10 Km</option>
-                <option value="">15 Km</option>
                 <option value="">20 Km</option>
+                @for ($i=30; $i <= 70; $i=$i + 10)
+                  <option value="">{{$i}} Km</option>
+                @endfor
               </select>
             </div>
           </div>
-          <div id="services" class="form-group w-100 filter-search">
+          {{-- <div id="services" class="form-group w-100 filter-search">
               Servizi :
               @foreach ($services as $service)
                   <div class="form-check form-check-inline">
@@ -57,25 +56,19 @@
               @error('services')
                   <small class="d-block text-danger">{{ $message }}</small>
               @enderror
-          </div>
+          </div> --}}
         </div>
       </div>
-      <section class="in-evidenza">
+      <section class="appartamenti">
         <div class="container">
           <div class="row">
-            <div class="text-center w-100">
-              <h1 >In Evidenza :</h1>
-            </div>
-            <div class="d-flex justify-content-around box-in-evidenza">
-
-            </div>
           </div>
         </div>
       </section>
   </main>
-@endsection --}}
+@endsection
 
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
@@ -91,44 +84,6 @@
 </head>
 
 <body id="bk-office" class="clearfix">
-    <header class="float-left">
-        <div class="container-fluid d-flex justify-content-between align-items-center">
-            <div id="header-left">
-                <div class="logo-container">
-                    <img src="{{ asset('img/logo.png') }}" alt="Logo" class="img-fluid">
-                </div>
-            </div>
-            <div id="header-right" class="d-flex justify-content-end align-items-center">
-                <nav id="main-nav">
-                    <ul class="list-inline d-flex justify-content-end align-items-center">
-                        <li>
-                            <a href="{{ route('home') }}">
-                                <i class="fas fa-home"></i>
-                                <span class="d-none d-md-inline">
-                                    Home utenti
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('logout') }}" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                         document.getElementById('logout-form').submit();">
-                                <i class="fas fa-sign-out-alt"></i>
-                                <span class="d-none d-md-inline">
-                                    Logout
-                                </span>
-                            </a>
-                        </li>
-                        <li id="aside-toggle" class="d-md-none">
-                            <i class="fas fa-bars"></i>
-                        </li>
-                    </ul>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                </nav>
-            </div>
-        </div>
-    </header>
     <aside class="float-md-left" id="advanced-search">
         <nav id="aside-nav" >
             <ul>
@@ -166,10 +121,11 @@
                     <label for="number_of_bathrooms"></label>
                     <select class="form-control" id="number_of_bathrooms">
                       <option value="">Km</option>
-                      <option value="">5 Km</option>
-                      <option value="">10 Km</option>
-                      <option value="">15 Km</option>
-                      <option value="">20 Km</option>
+                      <option value="5">5 Km</option>
+                      <option value="10">10 Km</option>
+                      <option value="15">15 Km</option>
+                      <option value="20">20 Km</option>
+                      <option value="25">25 Km</option>
                     </select>
                   </div>
                 </div>
@@ -197,5 +153,4 @@
         @yield('content')
     </main>
 </body>
-
-</html>
+</html> --}}
