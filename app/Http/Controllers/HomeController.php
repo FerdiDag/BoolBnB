@@ -18,13 +18,13 @@ class HomeController extends Controller
         $current_timestamp = Carbon::now('Europe/Rome')->toDateTimeString();
 
         //recupero la sponsorizzazione in database più recente, dell'appartamento in oggetto
-        $sponsorships = Sponsorship::all()->where("expiry_date", ">", $current_timestamp)->sortByDesc('created_at');
-
+        $sponsorships = Sponsorship::with("apartment")->get()->where("expiry_date", ">", $current_timestamp)->where("apartment.visibility","=", true)->sortByDesc('created_at');
         return view('homepage', compact('sponsorships'));
-}
+    }
 
         public function show(Apartment $apartment)
         {
+            dd($apartment);
           $new_view = new View();
           $data = [
             'apartment_id' => $apartment->id

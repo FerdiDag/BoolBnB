@@ -24,7 +24,7 @@
                     @foreach ($sponsorships as $sponsorship)
                       @foreach ($sponsorship->payments as $payment)
                         @if ($payment->status == "accepted" && $sponsorship->apartment->visibility == true)
-                          <a href="{{route("show", ["apartment" => $sponsorship->apartment->id])}}" class="col-12 box" data-id={{$sponsorship->apartment->id}}>
+                          <a href="{{route("show", ["apartment" => $sponsorship->apartment->slug])}}" class="col-12 box" data-id={{$sponsorship->apartment->id}}>
                               <div class="row">
                                   <div class="img-container col-12 col-md-5">
                                           @if (!$sponsorship->apartment->cover_image)
