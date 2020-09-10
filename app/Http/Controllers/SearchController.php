@@ -23,9 +23,9 @@ class SearchController extends Controller
         $lat = $request->lat;
         $lon = $request->lon;
         $sponsorships = Sponsorship::with('payments')->join('apartments', 'sponsorships.apartment_id', '=', 'apartments.id')->where('sponsorships.expiry_date', '>', $current_timestamp)->where('apartments.visibility', '=', true)->select(Apartment::raw('*, ( 6367 * acos( cos( radians('.$lat.') ) * cos( radians( lat ) ) * cos( radians( lon ) - radians('.$lon.') ) + sin( radians('.$lat.') ) * sin( radians( lat ) ) ) ) AS distance'))
-        ->having('distance', '<', 25)->orderByDesc('expiry_date')->get();
+        ->having('distance', '<', 20)->orderByDesc('expiry_date')->get();
         $apartments = Apartment::select(Apartment::raw('*, ( 6367 * acos( cos( radians('.$lat.') ) * cos( radians( lat ) ) * cos( radians( lon ) - radians('.$lon.') ) + sin( radians('.$lat.') ) * sin( radians( lat ) ) ) ) AS distance'))->where('visibility', '=', true)
-        ->having('distance', '<', 25)->orderByDesc('distance')->get();
+        ->having('distance', '<', 20)->orderByDesc('distance')->get();
 
         $data = [
             'address' => $request->search,

@@ -16,6 +16,9 @@
                         Cerca
                       </button>
                   </div>
+                  <div class="autocomplete">
+
+                  </div>
               </div>
               @error('search')
                   <small class="text-danger">{{ $message }}</small>
