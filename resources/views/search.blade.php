@@ -2,7 +2,7 @@
 
 @section('content')
   <main>
-      <div class="container">
+      <div id="index" class="container">
         <div class="row">
           <div class="input-group mb-3 search-bar">
             <input id="search" type="search" class="form-control input-search" placeholder="Dove vuoi andare?" aria-describedby="basic-addon2">
@@ -13,7 +13,7 @@
             </button>
             </div>
           </div>
-          <div class="w-100 d-flex justify-content-around">
+          <div class="w-100 d-flex justify-content-around mb-3">
             <div class="form-group">
               <label for="number_of_rooms"></label>
               <select class="form-control" id="number_of_rooms" >
@@ -61,8 +61,85 @@
       </div>
       <section class="appartamenti">
         <div class="container">
-          <div class="row">
-          </div>
+              @if ($apartments && $sponsorships)
+                  @php
+                      $apartments_in_page = [];
+                  @endphp
+                  <div class="marked">
+                      @foreach ($sponsorships as $sponsorship)
+                          @php
+                              array_push($apartments_in_page, $sponsorship->apartment->id);
+                          @endphp
+
+                          <a href="{{route("show", ["slug" => $sponsorship->apartment->slug])}}" class="col-12 box d-block mt-3 mb-3" data-id={{$sponsorship->apartment->id}}>
+                              <div class="row">
+                                  <div class="img-container col-12 col-md-5">
+                                          @if (!$sponsorship->apartment->cover_image)
+                                          <img src="{{asset('img/immagine-non-disponibile.gif')}}" alt="">
+                                          @else
+                                          <img src="{{ asset('storage/' . $sponsorship->apartment->cover_image) }}">
+                                          @endif
+                                  </div>
+                                  <div class="text-container d-flex col-12 col-md-7 flex-column justify-content-between">
+                                      <div class="title">
+                                          <h2>{{$sponsorship->apartment->description_title}}</h2>
+                                          <p class="font-weight-lighter">{{$sponsorship->apartment->description}}</p>
+                                      </div>
+                                      <div class="features">
+                                          <ul>
+                                              <li class="d-none d-md-block">Numero di letti: <span>{{$sponsorship->apartment->number_of_beds}}</span></li>
+                                              <li class="d-none d-md-block">Numero di stanze: <span>{{$sponsorship->apartment->number_of_rooms}}</span></li>
+                                              <li class="d-none d-md-block">Numero di bagni:  <span>{{$sponsorship->apartment->number_of_bathrooms}}</span></li>
+                                              <li class="d-none d-md-block">Grandezza: <span>{{$sponsorship->apartment->square_meters}} m²</span></li>
+                                          </ul>
+                                      </div>
+                                      <div data-lon={{$sponsorship->apartment->lon}} data-lat={{$sponsorship->apartment->lat}} id="address">
+                                          <p>Indirizzo: <span></span></p>
+                                      </div>
+                                  </div>
+                              </div>
+                          </a>
+                      @endforeach
+                  </div>
+                  <div class="normal">
+                      @foreach ($apartments as $apartment)
+                          @if (!in_array($apartment->id, $apartments_in_page))
+                              <a href="{{route("show", ["slug" => $apartment->slug])}}" class="col-12 box d-block" data-id={{$apartment->id}}>
+                                  <div class="row">
+                                      <div class="img-container col-12 col-md-5">
+                                              @if (!$apartment->cover_image)
+                                              <img src="{{asset('img/immagine-non-disponibile.gif')}}" alt="">
+                                              @else
+                                              <img src="{{ asset('storage/' . $apartment->cover_image) }}">
+                                              @endif
+                                      </div>
+                                      <div class="text-container d-flex col-12 col-md-7 flex-column justify-content-between">
+                                          <div class="title">
+                                              <h2>{{$apartment->description_title}}</h2>
+                                              <p class="font-weight-lighter">{{$apartment->description}}</p>
+                                          </div>
+                                          <div class="features">
+                                              <ul>
+                                                  <li class="d-none d-md-block">Numero di letti: <span>{{$apartment->number_of_beds}}</span></li>
+                                                  <li class="d-none d-md-block">Numero di stanze: <span>{{$apartment->number_of_rooms}}</span></li>
+                                                  <li class="d-none d-md-block">Numero di bagni:  <span>{{$apartment->number_of_bathrooms}}</span></li>
+                                                  <li class="d-none d-md-block">Grandezza: <span>{{$apartment->square_meters}} m²</span></li>
+                                              </ul>
+                                          </div>
+                                          <div data-lon={{$apartment->lon}} data-lat={{$apartment->lat}} id="address">
+                                              <p>Indirizzo: <span></span></p>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </a>
+                          @endif
+                      @endforeach
+                      @if ($apartments->isEmpty() && $sponsorships->isEmpty())
+                          <h3 class="text-center mt-3">Nessun appartamento trovato</h3>
+                      @endif
+                  </div>
+              @endif
+
         </div>
       </section>
   </main>

@@ -15,6 +15,7 @@ label#status_load {
 //stile per la lista appartamenti guest e admin
 .box {
     cursor: default;
+    border-radius: 20px;
 
     & .row {
         margin: 0 20px;
@@ -99,4 +100,9 @@ label#status_load {
   height: 60px;
   border: 1px solid #ced4da;
   border-radius: $border-radius-button;
+}
+
+.marked a{
+    background-color: gold;
+    border: 1px solid $main_color;
 }
