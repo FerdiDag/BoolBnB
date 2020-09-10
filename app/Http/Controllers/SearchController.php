@@ -21,10 +21,11 @@ class SearchController extends Controller
         $current_timestamp = Carbon::now('Europe/Rome')->toDateTimeString();
         $lat = $request->lat;
         $lon = $request->lon;
-        // dd($lon);
-        $sponsorship_apartment = Sponsorship::with('apartment')->get()->where('expiry_date', '>', $current_timestamp)->where('apartment.visibility', '=', true)->where('apartment.lat', '=', $lat)->where('apartment.lon', '=', $lon)->sortByDesc('created_at');
-        $apartment = Apartment::all()->where('visibility', '=', true)->where('lat', '=', $lat)->where('lon', '=', $lon)->sortByDesc('created_at');
-        dd($apartment);
+        $sponsorships = Sponsorship::with('payments')->join('apartments', 'sponsorships.apartment_id', '=', 'apartments.id')->where('sponsorships.expiry_date', '>', $current_timestamp)->where('apartments.visibility', '=', true)->select(Apartment::raw('*, ( 6367 * acos( cos( radians('.$lat.') ) * cos( radians( lat ) ) * cos( radians( lon ) - radians('.$lon.') ) + sin( radians('.$lat.') ) * sin( radians( lat ) ) ) ) AS distance'))
+        ->having('distance', '<', 25)->orderBy('distance')->get();
+        $apartments = Apartment::select(Apartment::raw('*, ( 6367 * acos( cos( radians('.$lat.') ) * cos( radians( lat ) ) * cos( radians( lon ) - radians('.$lon.') ) + sin( radians('.$lat.') ) * sin( radians( lat ) ) ) ) AS distance'))->where('visibility', '=', true)
+        ->having('distance', '<', 25)->orderByDesc('created_at')->get();
+        dd($apartments);
     }
 
 
