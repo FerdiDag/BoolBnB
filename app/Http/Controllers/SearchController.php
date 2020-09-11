@@ -12,7 +12,6 @@ class SearchController extends Controller
 {
 
     public function simplysearch(Request $request) {
-        $services = Service::all();
         $request->validate([
             'search' => 'required|string',
             "lon" => "required",
@@ -27,6 +26,7 @@ class SearchController extends Controller
         $apartments = Apartment::select(Apartment::raw('*, ( 6367 * acos( cos( radians('.$lat.') ) * cos( radians( lat ) ) * cos( radians( lon ) - radians('.$lon.') ) + sin( radians('.$lat.') ) * sin( radians( lat ) ) ) ) AS distance'))->where('visibility', '=', true)
         ->having('distance', '<', 20)->orderByDesc('distance')->get();
 
+
         $data = [
             'address' => $request->search,
             'sponsorships' => $sponsorships,
@@ -37,7 +37,8 @@ class SearchController extends Controller
     }
 
     public function index() {
-      return view('search');
+      $services = Service::all();
+      return view('search', compact('services'));
     }
 
 }

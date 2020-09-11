@@ -80,9 +80,24 @@ label#status_load {
 }
 
 //barra di ricerca avanzata
-.filter-search {
-  margin-top: 30px;
+
+.box-advanced-search {
+  background-color: $main_color;
+  border-radius: 12px;
+  width: 100%;
+  padding-bottom: 20px;
 }
+
+.search-bar {
+  background-color: white;
+}
+
+.services-box {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+}
+
 
 .search-filter-bar {
     border: 1px solid #B0B0B0;
@@ -102,7 +117,34 @@ label#status_load {
   border-radius: $border-radius-button;
 }
 
-.marked a{
+.number-box-filters {
+    display: flex;
+    justify-content: center;
+    border-radius: 12px;
+    padding-right: 10px;
+    padding-left: 10px;
+    line-height: 3px;
+    padding-bottom: 7px;
+}
+
+#services {
+  margin-bottom: 20px;
+}
+
+.number-services-box {
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.select-option {
+  margin-right: 30px;
+
+    #number_of_rooms, #number_of_beds, #km {
+      margin-top: 15px;
+    }
+}
+
+.marked a {
     background-color: gold;
     border: 1px solid $main_color;
 }

@@ -4,64 +4,69 @@
   <main>
       <div id="index" class="container">
         <div class="row">
-          <div class="input-group mb-3 search-bar">
-            <input id="search" type="search" class="form-control input-search" placeholder="Dove vuoi andare?" aria-describedby="basic-addon2">
-            <div class="input-group-append button-box">
-            <button class="btn btn-outline-secondary" id="search-button" type="button">
-            <i class="fas fa-search"></i>
-              Cerca
-            </button>
+          <div class="box-advanced-search">
+            <div class="input-group mb-3 search-bar">
+              <input id="search" type="search" class="form-control input-search" placeholder="Dove vuoi andare?" aria-describedby="basic-addon2">
+              <div class="input-group-append button-box">
+              <button class="btn btn-outline-secondary" id="search-button" type="button">
+              <i class="fas fa-search"></i>
+                Cerca
+              </button>
+              </div>
+            </div>
+            {{-- <div class="services-box"> --}}
+              <div id="services" class="form-group w-80 filter-search">
+                <div class="number-services-box">
+                  @foreach ($services as $service)
+                      <div class="form-check form-check-inline">
+                          <label class="form-check-label">
+                              <input {{ in_array($service->id, old('services', [])) ? 'checked' : '' }}
+                              class="form-check-input" id="services-advanced-search" name="services[]" type="checkbox" value="{{$service->id}}">
+                              {{$service->type}}
+                          </label>
+                      </div>
+                  @endforeach
+                  @error('services')
+                      <small class="d-block text-danger">{{ $message }}</small>
+                  @enderror
+                </div>
+              </div>
+            {{-- </div> --}}
+            <div class="number-box-filters">
+              <div class="form-group select-option">
+                <label for="number_of_rooms">Numero di stanze :</label>
+                <select class="form-control" id="number_of_rooms" >
+                  <option value="">1</option>
+                  @for ($i=2; $i < 31; $i++)
+                    <option>{{$i}}</option>
+                  @endfor
+                </select>
+              </div>
+              <div class="form-group select-option">
+                <label for="number_of_beds">Numero di letti :</label>
+                <select class="form-control" id="number_of_beds">
+                  <option value="">1</option>
+                  @for ($i=2; $i < 31; $i++)
+                    <option>{{$i}}</option>
+                  @endfor
+                </select>
+              </div>
+              <div class="form-group select-option">
+                <label for="Km">Km :</label>
+                <select class="form-control" id="km">
+                  <option value="">20 Km</option>
+                  @for ($i=30; $i <= 70; $i=$i + 10)
+                    <option value="">{{$i}} Km</option>
+                  @endfor
+                </select>
+              </div>
             </div>
           </div>
-          <div class="w-100 d-flex justify-content-around mb-3">
-            <div class="form-group">
-              <label for="number_of_rooms"></label>
-              <select class="form-control" id="number_of_rooms" >
-                <option value="">Stanze</option>
-                @for ($i=1; $i < 31; $i++)
-                  <option>{{$i}}</option>
-                @endfor
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="number_of_beds"></label>
-              <select class="form-control" id="number_of_beds">
-                <option value="">Letti</option>
-                @for ($i=1; $i < 31; $i++)
-                  <option>{{$i}}</option>
-                @endfor
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="number_of_bathrooms"></label>
-              <select class="form-control" id="number_of_bathrooms">
-                <option value="">20 Km</option>
-                @for ($i=30; $i <= 70; $i=$i + 10)
-                  <option value="">{{$i}} Km</option>
-                @endfor
-              </select>
-            </div>
-          </div>
-          {{-- <div id="services" class="form-group w-100 filter-search">
-              Servizi :
-              @foreach ($services as $service)
-                  <div class="form-check form-check-inline">
-                      <label class="form-check-label">
-                          <input {{ in_array($service->id, old('services', [])) ? 'checked' : '' }}
-                          class="form-check-input" name="services[]" type="checkbox" value="{{$service->id}}">
-                          {{$service->type}}
-                      </label>
-                  </div>
-              @endforeach
-              @error('services')
-                  <small class="d-block text-danger">{{ $message }}</small>
-              @enderror
-          </div> --}}
         </div>
       </div>
       <section class="appartamenti">
         <div class="container">
-              @if ($apartments && $sponsorships)
+              @if (isset($apartments) && isset($sponsorships))
                   @php
                       $apartments_in_page = [];
                   @endphp
