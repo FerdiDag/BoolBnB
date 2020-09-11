@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get("/advanced/sponsorships", "Api\SearchController@sponsorship");
+Route::get("/advanced/apartments", "Api\SearchController@apartments");
