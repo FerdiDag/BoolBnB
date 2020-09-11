@@ -157,7 +157,8 @@ return [
         "address" => "L'indirizzo",
         "services" => "Un servizio",
         "type" => "Un tipo",
-        "search" => "Il campo indirizzo"    
+        "search" => "Il campo indirizzo",
+        "text" => "Il testo"    
     ],
 
 ];

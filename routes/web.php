@@ -20,6 +20,8 @@ Route::get('/', 'HomeController@homepage')->name('home');
 Route::get('/search', 'SearchController@simplysearch')->name('search');
 Route::get('/advanced', 'SearchController@index')->name("advanced");
 Route::get('/show/{slug}', 'HomeController@show')->name('show');
+Route::post('/message/create', 'Admin\MessageController@create')->name('create_message');
+
 
 Route::prefix('admin')->namespace('Admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('/apartments', 'ApartmentController');
@@ -32,6 +34,7 @@ Route::prefix('admin')->namespace('Admin')->name('admin.')->middleware('auth')->
     });
     Route::get('/sponsorship/{apartment}', "SponsorshipController@index")->name("sponsorship");
     Route::post('/sponsorship/{apartment}', 'SponsorshipController@submit')->name('sponsorshipsubmit');
+    Route::get('/message/index', 'MessageController@index')->name('index_message');
 
 
 });

@@ -292,6 +292,19 @@ form {
     opacity: 0;
 }
 
+.box-info-messages {
+    border: 2px solid black;
+    border-radius: 20px;
+    text-align: center;
+}
+
+#messages-index {
+    img {
+        height: 150px;
+        width: 100%;
+    }
+}
+
 //*fine sezione aggiungi appartamento
 @media screen and (min-width: 768px) {
     body#bk-office {
@@ -311,6 +324,7 @@ form {
     }
     //fine sezione aggiungi appartamento
 }
+
 @media screen and (max-width: 576px) {
     //inizio sezione aggiungi appartamento
     .numbers-form {

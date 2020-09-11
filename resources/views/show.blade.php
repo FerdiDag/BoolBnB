@@ -3,6 +3,20 @@
 @section('page-title', 'Dettaglio appartamento')
 
 @section('content')
+@if (session('messages'))
+    <div class="info-sponsorship alert alert-success">
+        {{ session('messages') }}
+    </div>
+@endif
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <div id="show-header" class="container">
     <div class="row">
         <div class="col-md-6">
@@ -45,15 +59,22 @@
 
             <hr>
 
-            <h5 id="guest-show-form-title">Scrivi un messaggio al proprietario</h5
-            <form id="guest-show-form" class="" action="" method="post">
+            <h5 id="guest-show-form-title">Scrivi un messaggio al proprietario</h5>
+            <form id="guest-show-form" action="{{route("create_message")}}" method="post">
+                @csrf
                 <div class="form-group w-50">
-                    <input type="email" class="form-control" id="insert-email" aria-describedby="emailHelp" placeholder="Inserisci la tua email...">
+                    <input type="email" class="form-control" id="insert-email" aria-describedby="emailHelp" placeholder="Inserisci la tua email..." name="email" value="{{old("email")}}">
+                    @error('email')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Scrivi un messaggio..."></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="text" placeholder="Scrivi un messaggio...">{{old("text")}}</textarea>
+                    @error('text')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
-
+                <input type="hidden" name="apartment_id" value="{{$apartment->id}}">
                 <button id="guest-show-form-submit" type="submit" class="btn btn-primary">Invia</button>
             </form>
         </div>

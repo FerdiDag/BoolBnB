@@ -96,6 +96,11 @@ $(document).ready(function() {
 
                 lot: {
                     required: true
+                },
+
+                text: {
+                    required: true,
+                    minlength: 30
                 }
 
 

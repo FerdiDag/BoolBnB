@@ -18,7 +18,9 @@
         <div class="container-fluid d-flex justify-content-between align-items-center">
             <div id="header-left">
                 <div class="logo-container">
-                    <img src="{{ asset('img/logo.png') }}" alt="Logo" class="img-fluid">
+                    <a href="{{route("home")}}">
+                        <img src="{{ asset('img/logo.png') }}" alt="Logo" class="img-fluid">
+                    </a>
                 </div>
             </div>
             <div id="header-right" class="d-flex justify-content-end align-items-center">
@@ -74,8 +76,8 @@
                             Gestisci appartamenti
                         </a>
                     </li>
-                    <li>
-                        <a href="#">
+                    <li class="{{ Request::route()->getName() == 'admin.index_message' ? 'active' : '' }}">
+                        <a href="{{route("admin.index_message")}}">
                             <i class="fas fa-envelope-open-text"></i>
                             Messaggi
                         </a>
