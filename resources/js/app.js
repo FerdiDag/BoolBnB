@@ -107,6 +107,10 @@ $(document).ready(function() {
         },
         })
     })
+    //se all'apertura della pagina c'e testo nell'input effettuo la conversione in coordinate
+    if ($('#search').val() != '') {
+        geocodeGuest()
+    }
 
     // intercetto la pressione del pulsante sulla barra di ricerca
     $("#search").keyup(function() {

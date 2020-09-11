@@ -40593,7 +40593,12 @@ $(document).ready(function () {
         error.insertAfter(element.closest('.form-group'));
       }
     });
-  }); // intercetto la pressione del pulsante sulla barra di ricerca
+  }); //se all'apertura della pagina c'e testo nell'input effettuo la conversione in coordinate
+
+  if ($('#search').val() != '') {
+    geocodeGuest();
+  } // intercetto la pressione del pulsante sulla barra di ricerca
+
 
   $("#search").keyup(function () {
     if ($('#search').val() != '' && $('#search').val().length % 5) {
