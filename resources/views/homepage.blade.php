@@ -4,7 +4,7 @@
   <main>
       <div class="container">
         <div class="row">
-
+            <a href="{{route("advanced")}}" class="text-right advanced_link d-block w-100">Vai alla ricerca avanzata</a>
             <form id="simple-search" class="w-100" action="{{ route('search') }}" method="get">
                 <div class="input-group mb-3 search-bar form-group">
                   <input id="search" name="search" type="search" class="form-control input-search" placeholder="Dove vuoi andare?" aria-describedby="basic-addon2">
@@ -15,9 +15,6 @@
                       <i class="fas fa-search"></i>
                         Cerca
                       </button>
-                  </div>
-                  <div class="autocomplete">
-
                   </div>
               </div>
               @error('search')

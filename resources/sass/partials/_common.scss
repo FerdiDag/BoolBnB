@@ -8,6 +8,13 @@ label#status_load {
     text-align: left;
 }
 
+a {
+    color: inherit;
+    &:hover {
+        color: inherit;
+    }
+}
+
 .container {
     width: 95%;
 }

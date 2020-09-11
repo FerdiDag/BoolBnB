@@ -75,3 +75,10 @@
   height: 250px;
   border-radius: 12px;
 }
+
+.advanced_link {
+    color: $main_color;
+    &:hover {
+        color: $main_color;
+    }
+}

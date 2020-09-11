@@ -16067,6 +16067,13 @@ label#status_load {
   text-align: left;
 }
 
+a {
+  color: inherit;
+}
+a:hover {
+  color: inherit;
+}
+
 .container {
   width: 95%;
 }
@@ -16321,6 +16328,13 @@ header .container nav {
   background-color: #FF385C;
   height: 250px;
   border-radius: 12px;
+}
+
+.advanced_link {
+  color: #FF385C;
+}
+.advanced_link:hover {
+  color: #FF385C;
 }
 
 body#bk-office {

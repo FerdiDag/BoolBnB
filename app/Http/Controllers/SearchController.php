@@ -12,6 +12,7 @@ class SearchController extends Controller
 {
 
     public function simplysearch(Request $request) {
+        $services = Service::all();
         $request->validate([
             'search' => 'required|string',
             "lon" => "required",
@@ -30,15 +31,16 @@ class SearchController extends Controller
         $data = [
             'address' => $request->search,
             'sponsorships' => $sponsorships,
-            'apartments' => $apartments
+            'apartments' => $apartments,
+            "services" => $services
         ];
 
         return view('search', $data);
     }
 
     public function index() {
-      $services = Service::all();
-      return view('search', compact('services'));
+        $services = Service::all();
+        return view('search', compact('services'));
     }
 
 }
