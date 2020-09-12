@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section("page-title","Dettaglio appartamento")
 
 @section('page-title', 'Dettaglio appartamento')
 

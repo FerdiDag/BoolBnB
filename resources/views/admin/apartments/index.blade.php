@@ -1,4 +1,6 @@
 @extends('layouts.dashboard')
+@section('page-title', "I tuoi appartamenti")
+
 @section('content')
     <div id="index" class="container-fluid">
         <div class="row">

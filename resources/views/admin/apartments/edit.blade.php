@@ -1,4 +1,5 @@
 @extends('layouts.dashboard')
+@section('page-title', "Modifica Appartamento")
 
 @section('content')
     <div id="edit" class="container">

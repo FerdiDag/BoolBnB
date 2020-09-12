@@ -1,5 +1,4 @@
 @extends('layouts.dashboard')
-
 @section('page-title', 'Dettaglio appartamento')
 @section("content")
 @if (session('messages'))

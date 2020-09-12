@@ -35,12 +35,12 @@ class SearchController extends Controller
             "services" => $services
         ];
 
-        return view('search', $data);
+        return view('guest.search', $data);
     }
 
-    public function index() {
+    public function advanced_search() {
         $services = Service::all();
-        return view('search', compact('services'));
+        return view('guest.search', compact('services'));
     }
 
 }

@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section("page-title","La tua ricerca")
 
 @section('content')
   <main>

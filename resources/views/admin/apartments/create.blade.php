@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-
+@section('page-title', "Aggiungi appartamento")
 @section('content')
     <div class="container">
         <div class="row">

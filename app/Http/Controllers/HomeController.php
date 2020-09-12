@@ -35,7 +35,7 @@ class HomeController extends Controller
           $new_view->fill($data);
           $new_view->save();
 
-          return view('show', compact('apartment'));
+          return view('guest.show', compact('apartment'));
         }
 
 }

@@ -1,4 +1,5 @@
 @extends('layouts.dashboard')
+@section('page-title', "Dettagli messaggio")
 
 @section('content')
   <div id="show-message" class="container-fluid">

@@ -1,4 +1,5 @@
 @extends('layouts.dashboard')
+@section('page-title', "Lista messaggi")
 
 @section('content')
     <div id="messages-index" class="container-fluid">
