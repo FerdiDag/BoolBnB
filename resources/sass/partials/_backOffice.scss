@@ -292,17 +292,15 @@ form {
     opacity: 0;
 }
 
-.box-info-messages {
-    border: 2px solid black;
-    border-radius: 20px;
-    text-align: center;
-}
-
 #messages-index {
     img {
         height: 150px;
         width: 100%;
     }
+}
+
+.unread .guest {
+    color: red;
 }
 
 //*fine sezione aggiungi appartamento

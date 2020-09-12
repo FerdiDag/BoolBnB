@@ -20,7 +20,7 @@ Route::get('/', 'HomeController@homepage')->name('home');
 Route::get('/search', 'SearchController@simplysearch')->name('search');
 Route::get('/advanced', 'SearchController@index')->name("advanced");
 Route::get('/show/{slug}', 'HomeController@show')->name('show');
-Route::post('/message/create', 'Admin\MessageController@create')->name('create_message');
+Route::post('/message/create{apartment}', 'Admin\MessageController@create')->name('create_message');
 
 
 Route::prefix('admin')->namespace('Admin')->name('admin.')->middleware('auth')->group(function () {

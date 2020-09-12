@@ -60,7 +60,7 @@
             <hr>
 
             <h5 id="guest-show-form-title">Scrivi un messaggio al proprietario</h5>
-            <form id="guest-show-form" action="{{route("create_message")}}" method="post">
+            <form id="guest-show-form" action="{{route("create_message", ["apartment" => $apartment->id])}}" method="post">
                 @csrf
                 <div class="form-group w-50">
                     <input type="email" class="form-control" id="insert-email" aria-describedby="emailHelp" placeholder="Inserisci la tua email..." name="email" value="{{old("email")}}">
@@ -74,7 +74,6 @@
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
-                <input type="hidden" name="apartment_id" value="{{$apartment->id}}">
                 <button id="guest-show-form-submit" type="submit" class="btn btn-primary">Invia</button>
             </form>
         </div>
