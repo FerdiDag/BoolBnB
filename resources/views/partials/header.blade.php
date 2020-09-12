@@ -23,16 +23,16 @@
 
                     @endif
                     @else
-                    <li class="nav-item">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    <li class="nav-item text-right">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle text-right d-inline" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name ?? Auth::user()->email }}
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                            <a class="dropdown-item text-center" href="{{ route('admin.dashboard') }}">
                                 La tua dashboard
                             </a>
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                            <a class="dropdown-item text-center" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                              document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
