@@ -5,7 +5,7 @@
       <div class="container">
         <div class="row">
             <div class="col-12 text-right">
-                <a href="{{route("advanced")}}" class="text-right advanced_link d-block w-100">Vai alla ricerca avanzata</a>
+                <a href="{{route("advanced")}}" class="advanced_link">Vai alla ricerca avanzata</a>
             </div>
             <form id="simple-search" class="w-100" action="{{ route('search') }}" method="get">
                 @csrf
