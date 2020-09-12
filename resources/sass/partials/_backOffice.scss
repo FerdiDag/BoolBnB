@@ -310,6 +310,10 @@ form {
   border-bottom: 1px solid gainsboro;
 }
 
+.message-text {
+  word-break: break-word;
+}
+
 //*fine sezione aggiungi appartamento
 @media screen and (min-width: 768px) {
     body#bk-office {

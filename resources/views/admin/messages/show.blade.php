@@ -13,7 +13,7 @@
       </div>
       <div class="col-12 mt-2">
         <p class="font-weight-bold text-center mb-3">Testo</p>
-        <p>{{$message->text}}</p>
+        <p class="message-text">{{$message->text}}</p>
       </div>
     </div>
   </div>

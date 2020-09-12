@@ -16524,10 +16524,6 @@ body#bk-office main {
   margin-bottom: 20px;
 }
 
-#insert-email {
-  margin-bottom: 20px;
-}
-
 #guest-show-form-submit {
   background-color: #FF385C;
   border: 1px solid #FF385C;
@@ -16607,6 +16603,10 @@ form {
 .data-message {
   padding-bottom: 30px;
   border-bottom: 1px solid gainsboro;
+}
+
+.message-text {
+  word-break: break-word;
 }
 
 @media screen and (min-width: 768px) {

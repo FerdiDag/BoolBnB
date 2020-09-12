@@ -26,7 +26,7 @@
                     </div>
                 </a>
             @empty
-                <p>Nessun messaggio ricevuto</p>
+                <p class="col-12 mt-3 text-left">Nessun messaggio ricevuto</p>
             @endforelse
         </div>
     </div>
