@@ -18,10 +18,8 @@
                                 <ul>
                                     <li class="guest">Ricevuto da: <span>{{$message->email}}</span></li>
                                     <li>Data: <span>{{date('d/m/Y H:i', strtotime($message->created_at))}}</span></li>
+                                    <li>Appartamento: <span>{{$message->apartment->description_title}}</span></li>
                                 </ul>
-                            </div>
-                            <div class="title mb-3">
-                                <h2>Appartamento: <span>{{$message->apartment->description_title}}</span></h2>
                             </div>
                         </div>
                     </div>
