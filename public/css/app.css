@@ -16600,6 +16600,15 @@ form {
   color: red;
 }
 
+#show-message h1 {
+  margin-bottom: 30px;
+}
+
+.data-message {
+  padding-bottom: 30px;
+  border-bottom: 1px solid gainsboro;
+}
+
 @media screen and (min-width: 768px) {
   body#bk-office aside {
     position: static;

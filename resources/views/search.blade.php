@@ -14,7 +14,6 @@
               </button>
               </div>
             </div>
-            {{-- <div class="services-box"> --}}
               <div id="services" class="form-group w-80 filter-search">
                 <div class="number-services-box">
                   @foreach ($services as $service)
@@ -31,7 +30,6 @@
                   @enderror
                 </div>
               </div>
-            {{-- </div> --}}
             <div class="number-box-filters">
               <div class="form-group select-option">
                 <label for="number_of_rooms">Numero di stanze :</label>

@@ -30,4 +30,14 @@ class MessageController extends Controller
         $messages = Message::with("apartment")->get()->where("apartment.user_id","=", Auth::user()->id)->sortByDesc("created_at");
         return view("admin.messages.index", compact("messages"));
     }
+
+    public function show(Message $message) {
+        if ($message->apartment->user_id != Auth::user()->id) {
+          return abort('404');
+        }
+
+        $message->update(['status' => 'read']);
+
+        return view('admin.messages.show', compact('message'));
+    }
 }

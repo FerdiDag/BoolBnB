@@ -10,7 +10,7 @@
                 @endif
             </div>
             @forelse ($messages as $message)
-                <a href="*" class="col-12 box {{$message->status == "unread" ? "unread" : ""}}" data-id={{$message->id}}>
+                <a href="{{route('admin.show_message', ['message' => $message->id])}}" class="col-12 box {{$message->status == "unread" ? "unread" : ""}}">
                     <div class="row">
                         <div class="text-container col-12 flex-column justify-content-between">
                             <div class="features">
@@ -20,7 +20,7 @@
                                 </ul>
                             </div>
                             <div class="title mb-3">
-                                <h2>Appartemento: <span>{{$message->apartment->description_title}}</span></h2>
+                                <h2>Appartamento: <span>{{$message->apartment->description_title}}</span></h2>
                             </div>
                         </div>
                     </div>
