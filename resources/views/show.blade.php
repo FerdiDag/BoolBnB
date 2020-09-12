@@ -60,16 +60,16 @@
             <hr>
 
             <h5 id="guest-show-form-title">Scrivi un messaggio al proprietario</h5>
-            <form id="guest-show-form" action="{{route("create_message", ["apartment" => $apartment->id])}}" method="post">
+            <form id="guest-show-form" class="text-left" action="{{route("create_message", ["apartment" => $apartment->id])}}" method="post">
                 @csrf
                 <div class="form-group w-50">
-                    <input type="email" class="form-control" id="insert-email" aria-describedby="emailHelp" placeholder="Inserisci la tua email..." name="email" value="{{old("email")}}">
+                    <input type="email" class="form-control mb-3" id="insert-email" aria-describedby="emailHelp" placeholder="Inserisci la tua email..." name="email" value="{{old("email")}}">
                     @error('email')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="text" placeholder="Scrivi un messaggio...">{{old("text")}}</textarea>
+                    <textarea class="form-control mb-3" id="exampleFormControlTextarea1" rows="5" name="text" placeholder="Scrivi un messaggio...">{{old("text")}}</textarea>
                     @error('text')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
