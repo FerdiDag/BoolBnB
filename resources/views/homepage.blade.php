@@ -4,7 +4,9 @@
   <main>
       <div class="container">
         <div class="row">
-            <a href="{{route("advanced")}}" class="text-right advanced_link d-block w-100">Vai alla ricerca avanzata</a>
+            <div class="col-12 text-right">
+                <a href="{{route("advanced")}}" class="text-right advanced_link d-block w-100">Vai alla ricerca avanzata</a>
+            </div>
             <form id="simple-search" class="w-100" action="{{ route('search') }}" method="get">
                 @csrf
                 <div class="input-group mb-3 search-bar form-group">
