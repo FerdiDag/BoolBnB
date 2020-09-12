@@ -10,7 +10,7 @@
 
 <div id="sponsorship" class="container">
     <div class="row d-flex justify-content-center">
-        <div class="">
+        <div class="text-center">
             <h3>
                 Sponsorizza il seguente appartamento: {{$apartment->description_title}}
             </h3>
@@ -53,7 +53,8 @@
                         </div>
                     @else
                     @endif
-                    <div id="dropin-wrapper" class="col-6 offset-3">
+                    <div id="dropin-wrapper" class="col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+
                         <div id="checkout-message"></div>
                         <div id="dropin-container"></div>
                         <input id="nonce" name="payment_method_nonce" type="hidden" />
