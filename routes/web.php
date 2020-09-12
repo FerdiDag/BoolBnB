@@ -34,7 +34,7 @@ Route::prefix('admin')->namespace('Admin')->name('admin.')->middleware('auth')->
     });
     Route::get('/sponsorship/{apartment}', "SponsorshipController@index")->name("sponsorship");
     Route::post('/sponsorship/{apartment}', 'SponsorshipController@submit')->name('sponsorshipsubmit');
-    Route::get('/message/index', 'MessageController@index')->name('index_message');
+    Route::get('/messages', 'MessageController@index')->name('index_message');
 
 
 });
