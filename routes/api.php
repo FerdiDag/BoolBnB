@@ -14,11 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:api')->namespace("Api")->group(function() {
+    Route::get("/stats/messages", "StatsController@messages");
+    Route::get("/stats/views", "StatsController@views");
 });
 
 Route::get("/advanced/sponsorships", "Api\SearchController@sponsorship");
 Route::get("/advanced/apartments", "Api\SearchController@apartments");
-Route::get("/stats/messages", "Api\StatsController@messages");
-Route::get("/stats/views", "Api\StatsController@messages");
