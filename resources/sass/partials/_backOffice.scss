@@ -314,6 +314,13 @@ form {
   word-break: break-word;
 }
 
+//statistiche
+.stat-items:hover {
+  color: $main_color;
+}
+//fine statistiche
+
+
 //*fine sezione aggiungi appartamento
 @media screen and (min-width: 768px) {
     body#bk-office {

@@ -36,6 +36,7 @@ Route::prefix('admin')->namespace('Admin')->name('admin.')->middleware('auth')->
     Route::post('/sponsorship/{apartment}', 'SponsorshipController@submit')->name('sponsorshipsubmit');
     Route::get('/messages', 'MessageController@index')->name('index_message');
     Route::get('/messages/{message}', 'MessageController@show')->name('show_message');
-
+    Route::get('/stats', 'StatsController@index')->name('index_stats');
+    Route::get('/stats/{apartment}', 'StatsController@show')->name('show_stats');
 
 });

@@ -82,8 +82,8 @@
                             Messaggi
                         </a>
                     </li>
-                    <li>
-                        <a href="#">
+                    <li class="{{ Request::route()->getName() == 'admin.index_stats' ? 'active' : '' }}">
+                        <a href="{{route("admin.index_stats")}}">
                             <i class="fas fa-chart-line"></i>
                             Statistiche
                         </a>
