@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get("/advanced/sponsorships", "Api\SearchController@sponsorship");
 Route::get("/advanced/apartments", "Api\SearchController@apartments");
+Route::get("/stats/messages", "Api\StatsController@messages");
+Route::get("/stats/views", "Api\StatsController@messages");
