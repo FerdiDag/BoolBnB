@@ -112,6 +112,13 @@ $(document).ready(function() {
         },
         })
     })
+
+    //Sezione Statistiche
+    if($('#stats-show').length != 0) {
+
+
+    }
+
     //se all'apertura della pagina c'e testo nell'input effettuo la conversione in coordinate
     if ($('#search').val() != '') {
         geocodeGuest()
