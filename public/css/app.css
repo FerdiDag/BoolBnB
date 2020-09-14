@@ -16255,10 +16255,13 @@ header .container nav {
 
 /********************Fine-Register********************/
 #error h1 {
-  font-size: 160px;
+  font-size: 100px;
 }
 #error p {
   font-size: 20px;
+}
+#error .text {
+  margin-bottom: 50px;
 }
 
 .search-bar {

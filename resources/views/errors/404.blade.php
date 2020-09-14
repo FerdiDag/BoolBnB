@@ -11,9 +11,9 @@
         <main>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12 col-md-6 mb-3 d-flex align-items-center flex-column justify-content-around">
-                        <h1>Ops!</h1>
-                        <p>Non troviamo la pagina che stai cercando.</p>
+                    <div class=" text col-12 col-md-6 d-flex align-items-center flex-column justify-content-around">
+                        <h1 class="mb-3">Ops!</h1>
+                        <p class="mt-3">Non troviamo la pagina che stai cercando.</p>
                         <a href="{{route("home")}}">Torna alla home</a>
                     </div>
                     <div class="col-12 col-md-6 d-flex justify-content-center">
