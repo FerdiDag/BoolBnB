@@ -16609,6 +16609,10 @@ form {
   word-break: break-word;
 }
 
+.stat-items:hover {
+  color: #FF385C;
+}
+
 @media screen and (min-width: 768px) {
   body#bk-office aside {
     position: static;

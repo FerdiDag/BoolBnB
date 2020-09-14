@@ -22,7 +22,7 @@ class StatsController extends Controller
     }
 
     $data = [
-      'apartment_id' => $apartment->id,
+      'apartment' => $apartment,
       'api_token' => Auth::user()->api_token
     ];
     return view('admin.stats.show', $data);

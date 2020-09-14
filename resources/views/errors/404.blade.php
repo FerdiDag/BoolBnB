@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Ops! Non found</title>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
@@ -10,7 +11,7 @@
         <main>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12 col-md-6 d-flex align-items-center flex-column justify-content-around">
+                    <div class="col-12 col-md-6 mb-3 d-flex align-items-center flex-column justify-content-around">
                         <h1>Ops!</h1>
                         <p>Non troviamo la pagina che stai cercando.</p>
                         <a href="{{route("home")}}">Torna alla home</a>

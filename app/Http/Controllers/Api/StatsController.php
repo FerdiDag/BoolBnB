@@ -40,14 +40,7 @@ class StatsController extends Controller
     }
 
     public function views(Request $request){
-        $apartment = Apartment::where("user_id","=", auth('api')->user()->id)->get()->where("id", $request->apartment_id)->first();
-
-        if (!$apartment) {
-            return response()->json([
-                "success"=> false,
-                "error"=> "Nessun appartamento trovato"
-            ]);
-        }
+        $apartment = Apartment::where("id", $request->apartment_id)->first();
 
         $views = View::where("apartment_id", $request->apartment_id)->get();
 

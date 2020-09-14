@@ -4,11 +4,16 @@ require('jquery-validation');
 require('jquery-validation/dist/additional-methods.js');
 require('jquery-validation/dist/localization/messages_it.js');
 import 'bootstrap';
+var Chart = require('chart.js');
+var moment = require('moment'); // require
 
 
 
 
 $(document).ready(function() {
+
+    //setto la libreria moment in italiano
+    moment.locale("it");
 
     //validazione form lato-client
     jQuery.validator.addMethod("lettersonly", function(value, element) {
@@ -115,8 +120,8 @@ $(document).ready(function() {
 
     //Sezione Statistiche
     if($('#stats-show').length != 0) {
-
-
+      stats('messages', 'chart-message', 'messaggi');
+      stats('views', 'chart-views', 'visualizzazioni');
     }
 
     //se all'apertura della pagina c'e testo nell'input effettuo la conversione in coordinate
@@ -313,5 +318,91 @@ $(document).ready(function() {
                 alert("Si è verificato un errore");
             }
         })
+    }
+
+    //funzione per recuperare i dati da inserire nei grafici
+    function stats(type, container, info) {
+      var id = $('#stats-show').data('id');
+      var token = $('#stats-show').data('token');
+
+      $.ajax({
+          "url": "http://localhost:8000/api/stats/" + type,
+          "method": "GET",
+          "data": {
+            'apartment_id': id,
+            'api_token': token
+          },
+          "success": function(data) {
+            if (container == 'chart-message') {
+              $('#message-length').text(data.length)
+            }else {
+              $('#view-length').text(data.length)
+            }
+
+            var months = {};
+            for (var i = 1; i <= 12; i++) {
+              //converto la i in mese testuale
+              var data_moment = moment(i , "M").format("MMM");
+              var data_moment_upp = data_moment.charAt(0).toUpperCase() + data_moment.slice(1);
+              months[data_moment_upp] = 0;
+            }
+
+              if (data.results != 0) {
+                for (var i = 0; i < data.results.length; i++) {
+                var current_month = data.results[i].created_at;
+                var moment_current_month = moment(current_month, "YYYY/MM/DD").format("MMM");
+                var moment_current_month_upp = moment_current_month.charAt(0).toUpperCase() + moment_current_month.slice(1);
+                months[moment_current_month_upp] ++;
+                }
+              }
+              // console.log(months);
+            var key_months = Object.keys(months);
+            var value_months = Object.values(months);
+            // console.log(key_months);
+            // console.log(value_months);
+
+            var grafico_mesi = new Chart($('#' + container)[0].getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: key_months,
+                datasets: [{
+                    data: value_months,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    pointBackgroundColor: "green",
+                    lineTension: 0.3
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Numero di ' + info + ' per mese'
+                },
+                legend: {
+                  display: false
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        gridLines: {
+                          display: false
+                        }
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                          display: false
+                        }
+                    }]
+                }
+            }
+        })
+
+          },
+          "error": function() {
+            alert('errore');
+          }
+      });
     }
 })
