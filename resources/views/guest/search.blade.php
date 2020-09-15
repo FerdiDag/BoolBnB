@@ -7,7 +7,7 @@
         <div class="row">
           <div class="box-advanced-search">
             <div class="input-group mb-3 search-bar">
-              <input id="search" type="search" class="form-control input-search" placeholder="Dove vuoi andare?" aria-describedby="basic-addon2">
+              <input id="search" type="search" class="form-control input-search" placeholder="Dove vuoi andare?" aria-describedby="basic-addon2" value={{isset($address) ? $address : ''}}>
               <div class="input-group-append button-box">
               <button class="btn btn-outline-secondary" id="search-button" type="button">
               <i class="fas fa-search"></i>

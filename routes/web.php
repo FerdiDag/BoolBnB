@@ -21,6 +21,7 @@ Route::get('/search', 'SearchController@simplysearch')->name('search');
 Route::get('/advanced', 'SearchController@advanced_search')->name("advanced");
 Route::get('/show/{slug}', 'HomeController@show')->name('show');
 Route::post('/message/create{apartment}', 'Admin\MessageController@create')->name('create_message');
+Route::get("/prova", "Admin\prova@prova");
 
 
 Route::prefix('admin')->namespace('Admin')->name('admin.')->middleware('auth')->group(function () {

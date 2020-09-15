@@ -13,57 +13,70 @@ class SearchController extends Controller
 
 
     public function sponsorship(Request $request) {
-        $lat = $request->lat;
+        $current_timestamp = Carbon::now('Europe/Rome')->toDateTimeString();
+        $services = explode(',', $request->services);
         $lon = $request->lon;
-        $number_of_beds = $request->number_of_beds;
+        $lat = $request->lat;
         $number_of_rooms = $request->number_of_rooms;
         $number_of_bathrooms = $request->number_of_bathrooms;
+        $number_of_beds = $request->number_of_beds;
         $range = $request->range;
-        $current_timestamp = Carbon::now('Europe/Rome')->toDateTimeString();
-        $sponsorships = Sponsorship::join('payments','payments.sponsorship_id', '=', 'sponsorships.id')->join('apartments', 'sponsorships.apartment_id', '=', 'apartments.id')->where('sponsorships.expiry_date', '>', $current_timestamp)->where('apartments.visibility', '=', true)->where('apartments.number_of_rooms', '>=', $number_of_rooms)->where('apartments.number_of_beds', '>=' ,$number_of_beds)->where('apartments.number_of_bathrooms', '>=', $number_of_bathrooms)->where('status','=','accepted')->select(Apartment::raw('*, ( 6367 * acos( cos( radians('.$lat.') ) * cos( radians( lat ) ) * cos( radians( lon ) - radians('.$lon.') ) + sin( radians('.$lat.') ) * sin( radians( lat ) ) ) ) AS distance'))
-        ->having('distance', '<', $range)->orderByDesc('expiry_date')->get();
 
-        if ($sponsorships->isEmpty()) {
+        $apartments = Apartment::select(Apartment::raw('*, ( 6367 * acos( cos( radians('.$lat.') ) * cos( radians( lat ) ) * cos( radians( lon ) - radians('.$lon.') ) + sin( radians('.$lat.') ) * sin( radians( lat ) ) ) ) AS distance'))->join("sponsorships", "apartments.id", "=", "sponsorships.apartment_id")->join("payments", "sponsorships.id", "=", "payments.sponsorship_id")->where("expiry_date", ">", $current_timestamp)
+        ->where("payments.status", "=", "accepted")
+        ->where('visibility', '=', true)->where('apartments.number_of_rooms', '>=', $number_of_rooms)->where('apartments.number_of_beds', '>=' ,$number_of_beds)->where('apartments.number_of_bathrooms', '>=', $number_of_bathrooms)->having('distance', '<', $range)->orderByDesc('sponsorships.created_at');
+        foreach($services as $service) {
+            $apartments->whereHas('services', function ($query) use($service) {
+                $query->where('type', $service);
+            });
+        };
+
+        if ($apartments->get()->isEmpty()) {
             return response()->json([
                     'success' => true,
-                    'length' => $sponsorships->count(),
-                    "error" => "Nessun appartamento sponsorizzato trovato",
+                    'length' => $apartments->get()->count(),
+                    "error" => "Nessun appartamento trovato",
                     'results' => []
             ]);
 
         } else {
             return response()->json([
                     'success' => true,
-                    'length' => $sponsorships->count(),
-                    'results' => $sponsorships
+                    'length' => $apartments->get()->count(),
+                    'results' => $apartments->get()
             ]);
         }
     }
 
     public function apartments(Request $request) {
-        $lat = $request->lat;
+        $services = explode(',', $request->services);
         $lon = $request->lon;
-        $number_of_beds = $request->number_of_beds;
+        $lat = $request->lat;
         $number_of_rooms = $request->number_of_rooms;
         $number_of_bathrooms = $request->number_of_bathrooms;
+        $number_of_beds = $request->number_of_beds;
         $range = $request->range;
-        $current_timestamp = Carbon::now('Europe/Rome')->toDateTimeString();
 
-        $apartments = Apartment::with("services")->select(Apartment::raw('*, ( 6367 * acos( cos( radians('.$lat.') ) * cos( radians( lat ) ) * cos( radians( lon ) - radians('.$lon.') ) + sin( radians('.$lat.') ) * sin( radians( lat ) ) ) ) AS distance'))->where('visibility', '=', true)->where('apartments.number_of_rooms', '>=', $number_of_rooms)->where('apartments.number_of_beds', '>=' ,$number_of_beds)->where('apartments.number_of_bathrooms', '>=', $number_of_bathrooms)->having('distance', '<', $range)->orderByDesc('distance')->get();
+        $apartments = Apartment::with("services")->select(Apartment::raw('*, ( 6367 * acos( cos( radians('.$lat.') ) * cos( radians( lat ) ) * cos( radians( lon ) - radians('.$lon.') ) + sin( radians('.$lat.') ) * sin( radians( lat ) ) ) ) AS distance'))->where('visibility', '=', true)->where('apartments.number_of_rooms', '>=', $number_of_rooms)->where('apartments.number_of_beds', '>=' ,$number_of_beds)->where('apartments.number_of_bathrooms', '>=', $number_of_bathrooms)->having('distance', '<', $range)->orderBy('distance');
+        foreach($services as $service) {
+            $apartments->whereHas('services', function ($query) use($service) {
+                $query->where('type', $service);
+            });
+        };
 
-        if ($apartments->isEmpty()) {
+        if ($apartments->get()->isEmpty()) {
             return response()->json([
                     'success' => true,
-                    'length' => $apartments->count(),
-                    "error" => "Nessun appartamento sponsorizzato trovato",
+                    'length' => $apartments->get()->count(),
+                    "error" => "Nessun appartamento trovato",
                     'results' => []
             ]);
 
         } else {
             return response()->json([
                     'success' => true,
-                    'length' => $apartments->count(),
-                    'results' => $apartments
+                    'length' => $apartments->get()->count(),
+                    'results' => $apartments->get()
             ]);
         }
     }
