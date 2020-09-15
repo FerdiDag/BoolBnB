@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -72,6 +73,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'lastname' => $data['lastname'],
             'date_of_birth' => $data['date_of_birth'],
+            'api_token' => Str::random(60)
         ]);
     }
 }
