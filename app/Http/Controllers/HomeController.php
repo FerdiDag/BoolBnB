@@ -25,15 +25,18 @@ class HomeController extends Controller
         public function show($slug)
         {
             $apartment = Apartment::where("slug", $slug)->first();
+
             if(!$apartment) {
                 return abort("404");
             }
-          $new_view = new View();
-          $data = [
-            'apartment_id' => $apartment->id
-          ];
-          $new_view->fill($data);
-          $new_view->save();
+            if (!session('messages')) {
+                $new_view = new View();
+                $data = [
+                    'apartment_id' => $apartment->id
+                ];
+                $new_view->fill($data);
+                $new_view->save();
+            }
 
           return view('guest.show', compact('apartment'));
         }
