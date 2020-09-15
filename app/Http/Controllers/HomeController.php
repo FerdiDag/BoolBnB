@@ -29,7 +29,7 @@ class HomeController extends Controller
             if(!$apartment) {
                 return abort("404");
             }
-            if (!session('messages')) {
+            if (!session()->has('messages')) {
                 $new_view = new View();
                 $data = [
                     'apartment_id' => $apartment->id
