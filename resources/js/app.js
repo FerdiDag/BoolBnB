@@ -120,38 +120,187 @@ $(document).ready(function() {
         })
     })
 
+
+    //creo una variabile con all'interno una chiave tomtom
+    var key = "WnguCpNi1nmX08ODcn2NVwLLG8LD75Wd";
     //creo una variabile che ha la funzione di sentinella per gli errori
     var error;
+    if ($("#advanced-search").length > 0) {
+        //funzioni per handlebars
+        var source   = $("#apartment-box").html();
+        var template = Handlebars.compile(source);
+    }
+
+    //converto l'eventuale indirizzo
+    if ($("#advanced").length > 0 && $(this).val() != "") {
+        reverse_advanced();
+    }
+
+    $("#search-button").click(function() {
+        if ($("#advanced-search").length > 0) {
+            if ($("#services-advanced-search:checked").length > 0 && $("#search").val().length > 0) {
+                var lon = $("#add_lon").val();
+                var lat = $("#add_lat").val();
+                $(".error").remove();
+                var number_of_rooms = $("#number_of_rooms").val();
+                var number_of_beds = $("#number_of_beds").val();
+                var km = $("#km").val();
+                var array_service = [];
+                var app_in_page = [];
+
+                //effettuo un each per ottenere una stringa di servizi selezionati
+                $("#services-advanced-search:checked").each(function() {
+                     array_service.push($(this).closest("label").text().trim());
+                })
+                //trasormo l'array in una stringa per passarlo nel data dell'ajax
+                var services = array_service.join(",");
+
+                //effettuo una chiamata ajax per recuperare eventuali appartamenti sponsorizzati
+                $.ajax({
+                    "url": "http://localhost:8000/api/advanced/sponsorships",
+                    "method": "GET",
+                    "data": {
+                        'services': services,
+                        "lon": lon,
+                        "lat": lat,
+                        "number_of_rooms": number_of_rooms,
+                        "number_of_beds": number_of_beds,
+                        "range": km
+                    },
+                    "success": function(data) {
+                        //svuoto il contenuto della pagina
+                        $(".marked").html("");
+                        $(".normal").html("");
+                        // se i risultati sono maggiori di 0 inserisco gli appartamenti in pagina
+                        if (data.length > 0) {
+                            //ciclo gli appartamenti
+                            for (var i = 0; i < data.length; i++) {
+                                //creo una variabile contenente l'appartamento corrente
+                                var appartamento_corrente = data.results[i];
+                                //inserisco l'id nell array per tenerne traccia
+                                app_in_page.push(appartamento_corrente.apartment_id);
+                                //creo l'oggetto da restituire ad handlebars
+                                var context = {
+                                    "slug": appartamento_corrente.slug,
+                                    "id" : appartamento_corrente.apartment_id,
+                                    "image": appartamento_corrente.cover_image,
+                                    "title": appartamento_corrente.description_title,
+                                    "description" : appartamento_corrente.description,
+                                    "beds": appartamento_corrente.number_of_beds,
+                                    "rooms": appartamento_corrente.number_of_rooms,
+                                    "bathrooms": appartamento_corrente.number_of_bathrooms,
+                                    "square_meters":appartamento_corrente.square_meters,
+                                    "lon": appartamento_corrente.lon,
+                                    "lat": appartamento_corrente.lat
+                                }
+                                var html_finale = template(context);
+                                $(".marked").append(html_finale);
+                            }
+
+                            //invoco la funzione per convertire gli indirizzi
+                            reverseGeocode("#index", ".box", "#address");
+                        };
+                        //effettuo una chiamata ajax per recuperare eventuali appartamenti non sponsorizzati
+                        $.ajax({
+                            "url": "http://localhost:8000/api/advanced/apartments",
+                            "method": "GET",
+                            "data": {
+                                'services': services,
+                                "lon": lon,
+                                "lat": lat,
+                                "number_of_rooms": number_of_rooms,
+                                "number_of_beds": number_of_beds,
+                                "range": km
+                            },
+                            "success": function(data) {
+                                // se i risultati sono maggiori di 0 inserisco gli appartamenti in pagina
+                                if (data.length > 0) {
+                                    //ciclo gli appartamenti
+                                    for (var i = 0; i < data.length; i++) {
+                                        //creo una variabile contenente l'appartamento corrente
+                                        var appartamento_corrente = data.results[i];
+                                        //verifico se l'appartamentoè già presente in pagina
+                                        if (!app_in_page.includes(appartamento_corrente.id)) {
+                                            //inserisco l'id nell array per tenerne traccia
+                                            app_in_page.push(appartamento_corrente.id);
+                                            //creo l'oggetto da restituire ad handlebars
+                                            var context = {
+                                                "slug": appartamento_corrente.slug,
+                                                "id" : appartamento_corrente.id,
+                                                "image": appartamento_corrente.cover_image,
+                                                "title": appartamento_corrente.description_title,
+                                                "description" : appartamento_corrente.description,
+                                                "beds": appartamento_corrente.number_of_beds,
+                                                "rooms": appartamento_corrente.number_of_rooms,
+                                                "bathrooms": appartamento_corrente.number_of_bathrooms,
+                                                "square_meters":appartamento_corrente.square_meters,
+                                                "lon": appartamento_corrente.lon,
+                                                "lat": appartamento_corrente.lat
+                                            }
+                                            var html_finale = template(context);
+                                            $(".normal").append(html_finale);
+                                        }
+                                    }
+                                    //invoco la funzione per convertire gli indirizzi
+                                    reverseGeocode("#index", ".box", "#address");
+                                }
+                            },
+                            "error": function() {
+                                alert("errore");
+                            }
+                        })
+                    },
+                    "error": function() {
+                        alert("errore");
+                    }
+
+
+                })
+            } else {
+                $(".error").remove();
+                if ($(".error").length == 0) {
+                    if ($("#services-advanced-search:checked").length == 0 && $("#search").val().length == 0) {
+                        $(".number-services-box").after("<label id=search-error class='error' for=search>Devi selezionare almeno un servizio</label>");
+                        $(".search-bar").after("<label id=search-error class='error' for=search>Devi digitare un indirizzo</label>");
+                    }
+                    else if ($("#services-advanced-search:checked").length == 0) {
+                        $(".number-services-box").after("<label id=search-error class='error' for=search>Devi selezionare almeno un servizio</label>");
+                    } else {
+                        $(".search-bar").after("<label id=search-error class='error' for=search>Devi digitare un indirizzo</label>");
+                    }
+                }
+            }
+        }
+    })
+
+
+
+    $("#search").keyup(function() {
+        if ($("#advanced").length > 0 && $(this).val() != "") {
+            reverse_advanced();
+        }
+    })
 
     //dopo che ci sono stati errori in pagina, elimino l'avviso
     $("#search").keyup(function() {
-        if ($(".error-address").length > 0 && (event.which != 13)) {
+        if ($(".error-address").length > 0 && (event.which != 13) && $('#homepage').length > 0) {
             $(".error-address").remove();
         }
     })
 
     //al click del pulsante invio verifico la validità dell'indirizzo
     $("#search").keypress(function() {
-        if (event.which == 13) {
+        if (event.which == 13 && $("#homepage").length > 0) {
             address_is_valide();
         }
     })
 
     //lo ripeto per il click sul submit
     $("#search-button").click(function(event) {
-        address_is_valide();
-    })
-
-
-    $('#advanced-search-button').click(function() {
-        if (!$('.form-check-input').is(':checked') && $('#search').val().length > 0) {
-            event.preventDefault()
-            if ($("#search-error").length == 0) {
-                $(".number-services-box").after("<label id=search-error class=error for=search>Seleziona almeno un servizio aggiuntivo</label>");
-            }
+        if ($("#homepage").length >0) {
+            address_is_valide();
         }
-
-    });
+    })
 
     //Sezione Statistiche
     if ($('#stats-show').length != 0) {
@@ -205,7 +354,7 @@ $(document).ready(function() {
             "url": "https://api.tomtom.com/search/2/reverseGeocode/" + query + ".json",
             "method": "GET",
             "data": {
-                'key': 'VQnRG5CX322Qq4G6tKnUMDqG6DDv0Q6A'
+                'key': key
             },
             "success": function(data) {
                 //recupero l'indirizzo testuale dalla risposta
@@ -238,6 +387,32 @@ $(document).ready(function() {
     //**************FUNZIONI*************//
     //**********************************//
 
+    function reverse_advanced() {
+        $.ajax({
+            "url": "https://api.tomtom.com/search/2/geocode/" + address + ".json",
+            "method": "GET",
+            "data": {
+                'key': key,
+                "limit": 1
+            },
+            "success": function(data) {
+                var result = data.results;
+                if (result.length > 0) {
+                    if ($("#search-error").length > 0) {
+                        $(this).remove();
+                    }
+                    var lat = result[0].position.lat;
+                    var lon = result[0].position.lon;
+                    //recuper l'input nascosto predisposto per la lat
+                    $("#add_lat").val(lat);
+                    $("#add_lon").val(lon);
+                }
+            },
+            "error": function() {
+            }
+        })
+    }
+
     //funzione per la conversione dell'indirizzo da testuale a coordinate
     function geocodeBackoffice() {
         if ($("#address").val().length > 0) {
@@ -257,7 +432,7 @@ $(document).ready(function() {
             "url": "https://api.tomtom.com/search/2/geocode/" + address + ".json",
             "method": "GET",
             "data": {
-                'key': 'VQnRG5CX322Qq4G6tKnUMDqG6DDv0Q6A',
+                'key': key,
                 "limit": 1
             },
             "success": function(data) {
@@ -299,7 +474,7 @@ $(document).ready(function() {
             "url": "https://api.tomtom.com/search/2/reverseGeocode/" + query + ".json",
             "method": "GET",
             "data": {
-                'key': 'VQnRG5CX322Qq4G6tKnUMDqG6DDv0Q6A'
+                'key': key
             },
             "success": function(data) {
                 //recupero l'indirizzo testuale dall'Api
@@ -324,7 +499,7 @@ $(document).ready(function() {
             "url": "https://api.tomtom.com/search/2/geocode/" + address + ".json",
             "method": "GET",
             "data": {
-                'key': 'VQnRG5CX322Qq4G6tKnUMDqG6DDv0Q6A',
+                'key': key,
                 "limit": 1
             },
             "success": function(data) {
@@ -392,11 +567,8 @@ $(document).ready(function() {
                         months[moment_current_month_upp]++;
                     }
                 }
-                // console.log(months);
                 var key_months = Object.keys(months);
                 var value_months = Object.values(months);
-                // console.log(key_months);
-                // console.log(value_months);
 
                 var grafico_mesi = new Chart($('#' + container)[0].getContext('2d'), {
                     type: 'line',

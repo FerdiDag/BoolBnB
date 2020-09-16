@@ -5,13 +5,13 @@
   <main id="index">
       <div id="advanced-search" class="container">
         <div class="row">
-          <div class="box-advanced-search">
+          <div class="box-advanced-search mb-3">
             <div class="input-group mb-3 search-bar">
               <input id="search" type="search" class="form-control input-search" placeholder="Dove vuoi andare?" aria-describedby="basic-addon2" value={{isset($address) ? $address : ''}}>
               <input id="add_lon" type="hidden" name="" value="">
               <input id="add_lat" type="hidden" name="" value="">
               <div class="input-group-append button-box">
-              <button class="btn btn-outline-secondary" id="advanced-search-button" type="button">
+              <button class="btn btn-outline-secondary" id="search-button" type="button">
               <i class="fas fa-search"></i>
                 Cerca
               </button>
@@ -33,27 +33,27 @@
               <div class="form-group select-option">
                 <label for="number_of_rooms">Numero di stanze :</label>
                 <select class="form-control" id="number_of_rooms" >
-                  <option value="">1</option>
+                  <option value="1">1</option>
                   @for ($i=2; $i < 31; $i++)
-                    <option>{{$i}}</option>
+                    <option value="{{$i}}">{{$i}}</option>
                   @endfor
                 </select>
               </div>
               <div class="form-group select-option">
                 <label for="number_of_beds">Numero di letti :</label>
                 <select class="form-control" id="number_of_beds">
-                  <option value="">1</option>
+                  <option value="1">1</option>
                   @for ($i=2; $i < 31; $i++)
-                    <option>{{$i}}</option>
+                    <option value="{{$i}}">{{$i}}</option>
                   @endfor
                 </select>
               </div>
               <div class="form-group select-option">
                 <label for="Km">Km :</label>
                 <select class="form-control" id="km">
-                  <option value="">20 Km</option>
+                  <option value="20">20 Km</option>
                   @for ($i=30; $i <= 70; $i=$i + 10)
-                    <option value="">{{$i}} Km</option>
+                    <option value="{{$i}}">{{$i}} Km</option>
                   @endfor
                 </select>
               </div>
@@ -140,96 +140,38 @@
                           <h3 class="text-center mt-3">Nessun appartamento trovato</h3>
                       @endif
                   </div>
+              @else
+                  <div class="marked"></div>
+                  <div class="normal"></div>
               @endif
 
         </div>
       </section>
   </main>
+  <script id="apartment-box" type="text/x-handlebars-template">
+      <a href="http://localhost:8888/proj13_team6/public/show/@{{slug}}" class="col-12 box d-block" data-id="@{{id}}">
+          <div class="row">
+              <div class="img-container col-12 col-md-5">
+                  <img src="http://localhost:8888/proj13_team6/public/storage/@{{image}}">
+              </div>
+              <div class="text-container d-flex col-12 col-md-7 flex-column justify-content-between">
+                  <div class="title">
+                      <h2>@{{title}}</h2>
+                      <p class="font-weight-lighter">@{{description}}</p>
+                  </div>
+                  <div class="features">
+                      <ul>
+                          <li class="d-none d-md-block">Numero di letti: <span>@{{beds}}</span></li>
+                          <li class="d-none d-md-block">Numero di stanze: <span>@{{rooms}}</span></li>
+                          <li class="d-none d-md-block">Numero di bagni:  <span>@{{bathrooms}}</span></li>
+                          <li class="d-none d-md-block">Grandezza: <span>@{{square_meters}} m²</span></li>
+                      </ul>
+                  </div>
+                  <div data-lon='@{{lon}}' data-lat='@{{lat}}' id="address">
+                      <p>Indirizzo: <span></span></p>
+                  </div>
+              </div>
+          </div>
+      </a>
+  </script>
 @endsection
-
-{{-- <!DOCTYPE html>
-<html lang="en" dir="ltr">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('page-title')</title>
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="icon" href="{{asset("img/icona.png")}}">
-    <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.37.2/maps/maps.css' />
-    <script src='https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.37.2/maps/maps-web.min.js'></script>
-    <script src="https://js.braintreegateway.com/web/dropin/1.8.1/js/dropin.min.js"></script>
-</head>
-
-<body id="bk-office" class="clearfix">
-    <aside class="float-md-left" id="advanced-search">
-        <nav id="aside-nav" >
-            <ul>
-              <li>
-                <div class="input-group mb-3 search-filter-bar">
-                  <input id="search" type="search" class="form-control input-search" placeholder="Ricerca avanzata" aria-describedby="basic-addon2">
-                  <div class="input-group-append button-box">
-                  <button class="btn btn-outline-secondary" id="search-filter-button" type="button">
-                  <i class="fas fa-search"></i>
-                  </button>
-                  </div>
-                </div>
-              </li>
-              <li class="">
-                <div class="w-100 d-flex flex-column justify-content-around">
-                  <div class="form-group">
-                    <label for="number_of_rooms"></label>
-                    <select class="form-control" id="number_of_rooms" >
-                      <option value="">Stanze</option>
-                      @for ($i=1; $i < 31; $i++)
-                        <option>{{$i}}</option>
-                      @endfor
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="number_of_beds"></label>
-                    <select class="form-control" id="number_of_beds">
-                      <option value="">Letti</option>
-                      @for ($i=1; $i < 31; $i++)
-                        <option>{{$i}}</option>
-                      @endfor
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="number_of_bathrooms"></label>
-                    <select class="form-control" id="number_of_bathrooms">
-                      <option value="">Km</option>
-                      <option value="5">5 Km</option>
-                      <option value="10">10 Km</option>
-                      <option value="15">15 Km</option>
-                      <option value="20">20 Km</option>
-                      <option value="25">25 Km</option>
-                    </select>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div id="services" class="form-group d-flex flex-column w-100 filter-search">
-                    @foreach ($services as $service)
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                                <input {{ in_array($service->id, old('services', [])) ? 'checked' : '' }}
-                                class="form-check-input" name="services[]" type="checkbox" value="{{$service->id}}">
-                                {{$service->type}}
-                            </label>
-                        </div>
-                    @endforeach
-                    @error('services')
-                        <small class="d-block text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
-              </li>
-            </ul>
-        </nav>
-    </aside>
-    <main class="float-left">
-        @yield('content')
-    </main>
-</body>
-</html> --}}

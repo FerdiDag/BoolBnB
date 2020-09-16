@@ -18,13 +18,12 @@ class SearchController extends Controller
         $lon = $request->lon;
         $lat = $request->lat;
         $number_of_rooms = $request->number_of_rooms;
-        $number_of_bathrooms = $request->number_of_bathrooms;
         $number_of_beds = $request->number_of_beds;
         $range = $request->range;
 
         $apartments = Apartment::select(Apartment::raw('*, ( 6367 * acos( cos( radians('.$lat.') ) * cos( radians( lat ) ) * cos( radians( lon ) - radians('.$lon.') ) + sin( radians('.$lat.') ) * sin( radians( lat ) ) ) ) AS distance'))->join("sponsorships", "apartments.id", "=", "sponsorships.apartment_id")->join("payments", "sponsorships.id", "=", "payments.sponsorship_id")->where("expiry_date", ">", $current_timestamp)
         ->where("payments.status", "=", "accepted")
-        ->where('visibility', '=', true)->where('apartments.number_of_rooms', '>=', $number_of_rooms)->where('apartments.number_of_beds', '>=' ,$number_of_beds)->where('apartments.number_of_bathrooms', '>=', $number_of_bathrooms)->having('distance', '<', $range)->orderByDesc('sponsorships.created_at');
+        ->where('visibility', '=', true)->where('apartments.number_of_rooms', '>=', $number_of_rooms)->where('apartments.number_of_beds', '>=' ,$number_of_beds)->having('distance', '<', $range)->orderByDesc('sponsorships.created_at');
         foreach($services as $service) {
             $apartments->whereHas('services', function ($query) use($service) {
                 $query->where('type', $service);
@@ -53,11 +52,10 @@ class SearchController extends Controller
         $lon = $request->lon;
         $lat = $request->lat;
         $number_of_rooms = $request->number_of_rooms;
-        $number_of_bathrooms = $request->number_of_bathrooms;
         $number_of_beds = $request->number_of_beds;
         $range = $request->range;
 
-        $apartments = Apartment::with("services")->select(Apartment::raw('*, ( 6367 * acos( cos( radians('.$lat.') ) * cos( radians( lat ) ) * cos( radians( lon ) - radians('.$lon.') ) + sin( radians('.$lat.') ) * sin( radians( lat ) ) ) ) AS distance'))->where('visibility', '=', true)->where('apartments.number_of_rooms', '>=', $number_of_rooms)->where('apartments.number_of_beds', '>=' ,$number_of_beds)->where('apartments.number_of_bathrooms', '>=', $number_of_bathrooms)->having('distance', '<', $range)->orderBy('distance');
+        $apartments = Apartment::with("services")->select(Apartment::raw('*, ( 6367 * acos( cos( radians('.$lat.') ) * cos( radians( lat ) ) * cos( radians( lon ) - radians('.$lon.') ) + sin( radians('.$lat.') ) * sin( radians( lat ) ) ) ) AS distance'))->where('visibility', '=', true)->where('apartments.number_of_rooms', '>=', $number_of_rooms)->where('apartments.number_of_beds', '>=' ,$number_of_beds)->having('distance', '<', $range)->orderBy('distance');
         foreach($services as $service) {
             $apartments->whereHas('services', function ($query) use($service) {
                 $query->where('type', $service);
