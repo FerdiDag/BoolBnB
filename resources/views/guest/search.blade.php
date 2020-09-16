@@ -2,7 +2,7 @@
 @section("page-title","La tua ricerca")
 
 @section('content')
-  <main>
+  <main id="index">
       <div id="advanced-search" class="container">
         <div class="row">
           <div class="box-advanced-search">

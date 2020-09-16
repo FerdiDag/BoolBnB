@@ -120,7 +120,27 @@ $(document).ready(function() {
         })
     })
 
+    //creo una variabile che ha la funzione di sentinella per gli errori
+    var error;
 
+    //dopo che ci sono stati errori in pagina, elimino l'avviso
+    $("#search").keyup(function() {
+        if ($(".error-address").length > 0 && (event.which != 13)) {
+            $(".error-address").remove();
+        }
+    })
+
+    //al click del pulsante invio verifico la validità dell'indirizzo
+    $("#search").keypress(function() {
+        if (event.which == 13) {
+            address_is_valide();
+        }
+    })
+
+    //lo ripeto per il click sul submit
+    $("#search-button").click(function(event) {
+        address_is_valide();
+    })
 
 
     $('#advanced-search-button').click(function() {
@@ -145,57 +165,11 @@ $(document).ready(function() {
     }
 
     // intercetto la pressione del pulsante sulla barra di ricerca
-    $("#homepage #search").keyup(function() {
+    $("#search").keyup(function() {
         if ($('#search').val() != '' && $('#search').val().length % 5) {
             geocodeGuest()
         }
     })
-
-    function geocodeGuest() {
-        var address = $('#search').val();
-
-        geocodeGuestAjax(address);
-    }
-
-    function geocodeGuestAjax(address) {
-        $.ajax({
-            "url": "https://api.tomtom.com/search/2/geocode/" + address + ".json",
-            "method": "GET",
-            "data": {
-                'key': 'VQnRG5CX322Qq4G6tKnUMDqG6DDv0Q6A',
-                "limit": 1
-            },
-            "success": function(data) {
-                var result = data.results;
-                if (result.length > 0) {
-                    if ($("#search-error").length > 0) {
-                        $(this).remove();
-                    }
-                    var lat = result[0].position.lat;
-                    var lon = result[0].position.lon;
-                    //recuper l'input nascosto predisposto per la lat
-                    $("#add_lat").val(lat);
-                    $("#add_lon").val(lon);
-                }
-            },
-            "error": function() {
-                $("#search-button").click(function(event) {
-                    //se c'e un errore spossesso il button delle sue funzione
-
-                    if ($("#search-error").length == 0) {
-
-                        //aggiungo un messagigo in pagina
-                        $(".form-group").after("<label id=search-error class=error for=search>Inserisci un indirizzo valido</label>");
-                    }
-                    if ($("#search-error").length > 0) {
-                        event.preventDefault();
-                    }
-                })
-            }
-        })
-    }
-
-
 
     //Inserisco un messaggio in caso in cui non ci siano appartamenti in evidenza
     if ($('.in-evidenza a').length == 0) {
@@ -212,17 +186,6 @@ $(document).ready(function() {
 
     //chiamo la funzione per visualizzare gli indirizzo nelle show
     reverseGeocode("#show-header", "#show-info", "#address");
-
-
-    $('#search').keyup(function() {
-        if ($('.error').length > 0) {
-            $('.error').remove();
-        }
-    });
-
-    $('#advanced-search #search').keyup(function() {
-        geocodeSearchAjax();
-    });
 
     //intercetto il click sul button "aggiungi indirizzo"
     $("#add_address").click(function() {
@@ -350,9 +313,13 @@ $(document).ready(function() {
         })
     }
 
+    function geocodeGuest() {
+        var address = $('#search').val();
 
-    //funzione per la ricerca avanzata
-    function geocodeSearchAjax(address) {
+        geocodeGuestAjax(address);
+    }
+
+    function geocodeGuestAjax(address) {
         $.ajax({
             "url": "https://api.tomtom.com/search/2/geocode/" + address + ".json",
             "method": "GET",
@@ -371,30 +338,24 @@ $(document).ready(function() {
                     //recuper l'input nascosto predisposto per la lat
                     $("#add_lat").val(lat);
                     $("#add_lon").val(lon);
+                    error = false;
                 }
             },
             "error": function() {
-                $("#advanced-search-button").click(function(event) {
-
-                    if ($(".error-address").length == 0) {
-
-                        //aggiungo un messagigo in pagina
-                        $(".search-bar").after("<label class='error error-address' for=search>Inserisci un indirizzo valido</label>");
-                    }
-                    if ($(".error-address").length > 0) {
-                        event.preventDefault();
-                    }
-                })
-
+                error = true;
             }
         })
     }
 
-
-
-
-
-
+    //funzione per il controllo della validità dell'indirizzo
+    function address_is_valide() {
+        if (error == true) {
+            event.preventDefault();
+            if ($(".error-address").length == 0) {
+                $(".form-group").after("<label id=search-error class='error-address' for=search>Inserisci un indirizzo valido</label>");
+            }
+        }
+    }
 
     //funzione per recuperare i dati da inserire nei grafici
     function stats(type, container, info) {
