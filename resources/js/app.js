@@ -6,6 +6,8 @@ require('jquery-validation/dist/localization/messages_it.js');
 import 'bootstrap';
 var Chart = require('chart.js');
 var moment = require('moment'); // require
+const Handlebars = require("handlebars");
+
 
 
 
@@ -20,7 +22,7 @@ $(document).ready(function() {
         return this.optional(element) || /^[a-zA-Z\s]*$/.test(value);
     }, "Inserisci solo lettere");
 
-    $('form').each(function() {  // selects all forms with class="form"
+    $('form').each(function() { // selects all forms with class="form"
         $(this).validate({
             rules: {
 
@@ -61,25 +63,25 @@ $(document).ready(function() {
 
                 number_of_rooms: {
                     required: true,
-                    rangelength: [1,11],
+                    rangelength: [1, 11],
                     min: 1
                 },
 
                 number_of_beds: {
                     required: true,
-                    rangelength: [1,11],
+                    rangelength: [1, 11],
                     min: 1
                 },
 
                 number_of_bathrooms: {
                     required: true,
-                    rangelength: [1,11],
+                    rangelength: [1, 11],
                     min: 1
                 },
 
                 square_meters: {
                     required: true,
-                    rangelength: [1,11],
+                    rangelength: [1, 11],
                     min: 1
                 },
 
@@ -111,17 +113,30 @@ $(document).ready(function() {
 
 
             },
-            errorPlacement: function (error, element) {
-            //error.insertBefore(element);
-            error.insertAfter(element.closest('.form-group'));
-        },
+            errorPlacement: function(error, element) {
+                //error.insertBefore(element);
+                error.insertAfter(element.closest('.form-group'));
+            },
         })
     })
 
+
+
+
+    $('#advanced-search-button').click(function() {
+        if (!$('.form-check-input').is(':checked') && $('#search').val().length > 0) {
+            event.preventDefault()
+            if ($("#search-error").length == 0) {
+                $(".number-services-box").after("<label id=search-error class=error for=search>Seleziona almeno un servizio aggiuntivo</label>");
+            }
+        }
+
+    });
+
     //Sezione Statistiche
-    if($('#stats-show').length != 0) {
-      stats('messages', 'chart-message', 'messaggi');
-      stats('views', 'chart-views', 'visualizzazioni');
+    if ($('#stats-show').length != 0) {
+        stats('messages', 'chart-message', 'messaggi');
+        stats('views', 'chart-views', 'visualizzazioni');
     }
 
     //se all'apertura della pagina c'e testo nell'input effettuo la conversione in coordinate
@@ -130,7 +145,7 @@ $(document).ready(function() {
     }
 
     // intercetto la pressione del pulsante sulla barra di ricerca
-    $("#search").keyup(function() {
+    $("#homepage #search").keyup(function() {
         if ($('#search').val() != '' && $('#search').val().length % 5) {
             geocodeGuest()
         }
@@ -164,12 +179,16 @@ $(document).ready(function() {
                 }
             },
             "error": function() {
-                $("#search-button").click(function() {
-                    if($("#search-error").length == 0) {
-                        //se c'e un errore spossesso il button delle sue funzione
-                        event.preventDefault();
+                $("#search-button").click(function(event) {
+                    //se c'e un errore spossesso il button delle sue funzione
+
+                    if ($("#search-error").length == 0) {
+
                         //aggiungo un messagigo in pagina
                         $(".form-group").after("<label id=search-error class=error for=search>Inserisci un indirizzo valido</label>");
+                    }
+                    if ($("#search-error").length > 0) {
+                        event.preventDefault();
                     }
                 })
             }
@@ -179,8 +198,8 @@ $(document).ready(function() {
 
 
     //Inserisco un messaggio in caso in cui non ci siano appartamenti in evidenza
-    if($('.in-evidenza a').length == 0) {
-      $('.in-evidenza h1').after('<p class="text-center w-100">Nessuna sponsorizzazione presente</p>');
+    if ($('.in-evidenza a').length == 0) {
+        $('.in-evidenza h1').after('<p class="text-center w-100">Nessuna sponsorizzazione presente</p>');
     }
 
     //intercetto il click sull'hamburger menù per visualizzare l'aside in mobile
@@ -192,7 +211,18 @@ $(document).ready(function() {
     reverseGeocode("#index", ".box", "#address");
 
     //chiamo la funzione per visualizzare gli indirizzo nelle show
-    reverseGeocode("#show-header", "#show-info","#address");
+    reverseGeocode("#show-header", "#show-info", "#address");
+
+
+    $('#search').keyup(function() {
+        if ($('.error').length > 0) {
+            $('.error').remove();
+        }
+    });
+
+    $('#advanced-search #search').keyup(function() {
+        geocodeSearchAjax();
+    });
 
     //intercetto il click sul button "aggiungi indirizzo"
     $("#add_address").click(function() {
@@ -230,7 +260,7 @@ $(document).ready(function() {
     if ($(".info-sponsorship").length == 1) {
         setTimeout(function() {
             $(".info-sponsorship").toggleClass("active");
-        },2000)
+        }, 2000)
     }
 
     $("#send_form").click(function() {
@@ -287,7 +317,7 @@ $(document).ready(function() {
     }
 
     //creo una funzione per mostrare l'indirizzo in pagina partendo dalle coordinate
-    function reverseGeocode(section,container,tag_indirizzo) {
+    function reverseGeocode(section, container, tag_indirizzo) {
         if ($(section).length == 1) {
             $(container).each(function() {
                 var indirizzo = $(this).find(tag_indirizzo);
@@ -295,13 +325,13 @@ $(document).ready(function() {
                 var lat = indirizzo.data("lat");
                 var lon = indirizzo.data("lon");
                 var query = lat + "," + lon;
-                ajax_reverse_geocode(id,query,container);
+                ajax_reverse_geocode(id, query, container);
             })
         }
     }
 
     //creo una funzione che esegua una chiamata ajax all'API TomTom
-    function ajax_reverse_geocode(id,query,container) {
+    function ajax_reverse_geocode(id, query, container) {
         $.ajax({
             "url": "https://api.tomtom.com/search/2/reverseGeocode/" + query + ".json",
             "method": "GET",
@@ -320,89 +350,135 @@ $(document).ready(function() {
         })
     }
 
-    //funzione per recuperare i dati da inserire nei grafici
-    function stats(type, container, info) {
-      var id = $('#stats-show').data('id');
-      var token = $('#stats-show').data('token');
 
-      $.ajax({
-          "url": "http://localhost:8000/api/stats/" + type,
-          "method": "GET",
-          "data": {
-            'apartment_id': id,
-            'api_token': token
-          },
-          "success": function(data) {
-            if (container == 'chart-message') {
-              $('#message-length').text(data.length)
-            }else {
-              $('#view-length').text(data.length)
-            }
-
-            var months = {};
-            for (var i = 1; i <= 12; i++) {
-              //converto la i in mese testuale
-              var data_moment = moment(i , "M").format("MMM");
-              var data_moment_upp = data_moment.charAt(0).toUpperCase() + data_moment.slice(1);
-              months[data_moment_upp] = 0;
-            }
-
-              if (data.results != 0) {
-                for (var i = 0; i < data.results.length; i++) {
-                var current_month = data.results[i].created_at;
-                var moment_current_month = moment(current_month, "YYYY/MM/DD").format("MMM");
-                var moment_current_month_upp = moment_current_month.charAt(0).toUpperCase() + moment_current_month.slice(1);
-                months[moment_current_month_upp] ++;
-                }
-              }
-              // console.log(months);
-            var key_months = Object.keys(months);
-            var value_months = Object.values(months);
-            // console.log(key_months);
-            // console.log(value_months);
-
-            var grafico_mesi = new Chart($('#' + container)[0].getContext('2d'), {
-            type: 'line',
-            data: {
-                labels: key_months,
-                datasets: [{
-                    data: value_months,
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    pointBackgroundColor: "green",
-                    lineTension: 0.3
-                }]
+    //funzione per la ricerca avanzata
+    function geocodeSearchAjax(address) {
+        $.ajax({
+            "url": "https://api.tomtom.com/search/2/geocode/" + address + ".json",
+            "method": "GET",
+            "data": {
+                'key': 'VQnRG5CX322Qq4G6tKnUMDqG6DDv0Q6A',
+                "limit": 1
             },
-            options: {
-                title: {
-                    display: true,
-                    text: 'Numero di ' + info + ' per mese'
-                },
-                legend: {
-                  display: false
-                },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        },
-                        gridLines: {
-                          display: false
-                        }
-                    }],
-                    xAxes: [{
-                        gridLines: {
-                          display: false
-                        }
-                    }]
+            "success": function(data) {
+                var result = data.results;
+                if (result.length > 0) {
+                    if ($("#search-error").length > 0) {
+                        $(this).remove();
+                    }
+                    var lat = result[0].position.lat;
+                    var lon = result[0].position.lon;
+                    //recuper l'input nascosto predisposto per la lat
+                    $("#add_lat").val(lat);
+                    $("#add_lon").val(lon);
                 }
+            },
+            "error": function() {
+                $("#advanced-search-button").click(function(event) {
+
+                    if ($(".error-address").length == 0) {
+
+                        //aggiungo un messagigo in pagina
+                        $(".search-bar").after("<label class='error error-address' for=search>Inserisci un indirizzo valido</label>");
+                    }
+                    if ($(".error-address").length > 0) {
+                        event.preventDefault();
+                    }
+                })
+
             }
         })
+    }
 
-          },
-          "error": function() {
-            alert('errore');
-          }
-      });
+
+
+
+
+
+
+    //funzione per recuperare i dati da inserire nei grafici
+    function stats(type, container, info) {
+        var id = $('#stats-show').data('id');
+        var token = $('#stats-show').data('token');
+
+        $.ajax({
+            "url": "http://localhost:8000/api/stats/" + type,
+            "method": "GET",
+            "data": {
+                'apartment_id': id,
+                'api_token': token
+            },
+            "success": function(data) {
+                if (container == 'chart-message') {
+                    $('#message-length').text(data.length)
+                } else {
+                    $('#view-length').text(data.length)
+                }
+
+                var months = {};
+                for (var i = 1; i <= 12; i++) {
+                    //converto la i in mese testuale
+                    var data_moment = moment(i, "M").format("MMM");
+                    var data_moment_upp = data_moment.charAt(0).toUpperCase() + data_moment.slice(1);
+                    months[data_moment_upp] = 0;
+                }
+
+                if (data.results != 0) {
+                    for (var i = 0; i < data.results.length; i++) {
+                        var current_month = data.results[i].created_at;
+                        var moment_current_month = moment(current_month, "YYYY/MM/DD").format("MMM");
+                        var moment_current_month_upp = moment_current_month.charAt(0).toUpperCase() + moment_current_month.slice(1);
+                        months[moment_current_month_upp]++;
+                    }
+                }
+                // console.log(months);
+                var key_months = Object.keys(months);
+                var value_months = Object.values(months);
+                // console.log(key_months);
+                // console.log(value_months);
+
+                var grafico_mesi = new Chart($('#' + container)[0].getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: key_months,
+                        datasets: [{
+                            data: value_months,
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            pointBackgroundColor: "green",
+                            lineTension: 0.3
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'Numero di ' + info + ' per mese'
+                        },
+                        legend: {
+                            display: false
+                        },
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                },
+                                gridLines: {
+                                    display: false
+                                }
+                            }],
+                            xAxes: [{
+                                gridLines: {
+                                    display: false
+                                }
+                            }]
+                        }
+                    }
+                })
+
+            },
+            "error": function() {
+                alert('errore');
+            }
+        });
     }
 })

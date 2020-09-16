@@ -2,7 +2,7 @@
 @section("page-title","Homepage")
 @section('content')
   <main>
-      <div class="container">
+      <div id="homepage" class="container">
         <div class="row">
             <div class="col-12 text-right">
                 <a href="{{route("advanced")}}" class="advanced_link">Vai alla ricerca avanzata</a>

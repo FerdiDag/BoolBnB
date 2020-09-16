@@ -3,13 +3,15 @@
 
 @section('content')
   <main>
-      <div id="index" class="container">
+      <div id="advanced-search" class="container">
         <div class="row">
           <div class="box-advanced-search">
             <div class="input-group mb-3 search-bar">
               <input id="search" type="search" class="form-control input-search" placeholder="Dove vuoi andare?" aria-describedby="basic-addon2" value={{isset($address) ? $address : ''}}>
+              <input id="add_lon" type="hidden" name="" value="">
+              <input id="add_lat" type="hidden" name="" value="">
               <div class="input-group-append button-box">
-              <button class="btn btn-outline-secondary" id="search-button" type="button">
+              <button class="btn btn-outline-secondary" id="advanced-search-button" type="button">
               <i class="fas fa-search"></i>
                 Cerca
               </button>
@@ -20,15 +22,11 @@
                   @foreach ($services as $service)
                       <div class="form-check form-check-inline">
                           <label class="form-check-label">
-                              <input {{ in_array($service->id, old('services', [])) ? 'checked' : '' }}
-                              class="form-check-input" id="services-advanced-search" name="services[]" type="checkbox" value="{{$service->id}}">
+                              <input class="form-check-input" id="services-advanced-search" name="services[]" type="checkbox" value="{{$service->id}}">
                               {{$service->type}}
                           </label>
                       </div>
                   @endforeach
-                  @error('services')
-                      <small class="d-block text-danger">{{ $message }}</small>
-                  @enderror
                 </div>
               </div>
             <div class="number-box-filters">

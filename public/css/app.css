@@ -16059,6 +16059,7 @@ h3 {
 }
 label.error {
   width: 100%;
+  text-align: center;
 }
 
 label#status_load {
