@@ -13,7 +13,18 @@ var Chart = require('chart.js');
 var moment = require('moment');
 //import handlebars
 const Handlebars = require("handlebars");
+//Import Algolia search-box
+var places = require('places.js');
 
+if ($('#search').length != 0) {
+  const options = {
+    appId: 'plJM0BX61QPS',
+    apiKey: '0482cdf528ff1627a104a659c03b6bc8',
+    container: '#search',
+    language: 'it',
+  };
+  places(options);
+};
 
 
 
@@ -127,8 +138,12 @@ $(document).ready(function() {
     //creo una variabile con all'interno la chiave tomtom
     var key = "WnguCpNi1nmX08ODcn2NVwLLG8LD75Wd";
 
-    //creo una variabile che ha la funzione di sentinella per gli errori
-    var error;
+    //Imposto autocompletamento ricerca
+    $('.ap-dataset-places').on('click', function() {
+        setTimeout(function(){
+          geocodeGuest();
+        }, 100)
+    })
 
     //se sono nella ricerca avanzata compilo le funzioni di handlebars
     if ($("#advanced-search").length > 0) {
@@ -137,41 +152,9 @@ $(document).ready(function() {
         var template = Handlebars.compile(source);
     }
 
-    //converto l'eventuale indirizzo
-    if ($("#advanced").length > 0 && $(this).val() != "") {
-        reverse_advanced();
-    }
-
     //intercetto il click sul tasto "cerca"
     $("#search-button").click(function() {
         advanced_search();
-    })
-
-    $("#search").keyup(function() {
-        if ($("#advanced").length > 0 && $(this).val() != "") {
-            reverse_advanced();
-        }
-    })
-
-    //dopo che ci sono stati errori in pagina, elimino l'avviso
-    $("#search").keyup(function() {
-        if ($(".error-address").length > 0 && (event.which != 13) && $('#homepage').length > 0) {
-            $(".error-address").remove();
-        }
-    })
-
-    //al click del pulsante invio verifico la validità dell'indirizzo
-    $("#search").keypress(function() {
-        if (event.which == 13 && $("#homepage").length > 0) {
-            address_is_valide();
-        }
-    })
-
-    //lo ripeto per il click sul submit
-    $("#search-button").click(function(event) {
-        if ($("#homepage").length >0) {
-            address_is_valide();
-        }
     })
 
     //Sezione Statistiche
@@ -187,15 +170,10 @@ $(document).ready(function() {
 
     // intercetto la pressione del pulsante sulla barra di ricerca
     $("#search").keyup(function() {
-        if ($('#search').val() != '' && $('#search').val().length % 5) {
+        if ($('#search').val() != '' && $('#search').val().length % 5)  {
             geocodeGuest()
         }
     })
-
-    //Inserisco un messaggio in caso in cui non ci siano appartamenti in evidenza
-    if ($('.in-evidenza a').length == 0) {
-        $('.in-evidenza h1').after('<p class="text-center w-100">Nessuna sponsorizzazione presente</p>');
-    }
 
     //intercetto il click sull'hamburger menù per visualizzare l'aside in mobile
     $("#aside-toggle").click(function() {
@@ -260,32 +238,7 @@ $(document).ready(function() {
     //**************FUNZIONI*************//
     //**********************************//
 
-    //funzione per la conversione delle coordinate in indirizzi testuali
-    function reverse_advanced() {
-        $.ajax({
-            "url": "https://api.tomtom.com/search/2/geocode/" + address + ".json",
-            "method": "GET",
-            "data": {
-                'key': key,
-                "limit": 1
-            },
-            "success": function(data) {
-                var result = data.results;
-                if (result.length > 0) {
-                    if ($("#search-error").length > 0) {
-                        $(this).remove();
-                    }
-                    var lat = result[0].position.lat;
-                    var lon = result[0].position.lon;
-                    //recuper l'input nascosto predisposto per la lat
-                    $("#add_lat").val(lat);
-                    $("#add_lon").val(lon);
-                }
-            },
-            "error": function() {
-            }
-        })
-    }
+
 
     //funzione per la conversione dell'indirizzo da testuale a coordinate
     function geocodeBackoffice() {
@@ -387,23 +340,11 @@ $(document).ready(function() {
                     //recuper l'input nascosto predisposto per la lat
                     $("#add_lat").val(lat);
                     $("#add_lon").val(lon);
-                    error = false;
                 }
             },
             "error": function() {
-                error = true;
             }
         })
-    }
-
-    //funzione per il controllo della validità dell'indirizzo
-    function address_is_valide() {
-        if (error == true) {
-            event.preventDefault();
-            if ($(".error-address").length == 0) {
-                $(".form-group").after("<label id=search-error class='error-address' for=search>Inserisci un indirizzo valido</label>");
-            }
-        }
     }
 
     //funzione per la ricerca avanzata

@@ -16147,6 +16147,11 @@ a:hover {
   background-color: white;
 }
 
+.algolia-places {
+  width: calc(100% - 110px);
+  text-align: left;
+}
+
 .services-box {
   display: flex;
   margin: auto;
