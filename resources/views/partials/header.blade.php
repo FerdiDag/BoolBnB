@@ -29,7 +29,7 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item text-center" href="{{ route('admin.dashboard') }}">
+                            <a class="dropdown-item text-center" href="{{ route('admin.home') }}">
                                 La tua dashboard
                             </a>
                             <a class="dropdown-item text-center" href="{{ route('logout') }}" onclick="event.preventDefault();

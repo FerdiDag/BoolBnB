@@ -57,8 +57,8 @@
     <aside class="float-md-left">
         <nav id="aside-nav">
             <ul>
-                <li>
-                    <a href="#">
+                <li class="{{ Request::route()->getName() == 'admin.home' ? 'active' : '' }}">
+                    <a href="{{route('admin.home')}}">
                         <i class="fas fa-home"></i>
                         Home admin
                     </a>

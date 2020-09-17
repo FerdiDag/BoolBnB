@@ -25,7 +25,7 @@ Route::post('/message/create{apartment}', 'Admin\MessageController@create')->nam
 
 Route::prefix('admin')->namespace('Admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('/apartments', 'ApartmentController');
-    Route::get('/', 'HomeController@index')->name('dashboard');
+    Route::get('/', 'HomeController@index')->name('home');
     Route::get('/create', function () {
         return view('admin.apartments.create');
     });
