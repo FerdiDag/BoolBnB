@@ -16205,6 +16205,7 @@ a:hover {
 }
 
 .marked a {
+  margin-bottom: 5px;
   background-color: gold;
   border: 1px solid #FF385C;
 }
