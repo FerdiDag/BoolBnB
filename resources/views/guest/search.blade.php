@@ -18,7 +18,7 @@
               </div>
             </div>
               <div id="services" class="form-group w-80 filter-search">
-                <div class="number-services-box">
+                <div class="number-services-box d-flex justify-content-sm-center justify-content-center flex-wrap">
                   @foreach ($services as $service)
                       <div class="form-check form-check-inline">
                           <label class="form-check-label">
