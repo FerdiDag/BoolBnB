@@ -139,12 +139,18 @@ body#bk-office {
     }
 }
 
+#show-header .btn {
+    padding: 6px;
+}
+
 #modify-button,
 #sponsorship-button {
+    margin: 0 5px;
     border: 1px solid #FF385C;
 }
 
 #delete-button {
+    margin: 0 5px;
     color: white;
     background-color: #FF385C;
     border: 1px solid #FF385C;

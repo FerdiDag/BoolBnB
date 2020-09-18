@@ -7,11 +7,11 @@
     </div>
 @endif
 <div id="show-header" class="container">
-    <div class="row">
-        <div class="col-md-6">
+    <div class="row justify-content-between">
+        <div class="col-lg-6">
             <h1 id="detail-title">{{$apartment->description_title}}</h1>
         </div>
-        <div id="show-header-right" class="col-md-6 col-sm-12">
+        <div id="show-header-right" class="col-lg-6 col-sm-12 d-flex d-lg-block align-items-flex-start justify-content-end justify-content-lg-around">
             @if ($sponsorship != null)
                 @forelse ($sponsorship->payments as $payment)
                     @if ($loop->last && $payment->status != "accepted")
