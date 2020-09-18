@@ -7,13 +7,13 @@
         <div class="row">
           <div class="box-advanced-search mb-3">
             <div class="input-group mb-3 search-bar">
-              <input id="search" type="text" class="form-control input-search" placeholder="Dove vuoi andare?" aria-describedby="basic-addon2" value={{isset($address) ? $address : ''}}>
+              <input id="search" type="search" class="form-control input-search" placeholder="Dove vuoi andare?" aria-describedby="basic-addon2" value={{isset($address) ? $address : ''}}>
               <input id="add_lon" type="hidden" name="" value="">
               <input id="add_lat" type="hidden" name="" value="">
               <div class="input-group-append button-box">
               <button class="btn btn-outline-secondary" id="search-button" type="button">
               <i class="fas fa-search"></i>
-                Cerca
+                <span class="d-none d-md-inline">Cerca</span>
               </button>
               </div>
             </div>
@@ -29,8 +29,8 @@
                   @endforeach
                 </div>
               </div>
-            <div class="number-box-filters">
-              <div class="form-group select-option">
+            <div class="number-box-filters d-md-flex justify-content-center">
+              <div class="form-group select-option col-sm-12 col-md-3">
                 <label for="number_of_rooms">Numero di stanze :</label>
                 <select class="form-control" id="number_of_rooms" >
                   <option value="1">1</option>
@@ -39,7 +39,7 @@
                   @endfor
                 </select>
               </div>
-              <div class="form-group select-option">
+              <div class="form-group select-option col-sm-12 col-md-3">
                 <label for="number_of_beds">Numero di letti :</label>
                 <select class="form-control" id="number_of_beds">
                   <option value="1">1</option>
@@ -48,7 +48,7 @@
                   @endfor
                 </select>
               </div>
-              <div class="form-group select-option">
+              <div class="form-group select-option col-sm-12 col-md-3">
                 <label for="Km">Km :</label>
                 <select class="form-control" id="km">
                   <option value="20">20 Km</option>

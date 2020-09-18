@@ -16148,8 +16148,12 @@ a:hover {
 }
 
 .algolia-places {
-  width: calc(100% - 110px);
+  width: calc(100% - 52px);
   text-align: left;
+}
+
+.ap-input-icon {
+  display: none;
 }
 
 .services-box {
@@ -16177,12 +16181,9 @@ a:hover {
 }
 
 .number-box-filters {
-  display: flex;
-  justify-content: center;
   border-radius: 12px;
   padding-right: 10px;
   padding-left: 10px;
-  line-height: 3px;
   padding-bottom: 7px;
 }
 
@@ -16198,15 +16199,17 @@ a:hover {
 .select-option {
   margin-right: 30px;
 }
-.select-option #number_of_rooms, .select-option #number_of_beds, .select-option #km {
-  margin-top: 15px;
-}
 
 .marked a {
   background-color: gold;
   border: 1px solid #FF385C;
 }
 
+@media screen and (min-width: 768px) {
+  .algolia-places {
+    width: calc(100% - 98px);
+  }
+}
 header .container {
   padding: 0;
 }
@@ -16296,7 +16299,6 @@ header .container nav {
   font-weight: 700;
   color: white;
   background-image: radial-gradient(circle at center center, #ff385c 0%, #e61e4d 27.5%, #e31c5f 40%, #d70466 57.5%, #bd1e59 75%, #bd1e59 100%);
-  width: 100px;
   transition: none;
   border-radius: 12px;
 }
