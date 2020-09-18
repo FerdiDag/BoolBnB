@@ -16248,7 +16248,7 @@ header .container nav {
 }
 
 #register-card .form-group {
-  height: 50px;
+  margin-bottom: 15px;
 }
 
 #register-card .form-group .form-control {

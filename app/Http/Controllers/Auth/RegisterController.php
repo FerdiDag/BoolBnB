@@ -54,7 +54,7 @@ class RegisterController extends Controller
             'name' => ['string', 'regex:/^[a-zA-Z]+$/u', 'max:255', 'nullable'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'lastname' => ['string', 'regex:/^[a-zA-Z]+$/u', 'max:255', 'nullable'],
+            'lastname' => ['string', 'regex:/^[\pL\s\-]+$/u', 'max:255', 'nullable'],
             'date_of_birth' => ['date','nullable'],
         ]);
     }
