@@ -11,7 +11,7 @@
         <div class="col-lg-6">
             <h1 id="detail-title">{{$apartment->description_title}}</h1>
         </div>
-        <div id="show-header-right" class="col-lg-6 col-sm-12 d-flex d-lg-block align-items-flex-start justify-content-end justify-content-lg-around">
+        <div id="show-header-right" class="col-lg-6 col-sm-12 d-flex d-lg-block align-items-flex-start justify-md-content-end justify-content-center">
             @if ($sponsorship != null)
                 @forelse ($sponsorship->payments as $payment)
                     @if ($loop->last && $payment->status != "accepted")
