@@ -93556,6 +93556,14 @@ $(document).ready(function () {
     setTimeout(function () {
       geocodeGuest();
     }, 100);
+  }); //Imposto autocompletamento ricerca al premere di invio
+
+  $('#search').keyup(function () {
+    if (event.which == 13) {
+      setTimeout(function () {
+        geocodeGuest();
+      }, 100);
+    }
   }); //se sono nella ricerca avanzata compilo le funzioni di handlebars
 
   if ($("#advanced-search").length > 0) {
@@ -93581,7 +93589,8 @@ $(document).ready(function () {
 
 
   $("#search").keyup(function () {
-    if ($('#search').val() != '' && $('#search').val().length % 5) {
+    if ($('#search').val() != '' && $('#search').val().length % 3 == 0) {
+      console.log($('#search').val().length % 5);
       geocodeGuest();
     }
   }); //intercetto il click sull'hamburger menù per visualizzare l'aside in mobile

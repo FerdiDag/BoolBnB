@@ -16079,6 +16079,10 @@ a:hover {
   width: 95%;
 }
 
+.ap-name {
+  font-size: 10px;
+}
+
 .box {
   cursor: default;
   border-radius: 20px;
@@ -16208,6 +16212,10 @@ a:hover {
 @media screen and (min-width: 768px) {
   .algolia-places {
     width: calc(100% - 98px);
+  }
+
+  .ap-name {
+    font-size: 16px;
   }
 }
 header .container {

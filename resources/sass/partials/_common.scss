@@ -20,6 +20,11 @@ a {
     width: 95%;
 }
 
+.ap-name {
+    font-size: 10px;
+}
+
+
 //stile per la lista appartamenti guest e admin
 .box {
     cursor: default;
@@ -164,5 +169,9 @@ a {
 @media screen and (min-width: 768px) {
     .algolia-places {
         width: calc(100% - 98px);
+    }
+
+    .ap-name {
+        font-size: 16px;
     }
 }
