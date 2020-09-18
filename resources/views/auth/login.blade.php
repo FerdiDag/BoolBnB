@@ -49,7 +49,7 @@
                             </div>
                             <div class="col-md-6 offset-md-2">
                                 Non hai un account?
-                                <a href="http://localhost:8000/register">Registrati</a>
+                                <a href="{{route('register')}}">Registrati</a>
                             </div>
                         </div>
 
