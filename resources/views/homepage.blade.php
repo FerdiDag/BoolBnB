@@ -10,7 +10,7 @@
             <form id="simple-search" class="w-100" action="{{ route('search') }}" method="get">
                 @csrf
                 <div class="input-group mb-3 search-bar form-group">
-                  <input id="search" name="search" type="search" class="form-control input-search" placeholder="Dove vuoi andare?" aria-describedby="basic-addon2">
+                  <input id="search" name="search" type="search" class="algolia form-control input-search" placeholder="Dove vuoi andare?" aria-describedby="basic-addon2">
                   <input id="add_lon" type="hidden" name="lon" value="">
                   <input id="add_lat" type="hidden" name="lat" value="">
                   <div class="input-group-append button-box">

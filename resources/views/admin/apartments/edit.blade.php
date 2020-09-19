@@ -50,7 +50,7 @@
                             <div class="input-group-append">
                                 <a id="add_address" class="btn btn-outline-secondary">Aggiungi</a>
                             </div>
-                            <input id="address" name="address" value="{{old("address")}}" type="text" class="form-control" placeholder="Inserisci indirizzo">
+                            <input id="address" name="address" value="{{old("address")}}" type="text" class="algolia form-control" placeholder="Inserisci indirizzo">
                             <label id="status_load" class="errore"></label>
                             <input type="hidden" id="add_lat" name="lat" value="{{old("lat", $apartment->lat)}}">
                             <input type="hidden" id="add_lon" name="lon" value="{{old('lon', $apartment->lon)}}">

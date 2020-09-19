@@ -16,17 +16,15 @@ const Handlebars = require("handlebars");
 //Import Algolia search-box
 var places = require('places.js');
 
-if ($('#search').length != 0) {
+if ($('.algolia').length != 0) {
   const options = {
     appId: 'plJM0BX61QPS',
     apiKey: '0482cdf528ff1627a104a659c03b6bc8',
-    container: '#search',
+    container: '.algolia',
     language: 'it',
   };
   places(options);
 };
-
-
 
 
 $(document).ready(function() {

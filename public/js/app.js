@@ -93455,11 +93455,11 @@ var Handlebars = __webpack_require__(/*! handlebars */ "./node_modules/handlebar
 
 var places = __webpack_require__(/*! places.js */ "./node_modules/places.js/index.js");
 
-if ($('#search').length != 0) {
+if ($('.algolia').length != 0) {
   var options = {
     appId: 'plJM0BX61QPS',
     apiKey: '0482cdf528ff1627a104a659c03b6bc8',
-    container: '#search',
+    container: '.algolia',
     language: 'it'
   };
   places(options);
