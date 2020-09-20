@@ -3,7 +3,7 @@
 @section('page-title', 'Home')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-start">
         <div class="col-12">
             @if (Auth::user()->name)
