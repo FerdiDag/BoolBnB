@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
+    <div class="row justify-content-start">
         <div class="col-12">
             @if (Auth::user()->name)
                 <h1 class="mb-3">Ciao {{Auth::user()->name}}</h1>
@@ -13,10 +13,10 @@
             @endif
         </div>
         <div class="col-12">
-            @if ($apartments > 0)
+            @if ($apartments > 1)
                 <h5 class="mb-3">Hai {{$apartments}} appartamenti registrati.</h5>
             @elseif ($apartments == 1)
-                <h5 class="mb-3">Hai un appartamento registrato.</h5>
+                <h5 class="mb-3">Hai 1 appartamento registrato.</h5>
             @else
                 <h5 class="mb-3">Non hai nessun appartamento registrato</h5>
             @endif

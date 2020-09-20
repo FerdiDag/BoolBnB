@@ -93540,7 +93540,7 @@ $(document).ready(function () {
         },
         text: {
           required: true,
-          minlength: 30
+          minlength: 15
         }
       },
       errorPlacement: function errorPlacement(error, element) {

@@ -13,7 +13,7 @@ class MessageController extends Controller
     public function create(Request $request,Apartment $apartment) {
         $request->validate([
             "email" => 'required|string|email|max:255',
-            "text" => 'required|string|min:30'
+            "text" => 'required|string|min:15'
         ]);
 
         $new_message = new Message();
